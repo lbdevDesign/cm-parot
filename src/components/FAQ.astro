@@ -1,0 +1,45 @@
+---
+const faq = [
+  {
+    question: "Comment fonctionne votre service ?",
+    answer:
+      "Nous proposons une solution complète incluant le développement, la maintenance et le support.",
+  },
+  {
+    question: "Quels sont vos délais de livraison ?",
+    answer:
+      "Les délais varient entre 1 et 4 semaines selon la complexité du projet.",
+  },
+  {
+    question: "Proposez-vous un support après livraison ?",
+    answer:
+      "Oui, nous proposons plusieurs forfaits de support et de maintenance.",
+  },
+  {
+    question: "Puis-je modifier mon site moi-même ?",
+    answer:
+      "Bien sûr ! Grâce à notre CMS, vous pouvez modifier vos pages et publier des articles facilement.",
+  },
+];
+---
+
+<section class="max-w-5xl mx-auto px-6 py-20">
+  <h2 class="text-4xl font-bold text-center mb-16">FAQ</h2>
+
+  <div class="space-y-6">
+    {faq.map((item) => (
+      <details class="group bg-white shadow-md rounded-xl p-6 transition">
+        <summary class="cursor-pointer flex justify-between items-center text-lg font-medium">
+          {item.question}
+          <span class="transition-transform group-open:rotate-180">
+            ▼
+          </span>
+        </summary>
+
+        <p class="mt-4 text-gray-600 leading-relaxed">
+          {item.answer}
+        </p>
+      </details>
+    ))}
+  </div>
+</section>

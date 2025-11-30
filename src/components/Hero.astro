@@ -1,0 +1,28 @@
+---
+import Link from "./Link.astro";
+---
+
+<section 
+  class="relative w-full h-[80vh] flex items-center"
+  style="background-image: url('/images/hero.jpg'); background-size: cover; background-position: center;"
+>
+  <!-- Overlay pour lisibilité -->
+  <div class="absolute inset-0 bg-black/40"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-5xl mx-auto px-6">
+    <div class="max-w-xl text-left text-white space-y-6">
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+        Votre titre percutant ici
+      </h1>
+
+      <p class="text-lg md:text-xl opacity-90">
+        Un texte d’introduction engageant pour capter l’attention de vos visiteurs et présenter rapidement votre valeur.
+      </p>
+
+      <Link href="/contact" variant="button" class="mt-4">
+        Nous contacter
+      </Link>
+    </div>
+  </div>
+</section>

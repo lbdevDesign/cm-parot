@@ -1,0 +1,38 @@
+---
+import Link from "./Link.astro";
+---
+
+<nav class="w-full bg-white shadow-sm">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href="/" class="text-2xl font-bold text-gray-800 h-12">
+        <img src="/src/assets/624409c96c00004d9824fbc4.png" alt="Nav Image" class="h-full" />
+      </a>
+
+      <!-- Menu centré -->
+      <ul class="hidden md:flex space-x-8 text-lg font-medium">
+        <li>
+          <a href="/" class="hover:text-blue-600 transition">Accueil</a>
+        </li>
+        <li>
+          <a href="/#our-team" class="hover:text-blue-600 transition">Notre équipe</a>
+        </li>
+        <li>
+          <a href="/blog" class="hover:text-blue-600 transition">Blog</a>
+        </li>
+      </ul>
+
+      <!-- CTA droite -->
+      <Link href="/contact" variant="button">
+        Contactez-nous
+
+      <!-- Burger mobile -->
+      <button class="md:hidden flex items-center text-3xl">
+        ☰
+      </button>
+
+    </div>
+  </div>
+</nav>

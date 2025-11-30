@@ -1,0 +1,73 @@
+---
+const team = [
+  {
+    name: "Alice Dupont",
+    role: "CEO & Fondatrice",
+    photo: "/images/team/alice.jpg",
+  },
+  {
+    name: "Marc Legrand",
+    role: "CTO",
+    photo: "/images/team/marc.jpg",
+  },
+  {
+    name: "Sophie Martin",
+    role: "UX Designer",
+    photo: "/images/team/sophie.jpg",
+  },
+  {
+    name: "Thomas Roy",
+    role: "Développeur Front-end",
+    photo: "/images/team/thomas.jpg",
+  },
+  {
+    name: "Julie Caron",
+    role: "Marketing",
+    photo: "/images/team/julie.jpg",
+  },
+  {
+    name: "Lucas Bernard",
+    role: "Back-end Developer",
+    photo: "/images/team/lucas.jpg",
+  },
+  {
+    name: "Emma Leroy",
+    role: "Product Manager",
+    photo: "/images/team/emma.jpg",
+  },
+  {
+    name: "Louis Petit",
+    role: "Data Analyst",
+    photo: "/images/team/louis.jpg",
+  },
+  {
+    name: "Claire Moreau",
+    role: "Support Client",
+    photo: "/images/team/claire.jpg",
+  },
+  {
+    name: "Antoine Girard",
+    role: "DevOps Engineer",
+    photo: "/images/team/antoine.jpg",
+  },
+];
+---
+
+<section class="max-w-7xl mx-auto px-6 py-20" id="our-team">
+  <h2 class="text-4xl font-bold text-center mb-16">Notre équipe</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
+    {team.map((member) => (
+      <div class="bg-white shadow-lg rounded-2xl overflow-hidden text-center p-6 transition hover:shadow-xl">
+        <img 
+          src={member.photo} 
+          alt={member.name} 
+          class="w-32 h-32 mx-auto rounded-full object-cover mb-6"
+        />
+
+        <h3 class="text-xl font-semibold">{member.name}</h3>
+        <p class="text-gray-500 text-sm mt-2">{member.role}</p>
+      </div>
+    ))}
+  </div>
+</section>

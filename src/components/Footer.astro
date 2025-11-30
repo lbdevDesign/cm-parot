@@ -1,0 +1,81 @@
+---
+const navLinks = [
+  { label: "Accueil", href: "/" },
+  { label: "Notre équipe", href: "/equipe" },
+  { label: "Blog", href: "/blog" },
+];
+
+const legalLinks = [
+  { label: "Mentions légales", href: "/mentions-legales" },
+  { label: "Politique de confidentialité", href: "/privacy" },
+  { label: "Conditions d’utilisation", href: "/cgu" },
+];
+
+const socialLinks = [
+  { label: "Twitter", href: "https://twitter.com" },
+  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "Instagram", href: "https://instagram.com" },
+];
+---
+
+<footer class="bg-gray-950 text-gray-300 mt-20 pt-16 pb-10">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+
+    <!-- Logo + Description -->
+    <div class="space-y-4">
+      <img src="/logo.svg" alt="Logo" class="w-32" />
+
+      <p class="text-gray-400 text-sm leading-relaxed">
+        Nous créons des expériences web modernes, rapides et élégantes pour booster votre présence en ligne.
+      </p>
+    </div>
+
+    <!-- Navigation -->
+    <div>
+      <h4 class="text-white font-semibold mb-4">Navigation</h4>
+      <ul class="space-y-2">
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="hover:underline">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Légal -->
+    <div>
+      <h4 class="text-white font-semibold mb-4">Légal</h4>
+      <ul class="space-y-2">
+        {legalLinks.map((link) => (
+          <li>
+            <a href={link.href} class="hover:underline">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Réseaux sociaux -->
+    <div>
+      <h4 class="text-white font-semibold mb-4">Réseaux</h4>
+      <ul class="space-y-2">
+        {socialLinks.map((link) => (
+          <li>
+            <a href={link.href} class="hover:underline" target="_blank">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-gray-800 mt-14 pt-6 text-center text-sm text-gray-500">
+    © {new Date().getFullYear()} — Tous droits réservés.
+  </div>
+</footer>
