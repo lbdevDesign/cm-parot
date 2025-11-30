@@ -2,9 +2,11 @@
 import "../styles/global.css"
 import Navbar from "@/components/Navbar.astro"
 import Hero from "@/components/Hero.astro"
+import OurOffices from "@/components/ourOffices.jsx"
 import OurTeam from "@/components/OurTeam.astro"
 import FAQ from "@/components/FAQ.astro"
 import Footer from "@/components/Footer.astro"
+import cabinets from "@/data/cabinets.js"
 ---
 
 <!doctype html>
@@ -19,6 +21,7 @@ import Footer from "@/components/Footer.astro"
 	<body>
 		<Navbar />
 		<Hero />
+		<OurOffices client:load cabinets={cabinets} />
 		<OurTeam />
 		<FAQ />
 		<Footer />
