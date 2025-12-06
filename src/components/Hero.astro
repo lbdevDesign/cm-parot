@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
+import { Image } from "astro:assets";
 import Link from "./Link";
+import headerImage from "../assets/header.jpg";
 ---
 
 <section 
@@ -62,8 +64,8 @@ import Link from "./Link";
   </div>
 
   <!-- Background image -->
-  <img 
-    src="client/header.jpg" 
+  <Image 
+    src={headerImage}
     alt="Hero Image" 
     class="absolute inset-0 w-full h-full object-cover object-center z-0"
   />
