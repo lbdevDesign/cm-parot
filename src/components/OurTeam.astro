@@ -1,72 +1,26 @@
 ---
-const team = [
-  {
-    name: "Alice Dupont",
-    role: "CEO & Fondatrice",
-    photo: "/imgSlot.png",
-  },
-  {
-    name: "Marc Legrand",
-    role: "CTO",
-    photo: "/imgSlot.png",
-  },
-  {
-    name: "Sophie Martin",
-    role: "UX Designer",
-    photo: "/imgSlot.png",
-  },
-  {
-    name: "Thomas Roy",
-    role: "Développeur Front-end",
-    photo: "/imgSlot.png",
-  },
-  {
-    name: "Julie Caron",
-    role: "Marketing",
-    photo: "/imgSlot.png",
-  },
-  {
-    name: "Lucas Bernard",
-    role: "Back-end Developer",
-    photo: "/imgSlot.png",
-  },
-  {
-    name: "Emma Leroy",
-    role: "Product Manager",
-    photo: "/imgSlot.png",
-  },
-  {
-    name: "Louis Petit",
-    role: "Data Analyst",
-    photo: "/imgSlot.png",
-  },
-  {
-    name: "Claire Moreau",
-    role: "Support Client",
-    photo: "/imgSlot.png",
-  },
-  {
-    name: "Antoine Girard",
-    role: "DevOps Engineer",
-    photo: "/imgSlot.png",
-  },
-];
+import Link from './Link';
+import team from '../data/team.js';
 ---
 
-<section class="max-w-7xl mx-auto px-6 py-20" id="our-team">
+<section class="w-screen px-6 py-20 flex flex-col align-center justify-center" id="our-team">
   <h2 class="text-4xl font-bold text-center mb-16">Notre équipe</h2>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
+  <div class="mx-auto flex flex-wrap justify-center gap-10">
     {team.map((member) => (
-      <div class="bg-white shadow-lg rounded-2xl overflow-hidden text-center p-6 transition hover:shadow-xl">
+      <div class="w-3xs bg-white shadow-lg rounded-xl overflow-hidden text-center transition hover:shadow-xl">
         <img 
           src={member.photo} 
           alt={member.name} 
-          class="w-32 h-32 mx-auto rounded-full object-cover mb-6"
+          class="w-full h-60 rounded-t-xl object-cover object-top"
         />
 
-        <h3 class="text-xl font-semibold">{member.name}</h3>
-        <p class="text-gray-500 text-sm mt-2">{member.role}</p>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold">{member.name}</h3>
+          <Link href={member.url} variant="underline" target='_blank' className="mt-6 text-blue-600 hover:underline">
+            Doctolib
+          </Link>
+        </div>
       </div>
     ))}
   </div>
