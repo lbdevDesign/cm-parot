@@ -10,16 +10,13 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   output: 'server',
   integrations: [react()],
-
   vite: {
     plugins: [tailwindcss()],
   },
-
   adapter: vercel({
-    imageService: true,
-    imagesConfig: {
-      sizes: [320, 640, 1280],
-      domains: []
-    }
-  })
+    webAnalytics: { enabled: true }
+  }),
+  build: {
+    assets: '_astro' 
+  }
 });
