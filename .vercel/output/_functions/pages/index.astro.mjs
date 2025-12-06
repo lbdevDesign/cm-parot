@@ -1,4 +1,4 @@
-import { e as createComponent, s as spreadAttributes, u as unescapeHTML, r as renderTemplate, f as createAstro, m as maybeRenderHead, h as addAttribute, k as renderComponent, l as renderHead } from '../chunks/astro/server_B_D8lMhE.mjs';
+import { e as createComponent, s as spreadAttributes, u as unescapeHTML, r as renderTemplate, f as createAstro, m as maybeRenderHead, h as addAttribute, k as renderComponent, l as renderHead } from '../chunks/astro/server_BJR0n5yz.mjs';
 import 'piccolore';
 import 'clsx';
 /* empty css                                 */
@@ -131,7 +131,7 @@ Nous contacter
       z-30 flex items-center justify-center
       left-1/2 bottom-0 transform 
       -translate-x-1/2 translate-y-1/2
-    "> <img src="/logo/logoCMPlowerWavesColored.svg" alt="Logo waves" class="h-6 md:h-8 w-auto"> </div> <!-- Background image --> <img src="header.jpg" alt="Hero Image" class="absolute inset-0 w-full h-full object-cover object-center z-0"> </section>`;
+    "> <img src="/logo/logoCMPlowerWavesColored.svg" alt="Logo waves" class="h-6 md:h-8 w-auto"> </div> <!-- Background image --> <img src="client/header.jpg" alt="Hero Image" class="absolute inset-0 w-full h-full object-cover object-center z-0"> </section>`;
 }, "/Users/lb8/Documents/Code/cm-parot/src/components/Hero.astro", void 0);
 
 function CabinetsClient({ cabinets }) {
