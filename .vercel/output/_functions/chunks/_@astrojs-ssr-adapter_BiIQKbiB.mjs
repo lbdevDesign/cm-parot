@@ -1,7 +1,7 @@
-import { o as decryptString, p as createSlotValueFromString, q as isAstroComponentFactory, k as renderComponent, r as renderTemplate, R as ROUTE_TYPE_HEADER, v as REROUTE_DIRECTIVE_HEADER, A as AstroError, w as i18nNoLocaleFoundInPath, x as ResponseSentError, y as ActionNotFoundError, z as MiddlewareNoDataOrNextCalled, B as MiddlewareNotAResponse, C as originPathnameSymbol, D as RewriteWithBodyUsed, G as GetStaticPathsRequired, H as InvalidGetStaticPathsReturn, J as InvalidGetStaticPathsEntry, K as GetStaticPathsExpectedParams, O as GetStaticPathsInvalidRouteParam, P as PageNumberParamNotFound, Q as DEFAULT_404_COMPONENT, S as NoMatchingStaticPathFound, T as PrerenderDynamicEndpointPathCollide, V as ReservedSlotName, W as renderSlotToString, X as renderJSX, Y as chunkToString, Z as isRenderInstruction, _ as ForbiddenRewrite, $ as SessionStorageInitError, a0 as SessionStorageSaveError, a1 as ASTRO_VERSION, a2 as CspNotEnabled, a3 as LocalsReassigned, a4 as generateCspDigest, a5 as PrerenderClientAddressNotAvailable, a6 as clientAddressSymbol, a7 as ClientAddressNotAvailable, a8 as StaticClientAddressNotAvailable, a9 as AstroResponseHeadersReassigned, aa as responseSentSymbol$1, ab as renderPage, ac as REWRITE_DIRECTIVE_HEADER_KEY, ad as REWRITE_DIRECTIVE_HEADER_VALUE, ae as renderEndpoint, af as LocalsNotAnObject, ag as REROUTABLE_STATUS_CODES, ah as nodeRequestAbortControllerCleanupSymbol } from './astro/server_B_D8lMhE.mjs';
+import { o as decryptString, p as createSlotValueFromString, q as isAstroComponentFactory, k as renderComponent, r as renderTemplate, R as ROUTE_TYPE_HEADER, v as REROUTE_DIRECTIVE_HEADER, A as AstroError, w as i18nNoLocaleFoundInPath, x as ResponseSentError, y as ActionNotFoundError, z as MiddlewareNoDataOrNextCalled, B as MiddlewareNotAResponse, C as originPathnameSymbol, D as RewriteWithBodyUsed, G as GetStaticPathsRequired, H as InvalidGetStaticPathsReturn, J as InvalidGetStaticPathsEntry, K as GetStaticPathsExpectedParams, O as GetStaticPathsInvalidRouteParam, P as PageNumberParamNotFound, Q as DEFAULT_404_COMPONENT, S as NoMatchingStaticPathFound, T as PrerenderDynamicEndpointPathCollide, V as ReservedSlotName, W as renderSlotToString, X as renderJSX, Y as chunkToString, Z as isRenderInstruction, _ as ForbiddenRewrite, $ as SessionStorageInitError, a0 as SessionStorageSaveError, a1 as ASTRO_VERSION, a2 as CspNotEnabled, a3 as LocalsReassigned, a4 as generateCspDigest, a5 as PrerenderClientAddressNotAvailable, a6 as clientAddressSymbol, a7 as ClientAddressNotAvailable, a8 as StaticClientAddressNotAvailable, a9 as AstroResponseHeadersReassigned, aa as responseSentSymbol$1, ab as renderPage, ac as REWRITE_DIRECTIVE_HEADER_KEY, ad as REWRITE_DIRECTIVE_HEADER_VALUE, ae as renderEndpoint, af as LocalsNotAnObject, ag as REROUTABLE_STATUS_CODES, ah as nodeRequestAbortControllerCleanupSymbol } from './astro/server_BJR0n5yz.mjs';
 import colors from 'piccolore';
 import 'clsx';
-import { A as ActionError, d as deserializeActionResult, s as serializeActionResult, a as ACTION_RPC_ROUTE_PATTERN, b as ACTION_QUERY_PARAMS, g as getActionQueryString, D as DEFAULT_404_ROUTE, c as default404Instance, N as NOOP_MIDDLEWARE_FN, e as ensure404Route } from './astro-designed-error-pages_BgaqG1-T.mjs';
+import { A as ActionError, d as deserializeActionResult, s as serializeActionResult, a as ACTION_RPC_ROUTE_PATTERN, b as ACTION_QUERY_PARAMS, g as getActionQueryString, D as DEFAULT_404_ROUTE, c as default404Instance, N as NOOP_MIDDLEWARE_FN, e as ensure404Route } from './astro-designed-error-pages_B8CnGp-x.mjs';
 import 'es-module-lexer';
 import buffer from 'node:buffer';
 import crypto$1 from 'node:crypto';
@@ -2363,6 +2363,21 @@ function resolveSessionDriverName(driver) {
   return driver;
 }
 
+function validateAndDecodePathname(pathname) {
+  let decoded;
+  try {
+    decoded = decodeURI(pathname);
+  } catch (_e) {
+    throw new Error("Invalid URL encoding");
+  }
+  const hasDecoding = decoded !== pathname;
+  const decodedStillHasEncoding = /%[0-9a-fA-F]{2}/.test(decoded);
+  if (hasDecoding && decodedStillHasEncoding) {
+    throw new Error("Multi-level URL encoding is not allowed");
+  }
+  return decoded;
+}
+
 const apiContextRoutesSymbol = Symbol.for("context.routes");
 class RenderContext {
   constructor(pipeline, locals, middleware, actions, pathname, request, routeData, status, clientAddress, cookies = new AstroCookies(request), params = getParams(routeData, pathname), url = RenderContext.#createNormalizedUrl(request.url), props = {}, partial = void 0, shouldInjectCspMetaTags = !!pipeline.manifest.csp, session = pipeline.manifest.sessionConfig ? new AstroSession(cookies, pipeline.manifest.sessionConfig, pipeline.runtimeMode) : void 0) {
@@ -2386,10 +2401,14 @@ class RenderContext {
   static #createNormalizedUrl(requestUrl) {
     const url = new URL(requestUrl);
     try {
-      url.pathname = decodeURI(url.pathname);
-    } finally {
-      return url;
+      url.pathname = validateAndDecodePathname(url.pathname);
+    } catch {
+      try {
+        url.pathname = decodeURI(url.pathname);
+      } catch {
+      }
     }
+    return url;
   }
   /**
    * A flag that tells the render content if the rewriting was triggered
@@ -3324,7 +3343,7 @@ class App {
     const url = new URL(request.url);
     const pathname = prependForwardSlash(this.removeBase(url.pathname));
     try {
-      return decodeURI(pathname);
+      return validateAndDecodePathname(pathname);
     } catch (e) {
       this.getAdapterLogger().error(e.toString());
       return pathname;
@@ -3345,7 +3364,12 @@ class App {
     if (!pathname) {
       pathname = prependForwardSlash(this.removeBase(url.pathname));
     }
-    let routeData = matchRoute(decodeURI(pathname), this.#manifestData);
+    try {
+      pathname = validateAndDecodePathname(pathname);
+    } catch {
+      return void 0;
+    }
+    let routeData = matchRoute(pathname, this.#manifestData);
     if (!routeData) return void 0;
     if (allowPrerenderedRoutes) {
       return routeData;
@@ -3517,7 +3541,9 @@ class App {
     } finally {
       await session?.[PERSIST_SYMBOL]();
     }
-    if (REROUTABLE_STATUS_CODES.includes(response.status) && response.headers.get(REROUTE_DIRECTIVE_HEADER) !== "no") {
+    if (REROUTABLE_STATUS_CODES.includes(response.status) && // If the body isn't null, that means the user sets the 404 status
+    // but uses the current route to handle the 404
+    response.body === null && response.headers.get(REROUTE_DIRECTIVE_HEADER) !== "no") {
       return this.#renderError(request, {
         locals,
         response,
