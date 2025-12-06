@@ -35,7 +35,7 @@ const Link: React.FC<Props> = ({
       {/* Flèche SVG */}
       <img
         className="absolute right-2 w-0 h-4 opacity-0 -translate-x-1 group-hover:w-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-150"
-        src="/src/assets/Arrow_Right_SM.svg"
+        src="/assets/Arrow_Right_SM.svg"
       />
     </a>
   );
