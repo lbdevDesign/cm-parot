@@ -1,16 +1,16 @@
 ---
-import Link from "./Link.astro";
+import Link from "./Link";
 ---
 
 <nav id="navbar" class="w-full shadow-xs fixed top-0 left-0 z-50 bg-white transition-all duration-300">
   <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-content">
-    <div id="nav-links" class="flex items-center gap-12 h-50 transition-all duration-300">
+    <div id="nav-links" class="flex items-center gap-12 h-32 transition-all duration-300">
 
       <!-- Logo -->
-      <a id="nav-logo" href="/" class="h-44 w-44 font-bold text-gray-800 h-12 transition-all duration-300 flex flex-col align-middle items-center">
-          <img id="upperWaves" src="/src/assets/logoCMPupperWavesColored.svg" alt="Upper Waves" class="h-1/3 transition-all duration-300 w-7/10 mb-[-4px]" />
+      <a id="nav-logo" href="/" class="h-30 w-30 font-bold text-gray-800 h-12 transition-all duration-300 flex flex-col align-middle items-center">
+          <img id="upperWaves" src="/src/assets/logoCMPupperWavesColored.svg" alt="Upper Waves" class="h-1/3 transition-all duration-300 mb-[-4px]" />
           <img id="middleText" src="/src/assets/logoTextCMPcolored.svg" alt="Nav Image" class="h-1/3 transition-all duration-300" />
-          <img id="lowerWaves" src="/src/assets/logoCMPlowerWavesColored.svg" alt="Lower Waves" class="h-1/3 transition-all duration-300 w-11/20 mt-[-4px]" />
+          <img id="lowerWaves" src="/src/assets/logoCMPlowerWavesColored.svg" alt="Lower Waves" class="h-1/3 transition-all duration-300 mt-[-4px]" />
       </a>
 
       <!-- Menu centré -->
@@ -26,17 +26,20 @@ import Link from "./Link.astro";
         </li> -->
       </ul>
 
-      <!-- Burger mobile -->
-      <button class="md:hidden flex items-center text-3xl">
-        ☰
-      </button>
+      
 
     </div>
 
     <!-- CTA droite -->
       <Link href="/contact" variant="button">
-        Contactez-nous
+        <p class="hidden md:block">Contactez-nous</p>
+        <img src="/src/assets/icon-mail-white.svg" class="h-6 md:hidden"/>
       </Link>
+    
+    <!-- Burger mobile -->
+      <button class="md:hidden flex items-center text-3xl">
+        ☰
+      </button>
   </div>
 </nav>
 
@@ -79,7 +82,7 @@ import Link from "./Link.astro";
     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     width: calc(100% - 2rem); /* 2rem de chaque côté */
     backdrop-filter: blur(10px);
-    background-color: rgb(255, 255, 255, 0.8); /* fond semi-transparent */
+    background-color: rgb(255, 255, 255, 0.9); /* fond semi-transparent */
   }
   nav.scrolled #nav-links {
     height: 5rem; /* ajuste si nécessaire */
