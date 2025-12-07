@@ -34,7 +34,7 @@ export default function CabinetsClient({ cabinets }) {
           {/* Carte droite */}
           <div className="rounded-xl border border-gray-200 p-6 bg-white flex-1">
             <img
-              src={selected.image}
+              src={selected.image?.src || selected.image}
               alt={selected.name}
               className="rounded-lg mb-4 object-cover w-full h-100"
             />
