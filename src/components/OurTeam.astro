@@ -1,5 +1,6 @@
 ---
 import Link from './Link';
+import { Image } from 'astro:assets';
 import team from '../data/team.js';
 ---
 
@@ -9,7 +10,7 @@ import team from '../data/team.js';
   <div class="mx-auto flex flex-wrap justify-center gap-10">
     {team.map((member) => (
       <div class="w-3xs bg-white shadow-lg rounded-xl overflow-hidden text-center transition hover:shadow-xl">
-        <img 
+        <Image 
           src={member.photo} 
           alt={member.name} 
           class="w-full h-60 rounded-t-xl object-cover object-top"

@@ -1,9 +1,9 @@
 import React from "react";
-import CTAarrow from "../assets/Arrow_Right_SM.svg"
 
 type Variant = "default" | "button" | "outline" | "underline";
 
 interface Props {
+  id?: string;
   href?: string;
   variant?: Variant;
   className?: string;
@@ -12,6 +12,7 @@ interface Props {
 }
 
 const Link: React.FC<Props> = ({
+  id,
   href = "#",
   variant = "default",
   className = "",
@@ -30,13 +31,13 @@ const Link: React.FC<Props> = ({
   };
 
   return (
-    <a href={href} target={target} className={`${base} ${variants[variant]} ${className}`}>
+    <a id={id} href={href} target={target} className={`${base} ${variants[variant]} ${className}`}>
       <span className="mr-0 group-hover:mr-2 transition">{children}</span>
 
       {/* Flèche SVG */}
       <img
         className="absolute right-2 w-0 h-4 opacity-0 -translate-x-1 group-hover:w-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-150"
-        src={CTAarrow}
+        src="../assets/Arrow_Right_SM.svg"
       />
     </a>
   );
