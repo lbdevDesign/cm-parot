@@ -4,25 +4,168 @@ import { Image } from 'astro:assets';
 import team from '../data/team.js';
 ---
 
-<section class="w-screen px-6 py-20 flex flex-col align-center justify-center" id="our-team">
-  <h2 class="text-4xl font-bold text-center mb-16">Notre équipe</h2>
+<section class="w-screen scroll-mt-16 py-16 flex flex-col align-center justify-center overflow-hidden" id="our-team">
+  <div class="mx-auto max-w-7xl px-6">
+    <h2 class="text-4xl font-bold text-center mb-16">Notre équipe</h2>
+  </div>
 
-  <div class="mx-auto flex flex-wrap justify-center gap-10">
-    {team.map((member) => (
-      <div class="w-3xs bg-white shadow-lg rounded-xl overflow-hidden text-center transition hover:shadow-xl">
-        <Image 
-          src={member.photo} 
-          alt={member.name} 
-          class="w-full h-60 rounded-t-xl object-cover object-top"
-        />
+  <div class="relative overflow-hidden py-2">
+    <div 
+      id="team-slider" 
+      class="flex gap-6 cursor-grab active:cursor-grabbing select-none will-change-transform"
+    >
+      <!-- Une seule liste originale -->
+      {team.map((member) => (
+        <a href={member.url} target='_blank' class="relative team-card flex-shrink-0 w-64 h-80 bg-white rounded overflow-hidden text-center transition-all hover:scale-105">
+          <Image 
+            src={member.photo} 
+            alt={member.name} 
+            class="w-full h-full rounded-t object-cover object-top pointer-events-none"
+          />
 
-        <div class="p-6">
-          <h3 class="text-xl font-semibold">{member.name}</h3>
-          <Link href={member.url} variant="underline" target='_blank' className="mt-6 text-blue-600 hover:underline">
-            Doctolib
-          </Link>
-        </div>
-      </div>
-    ))}
+          <div class="p-4 absolute bottom-2 left-2 right-2 bg-white/90 rounded z-10 backdrop-blur-sm">
+            <h3 class="text-lg font-semibold">{member.name}</h3>
+          </div>
+        </a>
+      ))}
+    </div>
   </div>
 </section>
+
+<script>
+  const slider = document.getElementById('team-slider');
+  if (slider) {
+    const cardWidth = 256 + 24; // w-64 (256px) + gap-6 (24px)
+    const originalCards = Array.from(slider.querySelectorAll('.team-card'));
+    const originalCount = originalCards.length;
+    
+    // Calculer combien de répétitions on a besoin
+    const screenWidth = window.innerWidth;
+    const repetitionsNeeded = Math.ceil(screenWidth / (originalCount * cardWidth)) + 4;
+    
+    // Vider le slider et reconstruire avec des clones
+    slider.innerHTML = '';
+    
+    // Créer plusieurs copies de la liste complète
+    for (let rep = 0; rep < repetitionsNeeded; rep++) {
+      originalCards.forEach((card) => {
+        const clone = card.cloneNode(true) as HTMLElement;
+        if (rep !== Math.floor(repetitionsNeeded / 2)) {
+          clone.setAttribute('aria-hidden', 'true');
+        }
+        slider.appendChild(clone);
+      });
+    }
+
+    let isDown = false;
+    let isHovered = false;
+    let startX: number;
+    let scrollLeft = 0;
+    let velocity = -1;
+    let animationID: number;
+
+    // Position initiale au milieu
+    const setWidth = originalCount * cardWidth;
+    const middleSet = Math.floor(repetitionsNeeded / 2);
+    scrollLeft = middleSet * setWidth;
+
+    function animate() {
+      if (!isDown && !isHovered) {
+        scrollLeft += velocity;
+
+        const minScroll = setWidth;
+        const maxScroll = (repetitionsNeeded - 2) * setWidth;
+        
+        if (scrollLeft <= minScroll) {
+          scrollLeft += setWidth;
+        } else if (scrollLeft >= maxScroll) {
+          scrollLeft -= setWidth;
+        }
+      }
+
+      if (!slider) return
+      slider.style.transform = `translateX(${-scrollLeft}px)`;
+      animationID = requestAnimationFrame(animate);
+    }
+
+    // Gestion du survol
+    slider.addEventListener('mouseenter', () => {
+      isHovered = true;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      isHovered = false;
+      if (isDown) {
+        isDown = false;
+        slider.classList.remove('active');
+      }
+    });
+
+    // Interaction drag
+    let startScrollLeft: number;
+    
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.classList.add('active');
+      startX = e.pageX;
+      startScrollLeft = scrollLeft;
+    });
+
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      
+      const x = e.pageX;
+      const walk = (startX - x) * 1.5;
+      scrollLeft = startScrollLeft + walk;
+
+      const minScroll = setWidth;
+      const maxScroll = (repetitionsNeeded - 2) * setWidth;
+      
+      if (scrollLeft <= minScroll) {
+        scrollLeft += setWidth;
+        startScrollLeft = scrollLeft;
+        startX = x;
+      } else if (scrollLeft >= maxScroll) {
+        scrollLeft -= setWidth;
+        startScrollLeft = scrollLeft;
+        startX = x;
+      }
+    });
+
+    // Empêcher le clic si on a dragué
+    let hasMoved = false;
+    slider.addEventListener('mousedown', () => {
+      hasMoved = false;
+    });
+
+    slider.addEventListener('mousemove', () => {
+      if (isDown) hasMoved = true;
+    });
+
+    slider.addEventListener('click', (e) => {
+      if (hasMoved) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, { capture: true });
+
+    // Démarrer l'animation
+    animate();
+  }
+</script>
+
+<style>
+  #team-slider {
+    transition: none;
+  }
+
+  #team-slider.active {
+    cursor: grabbing;
+  }
+</style>

@@ -1,44 +1,78 @@
 ---
 const faq = [
   {
-    question: "Comment fonctionne votre service ?",
-    answer:
-      "Nous proposons une solution complète incluant le développement, la maintenance et le support.",
+    id: 1,
+    question: "Quelle est l'adresse de Centre Médical Parot ?",
+    answer: `<p>Centre Médical Parot reçoit des patients aux adresses suivantes :</p>
+
+    <ul>
+      <li>54 Rue Duquesne, 69006 Lyon</li>
+      <li>65 Rue des Contamines, 69140 Rillieux-la-Pape</li>
+      <li>51 Rue Commandant Charcot, 69110 Sainte-Foy-lès-Lyon</li>
+      <li>11 Rue Édouard Nieuport, 69008 Lyon</li>
+    </ul>`,
   },
   {
+    id: 2,
     question: "Quels sont vos délais de livraison ?",
-    answer:
-      "Les délais varient entre 1 et 4 semaines selon la complexité du projet.",
+    answer:`<p>Centre Médical Parot est ouvert aux horaires suivants :</p>
+
+    <ul>
+      <li><strong>Lundi :</strong> 08h00 – 12h00, 14h00 – 17h30</li>
+      <li><strong>Mardi :</strong> 08h00 – 12h00, 14h00 – 17h30</li>
+      <li><strong>Mercredi :</strong> 08h00 – 12h00, 14h00 – 17h00</li>
+      <li><strong>Jeudi :</strong> 08h00 – 12h00, 14h00 – 17h30</li>
+      <li><strong>Vendredi :</strong> 08h00 – 12h00, 14h00 – 17h00</li>
+    </ul>`,
   },
   {
+    id: 3,
     question: "Proposez-vous un support après livraison ?",
-    answer:
-      "Oui, nous proposons plusieurs forfaits de support et de maintenance.",
+    answer:`<p>
+      Oui, <strong>Centre Médical Parot accepte actuellement de nouveaux patients</strong>.
+    </p>`,
   },
   {
+    id: 4,
     question: "Puis-je modifier mon site moi-même ?",
-    answer:
-      "Bien sûr ! Grâce à notre CMS, vous pouvez modifier vos pages et publier des articles facilement.",
+    answer:`<p>
+      Oui, Centre Médical Parot propose la téléconsultation pour les motifs suivants :
+    </p>
+
+    <ul>
+      <li>Consultation vidéo – patient suivi</li>
+      <li>Consultation vidéo – nouveau patient</li>
+    </ul>`,
   },
 ];
+
+type FAQ = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+type Props = {
+  faqs: FAQ[];
+};
 ---
 
-<section class="max-w-5xl mx-auto px-6 py-20">
+<section class="max-w-7xl mx-auto px-6 py-20">
   <h2 class="text-4xl font-bold text-center mb-16">FAQ</h2>
 
   <div class="space-y-6">
     {faq.map((item) => (
-      <details class="group bg-white shadow-md rounded-xl p-6 transition">
-        <summary class="cursor-pointer flex justify-between items-center text-lg font-medium">
+      <details
+        class="rounded-xl border p-4 transition"
+      >
+        <summary class="cursor-pointer font-semibold text-[#313181]">
           {item.question}
-          <span class="transition-transform group-open:rotate-180">
-            ▼
-          </span>
         </summary>
 
-        <p class="mt-4 text-gray-600 leading-relaxed">
-          {item.answer}
-        </p>
+        <div
+          class="prose prose-sm mt-4 max-w-none"
+          set:html={item.answer}
+        />
       </details>
     ))}
   </div>

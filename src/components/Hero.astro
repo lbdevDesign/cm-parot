@@ -7,7 +7,7 @@ import lowerWaves from "../assets/logo/logoCMPlowerWavesColored.svg";
 ---
 
 <section 
-  class="relative w-full h-[70vh] flex items-center bg-white"
+  class="relative w-full h-[70vh] min-h-content flex items-center bg-white"
 >
   <!-- Overlay -->
   <div class="
@@ -18,32 +18,33 @@ import lowerWaves from "../assets/logo/logoCMPlowerWavesColored.svg";
   </div>
 
   <!-- Content -->
-  <div 
-    class="
-      relative z-20 px-6 
-      w-full md:w-1/2
-      mt-20 md:mt-40
-      text-white 
-      mx-auto md:ml-20
-    "
-  >
-    <div class="max-w-xl text-left space-y-6">
-      
-      <h1 class="text-3xl md:text-6xl font-extrabold leading-tight">
-        La santé de vos 
-        <span class="text-transparent [-webkit-text-stroke:2px_white]">
-          poumons
-        </span>
-        entre de bonnes mains
-      </h1>
+  <div class="max-w-7xl w-full mx-auto flex flex-col md:flex-row items-center md:items-start">
+    <div 
+      class="
+        relative z-20 px-6 
+        w-full md:w-1/2
+        mt-20 md:mt-40
+        text-white 
+      "
+    >
+      <div class="max-w-xl text-left space-y-6">
+        
+        <h1 class="text-3xl md:text-6xl font-extrabold leading-tight">
+          La santé de vos 
+          <span class="text-transparent [-webkit-text-stroke:2px_white]">
+            poumons
+          </span>
+          entre de bonnes mains
+        </h1>
 
-      <p class="text-base md:text-xl opacity-90">
-        Parce que bien respirer est essentiel à votre qualité de vie, notre centre de pneumologie vous propose un accompagnement personnalisé et attentif. Nos médecins prennent le temps de comprendre vos besoins pour vous offrir un suivi médical clair, rassurant et adapté à votre situation.
-      </p>
+        <p class="text-base md:text-xl opacity-90">
+          Parce que bien respirer est essentiel à votre qualité de vie, notre centre de pneumologie vous propose un accompagnement personnalisé et attentif. Nos médecins prennent le temps de comprendre vos besoins pour vous offrir un suivi médical clair, rassurant et adapté à votre situation.
+        </p>
 
-      <Link href="/contact" variant="button" className="mt-4 md:hidden inline-block">
-        Nous contacter
-      </Link>
+        <Link href="/contact" variant="button" className="mt-4 md:hidden inline-block">
+          Nous contacter
+        </Link>
+      </div>
     </div>
   </div>
 

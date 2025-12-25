@@ -19,7 +19,7 @@ const Link: React.FC<Props> = ({
   target,
   children,
 }) => {
-  const base = "relative pr-6 group inline-flex items-center font-semibold transition rounded-lg";
+  const base = "relative pr-6 group inline-flex items-center font-semibold transition rounded";
 
   const variants: Record<Variant, string> = {
     default: "text-blue-600 hover:text-blue-700",
@@ -37,7 +37,7 @@ const Link: React.FC<Props> = ({
       {/* Flèche SVG */}
       <img
         className="absolute right-2 w-0 h-4 opacity-0 -translate-x-1 group-hover:w-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-150"
-        src="../assets/Arrow_Right_SM.svg"
+        src="/Arrow_Right_SM.svg"
       />
     </a>
   );

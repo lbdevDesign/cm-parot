@@ -1,11 +1,11 @@
-import pierreBombaron from "../assets/medecins/pierreBombaron-min.jpg";
-import amandineVialDupuy from "../assets/medecins/amandineVialDupuy-min.jpg";
-import annickWattiez from "../assets/medecins/annickWattiez-min.jpg";
-import brunoCaillet from "../assets/medecins/brunoCaillet-min.jpg";
-import karimaBouledrak from "../assets/medecins/karimaBouledrak-min.jpg";
-import fabricePiegay from "../assets/medecins/fabricePiegay-min.jpg";
-import martinVeaudor from "../assets/medecins/martinVeaudor-min.jpg";
-import nelsonHanin from "../assets/medecins/nelsonHanin-min.jpg";
+import pierreBombaron from "../assets/medecins/pierreBombaron.jpg";
+import amandineVialDupuy from "../assets/medecins/amandineVialDupuy.jpg";
+import annickWattiez from "../assets/medecins/annickWattiez.jpg";
+import brunoCaillet from "../assets/medecins/brunoCaillet.jpg";
+import karimaBouledrak from "../assets/medecins/karimaBouledrak.jpg";
+import fabricePiegay from "../assets/medecins/fabricePiegay.jpg";
+import martinVeaudor from "../assets/medecins/martinVeaudor.jpg";
+import nelsonHanin from "../assets/medecins/nelsonHanin.jpg";
 
 const team = [
   {
