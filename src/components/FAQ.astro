@@ -14,7 +14,7 @@ const faq = [
   },
   {
     id: 2,
-    question: "Quels sont vos délais de livraison ?",
+    question: "Quels sont les horaires d'ouverture ?",
     answer:`<p>Centre Médical Parot est ouvert aux horaires suivants :</p>
 
     <ul>
@@ -27,14 +27,14 @@ const faq = [
   },
   {
     id: 3,
-    question: "Proposez-vous un support après livraison ?",
+    question: "Acceptez-vous de nouveaux patients ?",
     answer:`<p>
       Oui, <strong>Centre Médical Parot accepte actuellement de nouveaux patients</strong>.
     </p>`,
   },
   {
     id: 4,
-    question: "Puis-je modifier mon site moi-même ?",
+    question: "Proposez-vous la téléconsultation ?",
     answer:`<p>
       Oui, Centre Médical Parot propose la téléconsultation pour les motifs suivants :
     </p>
@@ -45,35 +45,72 @@ const faq = [
     </ul>`,
   },
 ];
-
-type FAQ = {
-  id: string;
-  question: string;
-  answer: string;
-};
-
-type Props = {
-  faqs: FAQ[];
-};
 ---
 
-<section class="max-w-7xl mx-auto px-6 py-20">
-  <h2 class="text-4xl font-bold text-center mb-16">FAQ</h2>
+<section class="max-w-4xl mx-auto px-6 py-20">
+  <h2 class="text-4xl font-bold text-center mb-4">Questions fréquentes</h2>
+  <p class="text-center text-gray-600 mb-12">Tout ce que vous devez savoir sur nos services</p>
 
-  <div class="space-y-6">
-    {faq.map((item) => (
+  <div class="space-y-4">
+    {faq.map((item, index) => (
       <details
-        class="rounded-xl border p-4 transition"
+        class="group bg-white rounded-2xl border border-gray-200 hover:border-[#37A4B3] transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md"
       >
-        <summary class="cursor-pointer font-semibold text-[#313181]">
-          {item.question}
+        <summary class="cursor-pointer font-semibold text-[#313181] p-6 flex items-center justify-between list-none">
+          <span class="flex items-center gap-4">
+            <span class="flex-shrink-0 w-8 h-8 bg-[#37A4B3]/10 rounded-full flex items-center justify-center text-[#37A4B3] font-bold text-sm">
+              {index + 1}
+            </span>
+            <span class="text-lg">{item.question}</span>
+          </span>
+          
+          <svg 
+            class="w-6 h-6 text-[#37A4B3] transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ml-4" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
         </summary>
 
-        <div
-          class="prose prose-sm mt-4 max-w-none"
-          set:html={item.answer}
-        />
+        <div class="px-6 pb-6 pt-0">
+          <div class="pl-12 prose prose-sm max-w-none text-gray-600" set:html={item.answer} />
+        </div>
       </details>
     ))}
   </div>
 </section>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] summary {
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Style des listes dans les réponses */
+  details ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.75rem;
+  }
+
+  details ul li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  details ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #37A4B3;
+    font-weight: bold;
+  }
+</style>

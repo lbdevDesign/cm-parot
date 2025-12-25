@@ -2,10 +2,10 @@
 import bgImage from "../assets/header.jpg";
 ---
 
-<div class="min-h-screen justify-center">
-    <div class="w-full h-screen relative">
+<div class="min-h-screen justify-center relative">
+    <div class="w-full h-screen">
         <!-- Image de fond (moitié gauche) -->
-        <div class="absolute h-full left-0 w-2/3 inset-0 overflow-hidden">
+        <div class="absolute h-full top-0 left-0 w-2/3 inset-0 overflow-hidden">
             <img 
                 src={bgImage.src}
                 alt="Contact background" 
@@ -24,34 +24,6 @@ import bgImage from "../assets/header.jpg";
                 </p>
 
                 <form class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">
-                                Prénom
-                            </label>
-                            <input 
-                                type="text" 
-                                id="firstName" 
-                                name="firstName"
-                                required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                            />
-                        </div>
-
-                        <div>
-                            <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">
-                                Nom
-                            </label>
-                            <input 
-                                type="text" 
-                                id="lastName" 
-                                name="lastName"
-                                required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                            />
-                        </div>
-                    </div>
-
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                             Email
