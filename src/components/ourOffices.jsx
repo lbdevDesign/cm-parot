@@ -33,16 +33,16 @@ export default function CabinetsClient({ cabinets }) {
 
           {/* Carte droite */}
           <div className="rounded border border-gray-200 p-6 bg-white flex-1">
-            <img
-              src={selected.image?.src || selected.image}
-              alt={selected.name}
-              className="rounded mb-4 object-cover w-full h-100"
-            />
             <h3 className="text-2xl font-bold mb-1">{selected.name}</h3>
             <p className="text-gray-600 mb-4">{selected.description}</p>
             <Link href={selected.mapsUrl} target="_blank" variant="button">
               Voir sur Google Maps
             </Link>
+            <img
+              src={selected.image?.src || selected.image}
+              alt={selected.name}
+              className="rounded mt-4 object-cover w-full h-100"
+            />
           </div>
         </div>
       </div>

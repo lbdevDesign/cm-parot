@@ -1,7 +1,12 @@
 ---
 import "../styles/global.css"
+import NavbarHome from "@/components/NavbarHome.astro"
 import Navbar from "@/components/Navbar.astro"
 import Footer from "@/components/Footer.astro"
+
+// Récupérer l'URL actuelle
+const { pathname } = Astro.url;
+const isHome = pathname === '/' || pathname === '';
 ---
 
 <!doctype html>
@@ -14,7 +19,7 @@ import Footer from "@/components/Footer.astro"
 		<title>Centre médical Parot</title>
 	</head>
 	<body class="bg-[--brand-surface]">
-		<Navbar />
+		{isHome ? <NavbarHome /> : <Navbar />}
 			<main>
 				<slot />
 			</main>
