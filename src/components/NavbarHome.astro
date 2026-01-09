@@ -53,13 +53,36 @@ import logoTextColored from "../assets/logo/logoTextCMPcolored.svg";
         </li>
       </ul>
     </div>
-    
-    <!-- Burger mobile -->
-      <button class="text-[#313181] absolute right-10 md:hidden flex items-center text-3xl">
-        ☰
-      </button>
   </div>
+  
+  <!-- Burger mobile (fixé, toujours au-dessus) -->
+  <button id="mobile-menu-button" class="fixed top-5 right-6 md:hidden flex items-center text-4xl z-[100] transition-colors">
+    <span id="burger-icon" class="text-[#313181]">☰</span>
+    <span id="close-icon" class="hidden text-[#313181]">✕</span>
+  </button>
 </nav>
+
+
+
+<!-- Menu mobile -->
+<div id="mobile-menu" class="md:hidden fixed inset-0 z-[60] bg-white/95 backdrop-blur-lg transition-all duration-300 opacity-0 pointer-events-none">
+  <div class="h-full flex items-center justify-center">
+    <ul id="mobile-menu-list" class="flex flex-col space-y-8 text-2xl font-medium text-[#313181] text-center transform translate-y-8 opacity-0 transition-all duration-300">
+      <li>
+        <a href="/#our-offices" class="block py-3 hover:text-[#37A4B3] transition">Nos cabinets</a>
+      </li>
+      <li>
+        <a href="/#our-team" class="block py-3 hover:text-[#37A4B3] transition">Notre équipe</a>
+      </li>
+      <li>
+        <a href="/#faq" class="block py-3 hover:text-[#37A4B3] transition">Vos questions</a>
+      </li>
+      <li>
+        <a href="/contact" class="block py-3 hover:text-[#37A4B3] transition">Contactez-nous</a>
+      </li>
+    </ul>
+  </div>
+</div>
 
 <script is:inline>
   const navbar = document.getElementById('navbar');
@@ -68,9 +91,66 @@ import logoTextColored from "../assets/logo/logoTextCMPcolored.svg";
   const middleScrolled = document.getElementById('middleTextScrolled');
   const lower = document.getElementById('lowerWaves');
   const logo = document.getElementById('nav-logo');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuList = document.getElementById('mobile-menu-list');
+  const burgerIcon = document.getElementById('burger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  // Toggle menu mobile
+  mobileMenuButton.addEventListener('click', () => {
+    const isOpening = mobileMenu.classList.contains('opacity-0');
+    
+    if (isOpening) {
+      // Ouvrir le menu
+      mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+      mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+      
+      // Animation du contenu avec délai
+      setTimeout(() => {
+        mobileMenuList.classList.remove('translate-y-8', 'opacity-0');
+        mobileMenuList.classList.add('translate-y-0', 'opacity-100');
+      }, 50);
+      
+      burgerIcon.classList.add('hidden');
+      closeIcon.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Fermer le menu
+      mobileMenuList.classList.add('translate-y-8', 'opacity-0');
+      mobileMenuList.classList.remove('translate-y-0', 'opacity-100');
+      
+      setTimeout(() => {
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+      }, 150);
+      
+      burgerIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Fermer le menu quand on clique sur un lien
+  const mobileLinks = mobileMenu.querySelectorAll('a');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenuList.classList.add('translate-y-8', 'opacity-0');
+      mobileMenuList.classList.remove('translate-y-0', 'opacity-100');
+      
+      setTimeout(() => {
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+      }, 150);
+      
+      burgerIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+      document.body.style.overflow = '';
+    });
+  });
 
   function isMobile() {
-    return window.innerWidth < 768; // md breakpoint de Tailwind
+    return window.innerWidth < 768;
   }
 
   window.addEventListener('scroll', () => {
@@ -83,7 +163,6 @@ import logoTextColored from "../assets/logo/logoTextCMPcolored.svg";
       logo.style.justifyContent = 'center';
       logo.style.height = '3rem';
       
-      // Changer les images texte
       logo.style.marginTop = '0';
       middleDefault.style.opacity = '0';
       middleScrolled.style.opacity = '1';
@@ -93,9 +172,8 @@ import logoTextColored from "../assets/logo/logoTextCMPcolored.svg";
       lower.style.height = '33%';
       upper.style.opacity = '1';
       lower.style.opacity = '1';
-      logo.style.height = '12rem';
+      logo.style.height = isMobile() ? "9.5rem" : '12rem';
       
-      // Revenir à l'image par défaut
       logo.style.marginTop = isMobile() ? '5rem' : '2rem';
       middleDefault.style.opacity = '1';
       middleScrolled.style.opacity = '0';
