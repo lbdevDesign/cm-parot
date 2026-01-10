@@ -4,6 +4,12 @@ export const content = [
 ];
 export const theme = {
     extend: {
+        fontFamily: {
+            'header': ['Geologica', 'sans-serif'],
+            'text': ['Onest', 'sans-serif'],
+            // Ou ajoutez une font personnalisée
+            // custom: ['Votre Font', 'sans-serif'],
+        },
         colors: {
             "brand": {
                 DEFAULT: "#313181", // -> bg-brand

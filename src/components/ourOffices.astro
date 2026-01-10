@@ -1,0 +1,131 @@
+---
+import Link from './Link.astro';
+
+// Récupérer les données des cabinets
+import cabinets from '../data/cabinets.js';
+
+// Préparer les données pour le JS (on extrait le src des images)
+const cabinetsJSON = JSON.stringify(cabinets.map(c => ({
+  id: String(c.id),
+  name: c.name,
+  district: c.district,
+  description: c.description,
+  mapsUrl: c.mapsUrl,
+  image: typeof c.image === 'string' ? c.image : c.image?.src
+})));
+
+// Pour l'affichage initial
+const firstCabinetImage = typeof cabinets[0].image === 'string' 
+  ? cabinets[0].image 
+  : cabinets[0].image?.src;
+---
+
+<section class="w-full scroll-mt-16 py-20" id="our-offices">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-4">Nos cabinets</h2>
+    <p class="text-center text-gray-600 mb-12">Retrouvez nos différents cabinets médicaux répartis dans la ville</p>
+
+    <!-- Boutons de sélection -->
+    <div class="flex gap-3 justify-center flex-wrap mb-8">
+      {cabinets.map((cabinet, index) => (
+        <button
+          data-cabinet-id={String(cabinet.id)}
+          class={`cabinet-btn cursor-pointer px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+            index === 0
+              ? "bg-[#37A4B3] text-white shadow-md"
+              : "bg-white text-[#313181] border border-gray-200 hover:border-[#37A4B3] hover:shadow-sm"
+          }`}
+        >
+          {cabinet.district}
+        </button>
+      ))}
+    </div>
+
+    <!-- Carte d'affichage -->
+    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+      <!-- Image en haut -->
+      <div class="relative h-64 md:h-80 overflow-hidden">
+        <img
+          id="cabinet-image"
+          src={firstCabinetImage}
+          alt={cabinets[0].name}
+          class="w-full h-full object-cover transition-transform duration-300"
+        />
+      </div>
+
+      <!-- Contenu -->
+      <div class="p-8">
+        <div class="flex items-start justify-between gap-4 mb-4">
+          <div class="flex-1">
+            <h3 id="cabinet-name" class="text-2xl font-bold text-[#313181] mb-2">{cabinets[0].name}</h3>
+            <p id="cabinet-description" class="text-gray-600">{cabinets[0].description}</p>
+          </div>
+        </div>
+
+        <Link 
+          id="cabinet-link" 
+          href={cabinets[0].mapsUrl} 
+          target="_blank" 
+          variant="button"
+          className="inline-flex"
+        >
+          Voir sur Google Maps
+        </Link>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ cabinetsJSON }}>
+  console.log('Script chargé');
+  
+  const cabinetsData = JSON.parse(cabinetsJSON);
+  console.log('Données cabinets:', cabinetsData);
+  
+  const buttons = document.querySelectorAll('.cabinet-btn');
+  console.log('Nombre de boutons trouvés:', buttons.length);
+  
+  const nameEl = document.getElementById('cabinet-name');
+  const descriptionEl = document.getElementById('cabinet-description');
+  const linkEl = document.getElementById('cabinet-link');
+  const imageEl = document.getElementById('cabinet-image');
+
+  buttons.forEach((btn, index) => {
+    console.log('Ajout listener sur bouton', index, 'ID:', btn.getAttribute('data-cabinet-id'));
+    
+    btn.addEventListener('click', function() {
+      console.log('CLIC détecté sur bouton !');
+      
+      const cabinetId = this.getAttribute('data-cabinet-id');
+      console.log('Cabinet ID cliqué:', cabinetId);
+      
+      const selected = cabinetsData.find(c => String(c.id) === String(cabinetId));
+      console.log('Cabinet trouvé:', selected);
+
+      if (!selected) {
+        console.error('Aucun cabinet trouvé pour ID:', cabinetId);
+        return;
+      }
+
+      // Mettre à jour les boutons
+      buttons.forEach(b => {
+        b.classList.remove('bg-[#37A4B3]', 'text-white', 'shadow-md');
+        b.classList.add('bg-white', 'text-[#313181]', 'border', 'border-gray-200');
+      });
+
+      this.classList.add('bg-[#37A4B3]', 'text-white', 'shadow-md');
+      this.classList.remove('bg-white', 'text-[#313181]', 'border', 'border-gray-200');
+
+      // Mettre à jour le contenu
+      nameEl.textContent = selected.name;
+      descriptionEl.textContent = selected.description;
+      linkEl.href = selected.mapsUrl;
+      imageEl.src = selected.image;
+      imageEl.alt = selected.name;
+      
+      console.log('Contenu mis à jour');
+    });
+  });
+  
+  console.log('Tous les listeners ajoutés');
+</script>
