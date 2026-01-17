@@ -1,45 +1,116 @@
 ---
 const faq = [
   {
-    question: "Comment fonctionne votre service ?",
-    answer:
-      "Nous proposons une solution complète incluant le développement, la maintenance et le support.",
+    id: 1,
+    question: "Quelle est l'adresse de Centre Médical Parot ?",
+    answer: `<p>Centre Médical Parot reçoit des patients aux adresses suivantes :</p>
+
+    <ul>
+      <li>54 Rue Duquesne, 69006 Lyon</li>
+      <li>65 Rue des Contamines, 69140 Rillieux-la-Pape</li>
+      <li>51 Rue Commandant Charcot, 69110 Sainte-Foy-lès-Lyon</li>
+      <li>11 Rue Édouard Nieuport, 69008 Lyon</li>
+    </ul>`,
   },
   {
-    question: "Quels sont vos délais de livraison ?",
-    answer:
-      "Les délais varient entre 1 et 4 semaines selon la complexité du projet.",
+    id: 2,
+    question: "Quels sont les horaires d'ouverture ?",
+    answer:`<p>Centre Médical Parot est ouvert aux horaires suivants :</p>
+
+    <ul>
+      <li><strong>Lundi :</strong> 08h00 – 12h00, 14h00 – 17h30</li>
+      <li><strong>Mardi :</strong> 08h00 – 12h00, 14h00 – 17h30</li>
+      <li><strong>Mercredi :</strong> 08h00 – 12h00, 14h00 – 17h00</li>
+      <li><strong>Jeudi :</strong> 08h00 – 12h00, 14h00 – 17h30</li>
+      <li><strong>Vendredi :</strong> 08h00 – 12h00, 14h00 – 17h00</li>
+    </ul>`,
   },
   {
-    question: "Proposez-vous un support après livraison ?",
-    answer:
-      "Oui, nous proposons plusieurs forfaits de support et de maintenance.",
+    id: 3,
+    question: "Acceptez-vous de nouveaux patients ?",
+    answer:`<p>
+      Oui, <strong>Centre Médical Parot accepte actuellement de nouveaux patients</strong>.
+    </p>`,
   },
   {
-    question: "Puis-je modifier mon site moi-même ?",
-    answer:
-      "Bien sûr ! Grâce à notre CMS, vous pouvez modifier vos pages et publier des articles facilement.",
+    id: 4,
+    question: "Proposez-vous la téléconsultation ?",
+    answer:`<p>
+      Oui, Centre Médical Parot propose la téléconsultation pour les motifs suivants :
+    </p>
+
+    <ul>
+      <li>Consultation vidéo – patient suivi</li>
+      <li>Consultation vidéo – nouveau patient</li>
+    </ul>`,
   },
 ];
 ---
 
-<section class="max-w-5xl mx-auto px-6 py-20">
-  <h2 class="text-4xl font-bold text-center mb-16">FAQ</h2>
+<section id="faq" class="max-w-4xl mx-auto px-6 py-20 scroll-mt-16">
+  <h2 class="text-4xl font-bold text-center mb-4">Questions fréquentes</h2>
+  <p class="text-center text-gray-600 mb-12">Tout ce que vous devez savoir sur nos services</p>
 
-  <div class="space-y-6">
-    {faq.map((item) => (
-      <details class="group bg-white shadow-md rounded-xl p-6 transition">
-        <summary class="cursor-pointer flex justify-between items-center text-lg font-medium">
-          {item.question}
-          <span class="transition-transform group-open:rotate-180">
-            ▼
+  <div class="space-y-4">
+    {faq.map((item, index) => (
+      <details
+        class="group bg-white rounded-2xl border border-gray-200 hover:border-[#37A4B3] transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md"
+      >
+        <summary class="cursor-pointer font-semibold text-[#313181] p-6 flex items-center justify-between list-none">
+          <span class="flex items-center gap-4">
+            <span class="flex-shrink-0 w-8 h-8 bg-[#37A4B3]/10 rounded-full flex items-center justify-center text-[#37A4B3] font-bold text-sm">
+              {index + 1}
+            </span>
+            <span class="text-lg">{item.question}</span>
           </span>
+          
+          <svg 
+            class="w-6 h-6 text-[#37A4B3] transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ml-4" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
         </summary>
 
-        <p class="mt-4 text-gray-600 leading-relaxed">
-          {item.answer}
-        </p>
+        <div class="px-6 pb-6 pt-0">
+          <div class="pl-12 prose prose-sm max-w-none text-gray-600" set:html={item.answer} />
+        </div>
       </details>
     ))}
   </div>
 </section>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] summary {
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Style des listes dans les réponses */
+  details ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.75rem;
+  }
+
+  details ul li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  details ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #37A4B3;
+    font-weight: bold;
+  }
+</style>

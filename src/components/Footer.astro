@@ -1,13 +1,17 @@
 ---
+import Image from 'astro/components/Image.astro';
+import logoFooter from '../assets/logo/logoCMPwhite.svg';
+
 const navLinks = [
   { label: "Accueil", href: "/" },
-  { label: "Notre équipe", href: "/equipe" },
-  { label: "Blog", href: "/blog" },
+  { label: "Nos cabinets", href: "/#our-offices" },
+  { label: "Notre équipe", href: "/#our-team" },
+  { label: "Questions fréquentes", href: "/#faq" },
 ];
 
 const legalLinks = [
-  { label: "Mentions légales", href: "/mentions-legales" },
-  { label: "Politique de confidentialité", href: "/privacy" },
+  { label: "Mentions légales", href: "/legal" },
+  { label: "Politique de confidentialité", href: "/confidentialite" },
   { label: "Conditions d’utilisation", href: "/cgu" },
 ];
 
@@ -18,12 +22,12 @@ const socialLinks = [
 ];
 ---
 
-<footer class="bg-gray-950 text-gray-300 mt-20 pt-16 pb-10">
-  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+<footer class="bg-gray-950 text-gray-300 pt-16 pb-10">
+  <div class="max-w-7xl mx-auto px-6 flex gap-8 md:gap-24 md:flex-row flex-col justify-between">
 
     <!-- Logo + Description -->
-    <div class="space-y-4">
-      <img src="/logo.svg" alt="Logo" class="w-32" />
+    <div class="space-y-4 w-full md:w-100">
+      <Image src={logoFooter} alt="Logo" class="w-32 m-auto-0" />
 
       <p class="text-gray-400 text-sm leading-relaxed">
         Nous créons des expériences web modernes, rapides et élégantes pour booster votre présence en ligne.
@@ -57,21 +61,6 @@ const socialLinks = [
         ))}
       </ul>
     </div>
-
-    <!-- Réseaux sociaux -->
-    <div>
-      <h4 class="text-white font-semibold mb-4">Réseaux</h4>
-      <ul class="space-y-2">
-        {socialLinks.map((link) => (
-          <li>
-            <a href={link.href} class="hover:underline" target="_blank">
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-
   </div>
 
   <!-- Bottom bar -->
