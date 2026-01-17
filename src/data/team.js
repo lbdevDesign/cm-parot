@@ -7,7 +7,6 @@ import fabricePiegay from "../assets/medecins/fabricePiegay.jpg";
 import martinVeaudor from "../assets/medecins/martinVeaudor.jpg";
 import nelsonHanin from "../assets/medecins/nelsonHanin.jpg";
 
-// Every team member must have a name, a Doctolib URL and a photo.
 const team = [
   {
     name: "Pierre Bombaron",
