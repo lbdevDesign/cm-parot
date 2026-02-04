@@ -4,68 +4,74 @@ import upperWaves from "../assets/logo/logoCMPupperWavesColored.svg";
 import lowerWaves from "../assets/logo/logoCMPlowerWavesColored.svg";
 import logoTextNavbar from "../assets/logo/logoTextCMPnavbar.svg";
 import logoTextColored from "../assets/logo/logoTextCMPcolored.svg";
+
+interface Props {
+  alwaysScrolled?: boolean;
+}
+
+const { alwaysScrolled = false } = Astro.props;
 ---
 
-<nav id="navbar" class="w-full fixed top-0 left-0 z-50 bg-transparent transition-all duration-300">
+<nav id="navbar" class={`w-full fixed top-0 left-0 z-70 transition-all duration-300 ${alwaysScrolled ? 'scrolled' : 'bg-transparent'}`}>
   <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-content">
-    <div id="nav-links" class="w-full flex md:grid md:grid-cols-3 justify-center items-center gap-4 h-32 md:h-40 transition-all duration-300">
+    <div id="nav-links" class={`w-full flex md:grid md:grid-cols-3 justify-center items-center gap-4 transition-all duration-300 ${alwaysScrolled ? 'h-20' : 'h-32 md:h-40'}`}>
 
       <!-- Menu gauche -->
       <ul class="hidden md:flex justify-end space-x-8 text-lg font-medium text-[#313181]">
         <li>
-          <a href="/#our-offices" class="hover:text-[#FFFFFF] transition cursor-pointer font-bold">Nos cabinets</a>
+          <a href="/#our-offices" class={`transition cursor-pointer font-bold ${alwaysScrolled ? 'hover:text-[#37A4B3]' : 'hover:text-[#FFFFFF]'}`}>Nos cabinets</a>
         </li>
         <li>
-          <a href="/#our-team" class="hover:text-[#FFFFFF] transition cursor-pointer font-bold">Notre équipe</a>
+          <a href="/#our-team" class={`transition cursor-pointer font-bold ${alwaysScrolled ? 'hover:text-[#37A4B3]' : 'hover:text-[#FFFFFF]'}`}>Notre équipe</a>
         </li>
       </ul>
 
-      <!-- Logo centré et agrandi -->
-      <a id="nav-logo" href="/" class="font-bold text-gray-800 h-38 md:h-48 transition-all duration-400 flex flex-col items-center justify-self-center mt-[5rem] md:mt-[2rem]">
-        <Image id="upperWaves" src={upperWaves} alt="Upper Waves" class="h-1/3 transition-all duration-300" />
+      <!-- Logo centré -->
+      <a id="nav-logo" href="/" class={`font-bold text-gray-800 transition-all duration-400 flex flex-col items-center justify-self-center ${alwaysScrolled ? 'h-16' : 'h-38 md:h-48 mt-[5rem] md:mt-[2rem]'}`}>
+        {!alwaysScrolled && <Image id="upperWaves" src={upperWaves} alt="Upper Waves" class="h-1/3 transition-all duration-300" />}
         
         <!-- Deux versions du texte superposées -->
-        <div id="middleTextContainer" class="relative h-[3.5rem] md:h-[4rem] flex items-center justify-center transition-all duration-300">
-          <Image 
-            id="middleTextDefault" 
-            src={logoTextNavbar} 
-            alt="Nav Image" 
-            class="h-full w-auto transition-all duration-300 opacity-100" 
-          />
+        <div id="middleTextContainer" class={`relative flex items-center justify-center transition-all duration-300 ${alwaysScrolled ? 'h-16' : 'h-[3.5rem] md:h-[4rem]'}`}>
+          {!alwaysScrolled && (
+            <Image 
+              id="middleTextDefault" 
+              src={logoTextNavbar} 
+              alt="Nav Image" 
+              class="h-full w-auto transition-all duration-300 opacity-100" 
+            />
+          )}
           <Image 
             id="middleTextScrolled" 
             src={logoTextColored} 
             alt="Nav Image Scrolled" 
-            class="absolute h-full w-auto inset-0 m-auto transition-all duration-300 opacity-0" 
+            class={`w-auto transition-all duration-300 ${alwaysScrolled ? 'relative opacity-100 h-16' : 'absolute opacity-0 h-full'}`}
           />
         </div>
         
-        <Image id="lowerWaves" src={lowerWaves} alt="Lower Waves" class="h-1/3 transition-all duration-300" />
+        {!alwaysScrolled && <Image id="lowerWaves" src={lowerWaves} alt="Lower Waves" class="h-1/3 transition-all duration-300" />}
       </a>
 
       <!-- Menu droite -->
       <ul class="hidden md:flex justify-start space-x-8 text-lg font-medium text-[#313181]">
         <li>
-          <a href="/#faq" class="hover:text-[#FFFFFF] transition cursor-pointer font-bold">Vos questions</a>
+          <a href="/#faq" class={`transition cursor-pointer font-bold ${alwaysScrolled ? 'hover:text-[#37A4B3]' : 'hover:text-[#FFFFFF]'}`}>Vos questions</a>
         </li>
         <li>
-          <a href="/contact" class="hover:text-[#FFFFFF] transition cursor-pointer font-bold">Contactez-nous</a>
+          <a href="/contact" class={`transition cursor-pointer font-bold ${alwaysScrolled ? 'hover:text-[#37A4B3]' : 'hover:text-[#FFFFFF]'}`}>Contactez-nous</a>
         </li>
       </ul>
     </div>
   </div>
   
-  <!-- Burger mobile (fixé, toujours au-dessus) -->
-  <button id="mobile-menu-button" class="fixed top-5 right-6 md:hidden flex items-center text-4xl z-[100] transition-colors">
+  <!-- Burger mobile -->
+  <button id="mobile-menu-button" class="fixed top-1/2 -translate-y-1/2 right-6 md:hidden flex items-center text-4xl z-[100] transition-colors">
     <span id="burger-icon" class="text-[#313181]">☰</span>
     <span id="close-icon" class="hidden text-[#313181]">✕</span>
   </button>
 </nav>
 
-
-
 <!-- Menu mobile -->
-<div id="mobile-menu" class="md:hidden fixed inset-0 z-[60] bg-white/95 backdrop-blur-lg transition-all duration-300 opacity-0 pointer-events-none">
+<div id="mobile-menu" class="md:hidden fixed inset-0 z-[60] bg-white backdrop-blur-lg transition-all duration-300 opacity-0 pointer-events-none">
   <div class="h-full flex items-center justify-center">
     <ul id="mobile-menu-list" class="flex flex-col space-y-8 text-2xl font-medium text-[#313181] text-center transform translate-y-8 opacity-0 transition-all duration-300">
       <li>
@@ -84,7 +90,7 @@ import logoTextColored from "../assets/logo/logoTextCMPcolored.svg";
   </div>
 </div>
 
-<script is:inline>
+<script is:inline define:vars={{ alwaysScrolled }}>
   const navbar = document.getElementById('navbar');
   const upper = document.getElementById('upperWaves');
   const middleDefault = document.getElementById('middleTextDefault');
@@ -97,37 +103,58 @@ import logoTextColored from "../assets/logo/logoTextCMPcolored.svg";
   const burgerIcon = document.getElementById('burger-icon');
   const closeIcon = document.getElementById('close-icon');
 
+  let menuOpen = false;
+
+  function closeMenu() {
+    mobileMenuList.classList.add('translate-y-8', 'opacity-0');
+    mobileMenuList.classList.remove('translate-y-0', 'opacity-100');
+    
+    setTimeout(() => {
+      mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+      mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+    }, 150);
+    
+    burgerIcon.classList.remove('hidden');
+    closeIcon.classList.add('hidden');
+    document.body.style.overflow = '';
+    menuOpen = false;
+  }
+
+  function openMenu() {
+    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+    mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+    
+    setTimeout(() => {
+      mobileMenuList.classList.remove('translate-y-8', 'opacity-0');
+      mobileMenuList.classList.add('translate-y-0', 'opacity-100');
+    }, 50);
+    
+    burgerIcon.classList.add('hidden');
+    closeIcon.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    menuOpen = true;
+    
+    // Ajouter une entrée dans l'historique
+    window.history.pushState({ menuOpen: true }, '');
+  }
+
   // Toggle menu mobile
   mobileMenuButton.addEventListener('click', () => {
-    const isOpening = mobileMenu.classList.contains('opacity-0');
-    
-    if (isOpening) {
-      // Ouvrir le menu
-      mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
-      mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
-      
-      // Animation du contenu avec délai
-      setTimeout(() => {
-        mobileMenuList.classList.remove('translate-y-8', 'opacity-0');
-        mobileMenuList.classList.add('translate-y-0', 'opacity-100');
-      }, 50);
-      
-      burgerIcon.classList.add('hidden');
-      closeIcon.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
+    if (menuOpen) {
+      closeMenu();
+      // Retirer l'entrée de l'historique si on ferme manuellement
+      if (window.history.state?.menuOpen) {
+        window.history.back();
+      }
     } else {
-      // Fermer le menu
-      mobileMenuList.classList.add('translate-y-8', 'opacity-0');
-      mobileMenuList.classList.remove('translate-y-0', 'opacity-100');
-      
-      setTimeout(() => {
-        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
-      }, 150);
-      
-      burgerIcon.classList.remove('hidden');
-      closeIcon.classList.add('hidden');
-      document.body.style.overflow = '';
+      openMenu();
+    }
+  });
+
+  // Gérer le bouton retour du navigateur
+  window.addEventListener('popstate', (event) => {
+    if (menuOpen) {
+      closeMenu();
     }
   });
 
@@ -135,17 +162,11 @@ import logoTextColored from "../assets/logo/logoTextCMPcolored.svg";
   const mobileLinks = mobileMenu.querySelectorAll('a');
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
-      mobileMenuList.classList.add('translate-y-8', 'opacity-0');
-      mobileMenuList.classList.remove('translate-y-0', 'opacity-100');
-      
-      setTimeout(() => {
-        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
-      }, 150);
-      
-      burgerIcon.classList.remove('hidden');
-      closeIcon.classList.add('hidden');
-      document.body.style.overflow = '';
+      closeMenu();
+      // Retirer l'entrée de l'historique
+      if (window.history.state?.menuOpen) {
+        window.history.back();
+      }
     });
   });
 
@@ -153,32 +174,43 @@ import logoTextColored from "../assets/logo/logoTextCMPcolored.svg";
     return window.innerWidth < 768;
   }
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-      upper.style.height = '0';
-      lower.style.height = '0';
-      upper.style.opacity = '0';
-      lower.style.opacity = '0';
-      logo.style.justifyContent = 'center';
-      logo.style.height = '3rem';
-      
-      logo.style.marginTop = '0';
-      middleDefault.style.opacity = '0';
-      middleScrolled.style.opacity = '1';
-    } else {
-      navbar.classList.remove('scrolled');
-      upper.style.height = '33%';
-      lower.style.height = '33%';
-      upper.style.opacity = '1';
-      lower.style.opacity = '1';
-      logo.style.height = isMobile() ? "9.5rem" : '12rem';
-      
-      logo.style.marginTop = isMobile() ? '5rem' : '2rem';
-      middleDefault.style.opacity = '1';
-      middleScrolled.style.opacity = '0';
-    }
-  });
+  // Ne gérer le scroll que si pas en mode alwaysScrolled
+  if (!alwaysScrolled) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+        if (upper) {
+          upper.style.height = '0';
+          upper.style.opacity = '0';
+        }
+        if (lower) {
+          lower.style.height = '0';
+          lower.style.opacity = '0';
+        }
+        logo.style.justifyContent = 'center';
+        logo.style.height = '3rem';
+        logo.style.marginTop = '0';
+        
+        if (middleDefault) middleDefault.style.opacity = '0';
+        if (middleScrolled) middleScrolled.style.opacity = '1';
+      } else {
+        navbar.classList.remove('scrolled');
+        if (upper) {
+          upper.style.height = '33%';
+          upper.style.opacity = '1';
+        }
+        if (lower) {
+          lower.style.height = '33%';
+          lower.style.opacity = '1';
+        }
+        logo.style.height = isMobile() ? "9.5rem" : '12rem';
+        logo.style.marginTop = isMobile() ? '5rem' : '2rem';
+        
+        if (middleDefault) middleDefault.style.opacity = '1';
+        if (middleScrolled) middleScrolled.style.opacity = '0';
+      }
+    });
+  }
 </script>
 
 <style>

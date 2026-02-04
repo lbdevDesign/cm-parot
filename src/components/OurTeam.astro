@@ -2,15 +2,19 @@
 import { Image } from 'astro:assets';
 import Link from './Link.astro';
 import team from '../data/team.js';
+
+const sortedTeam = [...team].sort((a, b) =>
+  a.name.localeCompare(b.name, "fr", { sensitivity: "base" })
+);
 ---
 
-<section class="w-full scroll-mt-16 pt-20" id="our-team">
+<section class="w-full scroll-mt-16 pt-10 pb-10" id="our-team">
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-4xl font-bold text-center mb-4">Notre équipe</h2>
     <p class="text-center text-gray-600 mb-12">Des médecins pneumologues expérimentés à votre écoute</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {team.map((member) => (
+      {sortedTeam.map((member) => (
         <div class="bg-white rounded-2xl border border-gray-200 hover:border-[#37A4B3] transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md">
           <div class="p-6 flex items-center gap-6">
             <div class="w-28 h-28 rounded-full overflow-hidden border-4 border-[#37A4B3]/20 hover:border-[#37A4B3] transition-colors flex-shrink-0">
