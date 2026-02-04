@@ -64,9 +64,9 @@ const { alwaysScrolled = false } = Astro.props;
   </div>
   
   <!-- Burger mobile -->
-  <button id="mobile-menu-button" class="fixed top-1/2 -translate-y-1/2 right-6 md:hidden flex items-center text-4xl z-[100] transition-colors">
-    <span id="burger-icon" class="text-[#313181]">☰</span>
-    <span id="close-icon" class="hidden text-[#313181]">✕</span>
+  <button id="mobile-menu-button" class="fixed top-[22px] right-6 md:hidden flex items-center justify-center text-4xl z-[100] transition-colors">
+    <span id="burger-icon" class="text-[#313181] flex items-center justify-center">☰</span>
+    <span id="close-icon" class="hidden text-[#313181] flex items-center justify-center">✕</span>
   </button>
 </nav>
 
@@ -233,4 +233,5 @@ const { alwaysScrolled = false } = Astro.props;
   nav.scrolled img {
     transition: all 0.3s ease;
   }
+  
 </style>
