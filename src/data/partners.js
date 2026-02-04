@@ -1,17 +1,21 @@
+import logoDoctolib from "../assets/partners/doctolib.jpg";
+import logoHCL from "../assets/partners/hcl.jpg";
+import logoARS from "../assets/partners/ars.jpg";
+
 export default [
   {
     name: "Doctolib",
-    logo: "/src/assets/partners/doctolib.jpg",
+    logo: logoDoctolib,
     url: "https://www.doctolib.fr",
   },
   {
     name: "Hôpital Croix-Rousse",
-    logo: "/src/assets/partners/hcl.jpg",
+    logo: logoHCL,
     url: "https://www.chu-lyon.fr",
   },
   {
     name: "ARS Auvergne-Rhône-Alpes",
-    logo: "/src/assets/partners/ars.jpg",
+    logo: logoARS,
     url: "https://www.auvergne-rhone-alpes.ars.sante.fr",
   },
 ];
