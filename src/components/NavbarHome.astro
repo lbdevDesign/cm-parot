@@ -104,6 +104,7 @@ const { alwaysScrolled = false } = Astro.props;
   const closeIcon = document.getElementById('close-icon');
 
   let menuOpen = false;
+  let wasScrolled = false;
 
   function closeMenu() {
     mobileMenuList.classList.add('translate-y-8', 'opacity-0');
@@ -118,6 +119,24 @@ const { alwaysScrolled = false } = Astro.props;
     closeIcon.classList.add('hidden');
     document.body.style.overflow = '';
     menuOpen = false;
+    
+    // Restaurer l'état du logo si on n'était pas scrollé
+    if (!alwaysScrolled && !wasScrolled) {
+      navbar.classList.remove('scrolled');
+      if (upper) {
+        upper.style.height = '33%';
+        upper.style.opacity = '1';
+      }
+      if (lower) {
+        lower.style.height = '33%';
+        lower.style.opacity = '1';
+      }
+      logo.style.height = isMobile() ? "9.5rem" : '12rem';
+      logo.style.marginTop = isMobile() ? '5rem' : '2rem';
+      
+      if (middleDefault) middleDefault.style.opacity = '1';
+      if (middleScrolled) middleScrolled.style.opacity = '0';
+    }
   }
 
   function openMenu() {
@@ -134,15 +153,39 @@ const { alwaysScrolled = false } = Astro.props;
     document.body.style.overflow = 'hidden';
     menuOpen = true;
     
+    // Sauvegarder l'état actuel et passer en mode scrolled
+    if (!alwaysScrolled) {
+      wasScrolled = navbar.classList.contains('scrolled');
+      
+      navbar.classList.add('scrolled');
+      if (upper) {
+        upper.style.height = '0';
+        upper.style.opacity = '0';
+      }
+      if (lower) {
+        lower.style.height = '0';
+        lower.style.opacity = '0';
+      }
+      logo.style.justifyContent = 'center';
+      logo.style.height = '3rem';
+      logo.style.marginTop = '0';
+      
+      if (middleDefault) middleDefault.style.opacity = '0';
+      if (middleScrolled) middleScrolled.style.opacity = '1';
+    }
+    
     // Ajouter une entrée dans l'historique
     window.history.pushState({ menuOpen: true }, '');
+  }
+
+  function isMobile() {
+    return window.innerWidth < 768;
   }
 
   // Toggle menu mobile
   mobileMenuButton.addEventListener('click', () => {
     if (menuOpen) {
       closeMenu();
-      // Retirer l'entrée de l'historique si on ferme manuellement
       if (window.history.state?.menuOpen) {
         window.history.back();
       }
@@ -163,21 +206,17 @@ const { alwaysScrolled = false } = Astro.props;
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
       closeMenu();
-      // Retirer l'entrée de l'historique
       if (window.history.state?.menuOpen) {
         window.history.back();
       }
     });
   });
 
-  function isMobile() {
-    return window.innerWidth < 768;
-  }
-
   // Ne gérer le scroll que si pas en mode alwaysScrolled
   if (!alwaysScrolled) {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
+        wasScrolled = true;
         navbar.classList.add('scrolled');
         if (upper) {
           upper.style.height = '0';
@@ -194,20 +233,23 @@ const { alwaysScrolled = false } = Astro.props;
         if (middleDefault) middleDefault.style.opacity = '0';
         if (middleScrolled) middleScrolled.style.opacity = '1';
       } else {
-        navbar.classList.remove('scrolled');
-        if (upper) {
-          upper.style.height = '33%';
-          upper.style.opacity = '1';
+        wasScrolled = false;
+        if (!menuOpen) {
+          navbar.classList.remove('scrolled');
+          if (upper) {
+            upper.style.height = '33%';
+            upper.style.opacity = '1';
+          }
+          if (lower) {
+            lower.style.height = '33%';
+            lower.style.opacity = '1';
+          }
+          logo.style.height = isMobile() ? "9.5rem" : '12rem';
+          logo.style.marginTop = isMobile() ? '5rem' : '2rem';
+          
+          if (middleDefault) middleDefault.style.opacity = '1';
+          if (middleScrolled) middleScrolled.style.opacity = '0';
         }
-        if (lower) {
-          lower.style.height = '33%';
-          lower.style.opacity = '1';
-        }
-        logo.style.height = isMobile() ? "9.5rem" : '12rem';
-        logo.style.marginTop = isMobile() ? '5rem' : '2rem';
-        
-        if (middleDefault) middleDefault.style.opacity = '1';
-        if (middleScrolled) middleScrolled.style.opacity = '0';
       }
     });
   }
