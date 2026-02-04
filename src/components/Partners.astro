@@ -1,0 +1,42 @@
+---
+import { Image } from "astro:assets";
+import partners from "../data/partners.js";
+---
+
+<section class="w-full py-20 bg-gray-50 pt-10 pb-10" id="partners">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-4">Nos partenaires</h2>
+
+    <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+      Nous travaillons en collaboration avec des acteurs reconnus du secteur
+      médical afin de garantir une prise en charge de qualité.
+    </p>
+
+    <div
+      class="flex gap-6 flex-wrap justify-center items-start"
+    >
+      {
+        partners.map((partner) => (
+          <a
+            href={partner.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group w-80 flex flex-col bg-white rounded-2xl border border-gray-200 p-6 flex items-center justify-center
+                 hover:border-[#37A4B3] hover:shadow-md transition-all duration-300"
+          >
+            <div class="w-full h-40 mb-4 rounded-lg flex items-center justify-center overflow-hidden">
+              <Image
+                src={partner.logo}
+                alt={partner.name}
+                width={160}
+                height={48}
+                class="w-full h-full h-20 object-cover opacity-70 group-hover:opacity-100 transition"
+              />
+            </div>
+            <p class="text-lg font-semibold text-[#313181] mb-1">{partner.name}</p>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

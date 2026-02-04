@@ -5,11 +5,13 @@ import OurOffices from "@/components/ourOffices.astro"
 import OurTeam from "@/components/OurTeam.astro"
 import FAQ from "@/components/FAQ.astro"
 import cabinets from "@/data/cabinets.js"
+import Partners from '@/components/Partners.astro';
 ---
 
 <Layout>
 	<Hero />
 	<OurOffices client:load cabinets={cabinets} />
 	<OurTeam />
+	<Partners />
 	<FAQ />
 </Layout>

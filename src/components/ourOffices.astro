@@ -20,7 +20,7 @@ const firstCabinetImage = typeof cabinets[0].image === 'string'
   : cabinets[0].image?.src;
 ---
 
-<section class="w-full scroll-mt-16 pt-20" id="our-offices">
+<section class="w-full scroll-mt-16 pt-20 pb-10" id="our-offices">
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-4xl font-bold text-center mb-4">Nos cabinets</h2>
     <p class="text-center text-gray-600 mb-12">Retrouvez nos différents cabinets médicaux répartis dans la ville</p>
@@ -59,6 +59,7 @@ const firstCabinetImage = typeof cabinets[0].image === 'string'
           <div class="flex-1">
             <h3 id="cabinet-name" class="text-2xl font-bold text-[#313181] mb-2">{cabinets[0].name}</h3>
             <p id="cabinet-description" class="text-gray-600">{cabinets[0].description}</p>
+            <p class="text-gray-600 mt-2">{cabinets[0].hours}</p>
           </div>
         </div>
 

@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css"
 import NavbarHome from "@/components/NavbarHome.astro"
-import Navbar from "@/components/Navbar.astro"
 import Footer from "@/components/Footer.astro"
 
 // Récupérer l'URL actuelle
@@ -22,7 +21,7 @@ const isHome = pathname === '/' || pathname === '';
 		<title>Centre médical Parot</title>
 	</head>
 	<body class="bg-[--brand-surface]">
-		{isHome ? <NavbarHome /> : <Navbar />}
+		<NavbarHome alwaysScrolled={!isHome} />
 			<main>
 				<slot />
 			</main>

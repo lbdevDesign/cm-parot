@@ -11,6 +11,7 @@ const cabinets = [
     description: "54 Rue Duquesne, 69006 Lyon",
     image: parotDuquesne,
     logo: "imgSlot.png",
+    hours: "Lun - Ven: 8h - 18h",
     mapsUrl: "https://maps.app.goo.gl/b86pVfsgpgrCJSX97"
   },
   {
@@ -20,6 +21,7 @@ const cabinets = [
     description: "51 Rue Commandant Charcot, 69110 Sainte-Foy-lès-Lyon",
     image: parotCharcot,
     logo: "imgSlot.png",
+    hours: "Lun - Ven: 8h - 18h",
     mapsUrl: "https://maps.app.goo.gl/dh84879fLTujPNVs6"
   },
   {
@@ -29,6 +31,7 @@ const cabinets = [
     description: "11 Rue Edouard Nieuport, 69008 Lyon",
     image: parotMermoz,
     logo: "imgSlot.png",
+    hours: "Lun - Ven: 8h - 18h",
     mapsUrl: "https://maps.app.goo.gl/aUro1PMNwxkdr7bdA"
   },
   {
@@ -38,6 +41,7 @@ const cabinets = [
     description: "65 Rue des Contamines, 69140 Rillieux-la-Pape",
     image: parotRilleux,
     logo: "/imgSlot.png",
+    hours: "Lun - Ven: 8h - 18h",
     mapsUrl: "https://maps.app.goo.gl/mbuYFTrBJPFdojp3A"
   }
 ];
