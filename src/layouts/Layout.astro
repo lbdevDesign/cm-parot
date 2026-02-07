@@ -2,10 +2,25 @@
 import "../styles/global.css"
 import NavbarHome from "@/components/NavbarHome.astro"
 import Footer from "@/components/Footer.astro"
+import { SEO } from 'astro-seo';
 
 // Récupérer l'URL actuelle
 const { pathname } = Astro.url;
 const isHome = pathname === '/' || pathname === '';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const siteName = "Cabinet Médical Partenaire";
+
+const { 
+  title = "Titre par défaut de ton site",
+  description = "Description par défaut de ton site",
+  image = "/images/og-image.jpg"
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -19,6 +34,34 @@ const isHome = pathname === '/' || pathname === '';
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&family=Onest:wght@100..900&display=swap" rel="stylesheet">
 		<title>Centre médical Parot</title>
+		<SEO
+			title={title}
+			description={description}
+			openGraph={{
+				basic: {
+					title: title,
+					type: "website",
+					image: image,
+				},
+					optional: {
+					siteName: siteName,
+					description: description,
+					locale: "fr_FR",
+				},
+			}}
+			twitter={{
+				card: "summary_large_image",
+				title: title,
+				description: description,
+				image: image,
+			}}
+			extend={{
+				link: [{ rel: "icon", href: "/favicon.svg" }],
+				meta: [
+					{ name: "theme-color", content: "#313181" },
+				],
+			}}
+		/>
 	</head>
 	<body class="bg-[--brand-surface]">
 		<NavbarHome alwaysScrolled={!isHome} />
