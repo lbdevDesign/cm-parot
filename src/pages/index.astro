@@ -8,7 +8,11 @@ import cabinets from "@/data/cabinets.js"
 import Partners from '@/components/Partners.astro';
 ---
 
-<Layout>
+<Layout
+	title="Centre médical Parot - Votre santé, notre priorité"
+	description="Découvrez le Centre médical Parot, votre cabinet de confiance pour des soins de santé de qualité. Notre équipe de professionnels dévoués est là pour vous offrir des services médicaux complets et personnalisés. Prenez rendez-vous dès aujourd'hui."
+	image="/cmParrot_accueil.jpg"
+>
 	<Hero />
 	<OurOffices client:load cabinets={cabinets} />
 	<OurTeam />

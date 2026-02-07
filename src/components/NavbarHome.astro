@@ -206,9 +206,6 @@ const { alwaysScrolled = false } = Astro.props;
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
       closeMenu();
-      if (window.history.state?.menuOpen) {
-        window.history.back();
-      }
     });
   });
 
