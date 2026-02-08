@@ -14,6 +14,8 @@ const cabinetsJSON = JSON.stringify(cabinets.map(c => ({
   image: typeof c.image === 'string' ? c.image : c.image?.src
 })));
 
+let activeCabinetIndex = 0;
+
 // Pour l'affichage initial
 const firstCabinetImage = typeof cabinets[0].image === 'string' 
   ? cabinets[0].image 
@@ -31,8 +33,8 @@ const firstCabinetImage = typeof cabinets[0].image === 'string'
         <button
           data-cabinet-id={String(cabinet.id)}
           class={`cabinet-btn cursor-pointer px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-            index === 0
-              ? "bg-[#37A4B3] text-white shadow-md"
+            index === activeCabinetIndex
+              ? "bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white shadow-md"
               : "bg-white text-[#313181] border border-gray-200 hover:border-[#37A4B3] hover:shadow-sm"
           }`}
         >
@@ -110,11 +112,11 @@ const firstCabinetImage = typeof cabinets[0].image === 'string'
 
       // Mettre à jour les boutons
       buttons.forEach(b => {
-        b.classList.remove('bg-[#37A4B3]', 'text-white', 'shadow-md');
+        b.classList.remove('bg-gradient-to-br', 'from-[#37A4B3]', 'to-[#268090]', 'text-white', 'shadow-md');
         b.classList.add('bg-white', 'text-[#313181]', 'border', 'border-gray-200');
       });
 
-      this.classList.add('bg-[#37A4B3]', 'text-white', 'shadow-md');
+      this.classList.add('bg-gradient-to-br', 'from-[#37A4B3]', 'to-[#268090]', 'text-white', 'shadow-md');
       this.classList.remove('bg-white', 'text-[#313181]', 'border', 'border-gray-200');
 
       // Mettre à jour le contenu
@@ -123,10 +125,6 @@ const firstCabinetImage = typeof cabinets[0].image === 'string'
       linkEl.href = selected.mapsUrl;
       imageEl.src = selected.image;
       imageEl.alt = selected.name;
-      
-      console.log('Contenu mis à jour');
     });
   });
-  
-  console.log('Tous les listeners ajoutés');
 </script>
