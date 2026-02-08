@@ -12,6 +12,7 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  noindex?: boolean;
 }
 
 const siteName = "Cabinet Médical Partenaire";
@@ -19,7 +20,8 @@ const siteName = "Cabinet Médical Partenaire";
 const { 
   title = "Titre par défaut de ton site",
   description = "Description par défaut de ton site",
-  image = "/images/og-image.jpg"
+  image = "/images/og-image.jpg",
+  noindex = false
 } = Astro.props;
 ---
 
@@ -37,6 +39,8 @@ const {
 		<SEO
 			title={title}
 			description={description}
+			noindex={noindex}
+			nofollow={noindex}
 			openGraph={{
 				basic: {
 					title: title,

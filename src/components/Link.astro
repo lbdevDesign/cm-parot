@@ -21,20 +21,77 @@ const base = "relative pr-6 group inline-flex items-center font-semibold transit
 
 const variants: Record<Variant, string> = {
   default: "text-blue-600 hover:text-blue-700",
-  button: "bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white px-5 py-2 border border-transparent hover:bg-transparent hover:text-[#313181] hover:border-[#313181] transition",
+  button: "btn-gradient", // Retire les classes en double, tout est dans le CSS
   outline: "border border-blue-600 text-blue-600 px-5 py-2 hover:bg-blue-600 hover:text-white",
   underline: "text-blue-600 underline hover:text-blue-700",
 };
 ---
 
 <a id={id} href={href} target={target} class={`${base} ${variants[variant]} ${className}`}>
-  <span class="mr-0 group-hover:mr-2 transition">
+  <span class="mr-0 group-hover:mr-2 transition-all duration-300">
     <slot />
   </span>
 
   <img
-    class="absolute right-2 w-0 h-4 opacity-0 -translate-x-1 group-hover:w-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-150"
+    class="absolute right-2 w-0 h-4 opacity-0 -translate-x-1 group-hover:w-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
     src="/Arrow_Right_SM.svg"
     alt="arrow right"
   />
 </a>
+
+<style>
+  .btn-gradient {
+    position: relative;
+    overflow: hidden;
+    padding: 0.5rem 1.25rem;
+    border: 2px solid transparent;
+    color: white;
+    font-weight: 600;
+    border-radius: 0.5rem; /* Ajoute le border-radius ici */
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .btn-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #2A8A98 0%, #268090 100%);
+    transition: opacity 0.3s ease;
+    z-index: 0; /* Change de -1 à 0 */
+  }
+  
+  .btn-gradient::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0; /* Change de -1 à 0 */
+  }
+  
+  /* Le texte doit être au-dessus des pseudo-éléments */
+  .btn-gradient > span,
+  .btn-gradient > img {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .btn-gradient:hover::before {
+    opacity: 0;
+  }
+  
+  .btn-gradient:hover::after {
+    opacity: 1;
+  }
+  
+  .btn-gradient:hover {
+    color: #313181;
+    border: 2px solid #313181;
+  }
+  
+  /* Fix pour la flèche au hover */
+  .btn-gradient:hover img {
+    margin-left: 1rem;
+  }
+</style>
