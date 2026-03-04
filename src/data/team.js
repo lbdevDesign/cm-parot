@@ -9,42 +9,42 @@ import nelsonHanin from "../assets/medecins/nelsonHanin.jpg";
 
 const team = [
   {
-    name: "Pierre Bombaron",
+    name: "Dr Bombaron Pierre",
     url: "https://www.doctolib.fr/pneumologue/lyon/pierre-bombaron?pid=practice-617216",
     photo: pierreBombaron,
   },
   {
-    name: "Amandine Vial-Dupuy",
+    name: "Dr Vial-Dupuy Amandine",
     url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/amandine-vial-dupuy-rillieux-la-pape?pid=practice-617216",
     photo: amandineVialDupuy,
   },
   {
-    name: "Annick Wattiez",
+    name: "Dr Wattiez Annick",
     url: "https://www.doctolib.fr/pneumologue/lyon/annick-wattiez?pid=practice-617216",
     photo: annickWattiez,
   }, 
   {
-    name: "Bruno Caillet",
+    name: "Dr Caillet Bruno",
     url: "https://www.doctolib.fr/pneumologue/lyon/bruno-caillet?pid=practice-617216",
     photo: brunoCaillet,
   },
   {
-    name: "Karima Bouledrak",
+    name: "Dr Bouledrak Karima",
     url: "https://www.doctolib.fr/pneumologue/lyon/karima-bouledrak?pid=practice-617216",
     photo: karimaBouledrak,
   },
   {
-    name: "Fabrice Piegay",
+    name: "Dr Piegay Fabrice",
     url: "https://www.doctolib.fr/pneumologue/lyon/fabrice-piegay?pid=practice-617216",
     photo: fabricePiegay,
   },
   {
-    name: "Martin Veaudor",
+    name: "Dr Veaudor Martin",
     url: "https://www.doctolib.fr/pneumologue/lyon/martin-veaudor?pid=practice-617216",
     photo: martinVeaudor,
   },
   {
-    name: "Nelson Hanin",
+    name: "Dr Hanin Nelson",
     url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/nelson-hanin?pid=practice-617216",
     photo: nelsonHanin,
   }
