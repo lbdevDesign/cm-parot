@@ -9,44 +9,49 @@ import nelsonHanin from "../assets/medecins/nelsonHanin.jpg";
 
 const team = [
   {
-    name: "Dr Bombaron Pierre",
-    url: "https://www.doctolib.fr/pneumologue/lyon/pierre-bombaron?pid=practice-617216",
+    name: "Dr BOMBARON Pierre",
+    url: "https://www.doctolib.fr/pneumologue/lyon/pierre-bombaron",
     photo: pierreBombaron,
   },
   {
-    name: "Dr Vial-Dupuy Amandine",
-    url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/amandine-vial-dupuy-rillieux-la-pape?pid=practice-617216",
+    name: "Dr VIAL-DUPUY Amandine",
+    url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/amandine-vial-dupuy-rillieux-la-pape",
     photo: amandineVialDupuy,
   },
   {
-    name: "Dr Wattiez Annick",
-    url: "https://www.doctolib.fr/pneumologue/lyon/annick-wattiez?pid=practice-617216",
+    name: "Dr WATTIEZ Annick",
+    url: "https://www.doctolib.fr/pneumologue/lyon/annick-wattiez",
     photo: annickWattiez,
   }, 
   {
-    name: "Dr Caillet Bruno",
-    url: "https://www.doctolib.fr/pneumologue/lyon/bruno-caillet?pid=practice-617216",
+    name: "Dr CAILLET Bruno",
+    url: "https://www.doctolib.fr/pneumologue/lyon/bruno-caillet",
     photo: brunoCaillet,
   },
   {
-    name: "Dr Bouledrak Karima",
-    url: "https://www.doctolib.fr/pneumologue/lyon/karima-bouledrak?pid=practice-617216",
+    name: "Dr BOULEDRACK Karima",
+    url: "https://www.doctolib.fr/pneumologue/lyon/karima-bouledrak",
     photo: karimaBouledrak,
   },
   {
-    name: "Dr Piegay Fabrice",
-    url: "https://www.doctolib.fr/pneumologue/lyon/fabrice-piegay?pid=practice-617216",
+    name: "Dr PIEGAY Fabrice",
+    url: "https://www.doctolib.fr/pneumologue/lyon/fabrice-piegay",
     photo: fabricePiegay,
   },
   {
-    name: "Dr Veaudor Martin",
-    url: "https://www.doctolib.fr/pneumologue/lyon/martin-veaudor?pid=practice-617216",
+    name: "Dr VEAUDOR Martin",
+    url: "https://www.doctolib.fr/pneumologue/lyon/martin-veaudor",
     photo: martinVeaudor,
   },
   {
-    name: "Dr Hanin Nelson",
-    url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/nelson-hanin?pid=practice-617216",
+    name: "Dr HANIN Nelson",
+    url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/nelson-hanin",
     photo: nelsonHanin,
+  },
+  {
+    name: "Dr JOUAN Mathilde",
+    url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/mathilde-jouan",
+    photo: null,
   }
 ];
 
