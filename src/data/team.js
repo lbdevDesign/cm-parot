@@ -29,7 +29,7 @@ const team = [
     photo: brunoCaillet,
   },
   {
-    name: "Dr BOULEDRACK Karima",
+    name: "Dr BOULEDRAK Karima",
     url: "https://www.doctolib.fr/pneumologue/lyon/karima-bouledrak",
     photo: karimaBouledrak,
   },
