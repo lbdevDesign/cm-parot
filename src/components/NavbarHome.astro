@@ -12,68 +12,125 @@ interface Props {
 const { alwaysScrolled = false } = Astro.props;
 ---
 
-<nav id="navbar" class={`w-full fixed top-0 left-0 z-70 transition-all duration-300 ${alwaysScrolled ? 'scrolled' : 'bg-transparent'}`}>
+<nav
+  id="navbar"
+  class={`w-full fixed top-0 left-0 z-70 transition-all duration-300 ${alwaysScrolled ? "scrolled" : "bg-transparent"}`}
+>
   <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-content">
-    <div id="nav-links" class={`w-full flex md:grid md:grid-cols-3 justify-center items-center gap-4 transition-all duration-300 ${alwaysScrolled ? 'h-20' : 'h-32 md:h-40'}`}>
-
+    <div
+      id="nav-links"
+      class={`w-full flex md:grid md:grid-cols-3 justify-center items-center gap-4 transition-all duration-300 ${alwaysScrolled ? "h-20" : "h-32 md:h-40"}`}
+    >
       <!-- Menu gauche -->
       <ul class="hidden md:flex justify-end space-x-8 text-lg font-medium text-[#313181]">
         <li>
-          <a href="/#our-offices" class={`transition cursor-pointer font-bold ${alwaysScrolled ? 'hover:text-[#37A4B3]' : 'hover:text-[#FFFFFF]'}`}>Nos cabinets</a>
+          <a
+            href="/#expertises"
+            class={`transition cursor-pointer font-bold ${alwaysScrolled ? "hover:text-[#37A4B3]" : "hover:text-[#37A4B3]"}`}
+            >Nos expertises</a
+          >
         </li>
         <li>
-          <a href="/#our-team" class={`transition cursor-pointer font-bold ${alwaysScrolled ? 'hover:text-[#37A4B3]' : 'hover:text-[#FFFFFF]'}`}>Notre équipe</a>
+          <a
+            href="/#cabinets"
+            class={`transition cursor-pointer font-bold ${alwaysScrolled ? "hover:text-[#37A4B3]" : "hover:text-[#37A4B3]"}`}
+            >Nos cabinets</a
+          >
         </li>
       </ul>
 
       <!-- Logo centré -->
-      <a id="nav-logo" href="/" class={`font-bold text-gray-800 transition-all duration-400 flex flex-col items-center justify-self-center ${alwaysScrolled ? 'h-16' : 'h-38 md:h-48 mt-[5rem] md:mt-[2rem]'}`}>
-        {!alwaysScrolled && <Image id="upperWaves" src={upperWaves} alt="Upper Waves" class="h-1/3 transition-all duration-300" />}
-        
-        <!-- Deux versions du texte superposées -->
-        <div id="middleTextContainer" class={`relative flex items-center justify-center transition-all duration-300 ${alwaysScrolled ? 'h-16' : 'h-[3.5rem] md:h-[4rem]'}`}>
-          {!alwaysScrolled && (
-            <Image 
-              id="middleTextDefault" 
-              src={logoTextNavbar} 
-              alt="Nav Image" 
-              class="h-full w-auto transition-all duration-300 opacity-100" 
+      <a
+        id="nav-logo"
+        href="/"
+        class={`font-bold text-gray-800 transition-all duration-400 flex flex-col items-center justify-self-center ${alwaysScrolled ? "h-16" : "h-38 md:h-48 mt-[5rem] md:mt-[2rem]"}`}
+      >
+        {
+          !alwaysScrolled && (
+            <Image
+              id="upperWaves"
+              src={upperWaves}
+              alt="Upper Waves"
+              class="h-1/3 transition-all duration-300"
             />
-          )}
-          <Image 
-            id="middleTextScrolled" 
-            src={logoTextColored} 
-            alt="Nav Image Scrolled" 
-            class={`w-auto transition-all duration-300 ${alwaysScrolled ? 'relative opacity-100 h-16' : 'absolute opacity-0 h-full'}`}
+          )
+        }
+
+        <!-- Deux versions du texte superposées -->
+        <div
+          id="middleTextContainer"
+          class={`relative flex items-center justify-center transition-all duration-300 ${alwaysScrolled ? "h-16" : "h-[3.5rem] md:h-[4rem]"}`}
+        >
+          {
+            !alwaysScrolled && (
+              <Image
+                id="middleTextDefault"
+                src={logoTextNavbar}
+                alt="Nav Image"
+                class="h-full w-auto transition-all duration-300 opacity-100"
+              />
+            )
+          }
+          <Image
+            id="middleTextScrolled"
+            src={logoTextColored}
+            alt="Nav Image Scrolled"
+            class={`w-auto transition-all duration-300 ${alwaysScrolled ? "relative opacity-100 h-16" : "absolute opacity-0 h-full"}`}
           />
         </div>
-        
-        {!alwaysScrolled && <Image id="lowerWaves" src={lowerWaves} alt="Lower Waves" class="h-1/3 transition-all duration-300" />}
+
+        {
+          !alwaysScrolled && (
+            <Image
+              id="lowerWaves"
+              src={lowerWaves}
+              alt="Lower Waves"
+              class="h-1/3 transition-all duration-300"
+            />
+          )
+        }
       </a>
 
       <!-- Menu droite -->
       <ul class="hidden md:flex justify-start space-x-8 text-lg font-medium text-[#313181]">
         <li>
-          <a href="/#faq" class={`transition cursor-pointer font-bold ${alwaysScrolled ? 'hover:text-[#37A4B3]' : 'hover:text-[#FFFFFF]'}`}>Vos questions</a>
+          <a
+            href="/#equipe"
+            class={`transition cursor-pointer font-bold ${alwaysScrolled ? "hover:text-[#37A4B3]" : "hover:text-[#37A4B3]"}`}
+            >Notre équipe</a
+          >
         </li>
         <li>
-          <a href="/contact" class={`transition cursor-pointer font-bold ${alwaysScrolled ? 'hover:text-[#37A4B3]' : 'hover:text-[#FFFFFF]'}`}>Contactez-nous</a>
+          <a
+            href="/contact"
+            class={`transition cursor-pointer font-bold ${alwaysScrolled ? "hover:text-[#37A4B3]" : "hover:text-[#37A4B3]"}`}
+            >Contactez-nous</a
+          >
         </li>
       </ul>
     </div>
   </div>
-  
+
   <!-- Burger mobile -->
-  <button id="mobile-menu-button" class="fixed top-[22px] right-6 md:hidden flex items-center justify-center text-4xl z-[100] transition-colors">
+  <button
+    id="mobile-menu-button"
+    class="fixed top-[22px] right-6 md:hidden flex items-center justify-center text-4xl z-[100] transition-colors"
+  >
     <span id="burger-icon" class="text-[#313181] flex items-center justify-center">☰</span>
     <span id="close-icon" class="hidden text-[#313181] flex items-center justify-center">✕</span>
   </button>
 </nav>
 
 <!-- Menu mobile -->
-<div id="mobile-menu" class="md:hidden fixed inset-0 z-[60] bg-white backdrop-blur-lg transition-all duration-300 opacity-0 pointer-events-none">
+<div
+  id="mobile-menu"
+  class="md:hidden fixed inset-0 z-[60] bg-white backdrop-blur-lg transition-all duration-300 opacity-0 pointer-events-none"
+>
   <div class="h-full flex items-center justify-center">
-    <ul id="mobile-menu-list" class="flex flex-col space-y-8 text-2xl font-medium text-[#313181] text-center transform translate-y-8 opacity-0 transition-all duration-300">
+    <ul
+      id="mobile-menu-list"
+      class="flex flex-col space-y-8 text-2xl font-medium text-[#313181] text-center transform translate-y-8 opacity-0 transition-all duration-300"
+    >
       <li>
         <a href="/#our-offices" class="block py-3 hover:text-[#37A4B3] transition">Nos cabinets</a>
       </li>
@@ -91,91 +148,91 @@ const { alwaysScrolled = false } = Astro.props;
 </div>
 
 <script is:inline define:vars={{ alwaysScrolled }}>
-  const navbar = document.getElementById('navbar');
-  const upper = document.getElementById('upperWaves');
-  const middleDefault = document.getElementById('middleTextDefault');
-  const middleScrolled = document.getElementById('middleTextScrolled');
-  const lower = document.getElementById('lowerWaves');
-  const logo = document.getElementById('nav-logo');
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileMenuList = document.getElementById('mobile-menu-list');
-  const burgerIcon = document.getElementById('burger-icon');
-  const closeIcon = document.getElementById('close-icon');
+  const navbar = document.getElementById("navbar");
+  const upper = document.getElementById("upperWaves");
+  const middleDefault = document.getElementById("middleTextDefault");
+  const middleScrolled = document.getElementById("middleTextScrolled");
+  const lower = document.getElementById("lowerWaves");
+  const logo = document.getElementById("nav-logo");
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileMenuList = document.getElementById("mobile-menu-list");
+  const burgerIcon = document.getElementById("burger-icon");
+  const closeIcon = document.getElementById("close-icon");
 
   let menuOpen = false;
   let wasScrolled = false;
 
   function closeMenu() {
-    mobileMenuList.classList.add('translate-y-8', 'opacity-0');
-    mobileMenuList.classList.remove('translate-y-0', 'opacity-100');
-    
+    mobileMenuList.classList.add("translate-y-8", "opacity-0");
+    mobileMenuList.classList.remove("translate-y-0", "opacity-100");
+
     setTimeout(() => {
-      mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-      mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+      mobileMenu.classList.add("opacity-0", "pointer-events-none");
+      mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
     }, 150);
-    
-    burgerIcon.classList.remove('hidden');
-    closeIcon.classList.add('hidden');
-    document.body.style.overflow = '';
+
+    burgerIcon.classList.remove("hidden");
+    closeIcon.classList.add("hidden");
+    document.body.style.overflow = "";
     menuOpen = false;
-    
+
     // Restaurer l'état du logo si on n'était pas scrollé
     if (!alwaysScrolled && !wasScrolled) {
-      navbar.classList.remove('scrolled');
+      navbar.classList.remove("scrolled");
       if (upper) {
-        upper.style.height = '33%';
-        upper.style.opacity = '1';
+        upper.style.height = "33%";
+        upper.style.opacity = "1";
       }
       if (lower) {
-        lower.style.height = '33%';
-        lower.style.opacity = '1';
+        lower.style.height = "33%";
+        lower.style.opacity = "1";
       }
-      logo.style.height = isMobile() ? "9.5rem" : '12rem';
-      logo.style.marginTop = isMobile() ? '5rem' : '2rem';
-      
-      if (middleDefault) middleDefault.style.opacity = '1';
-      if (middleScrolled) middleScrolled.style.opacity = '0';
+      logo.style.height = isMobile() ? "9.5rem" : "12rem";
+      logo.style.marginTop = isMobile() ? "5rem" : "2rem";
+
+      if (middleDefault) middleDefault.style.opacity = "1";
+      if (middleScrolled) middleScrolled.style.opacity = "0";
     }
   }
 
   function openMenu() {
-    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
-    mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
-    
+    mobileMenu.classList.remove("opacity-0", "pointer-events-none");
+    mobileMenu.classList.add("opacity-100", "pointer-events-auto");
+
     setTimeout(() => {
-      mobileMenuList.classList.remove('translate-y-8', 'opacity-0');
-      mobileMenuList.classList.add('translate-y-0', 'opacity-100');
+      mobileMenuList.classList.remove("translate-y-8", "opacity-0");
+      mobileMenuList.classList.add("translate-y-0", "opacity-100");
     }, 50);
-    
-    burgerIcon.classList.add('hidden');
-    closeIcon.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
+
+    burgerIcon.classList.add("hidden");
+    closeIcon.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
     menuOpen = true;
-    
+
     // Sauvegarder l'état actuel et passer en mode scrolled
     if (!alwaysScrolled) {
-      wasScrolled = navbar.classList.contains('scrolled');
-      
-      navbar.classList.add('scrolled');
+      wasScrolled = navbar.classList.contains("scrolled");
+
+      navbar.classList.add("scrolled");
       if (upper) {
-        upper.style.height = '0';
-        upper.style.opacity = '0';
+        upper.style.height = "0";
+        upper.style.opacity = "0";
       }
       if (lower) {
-        lower.style.height = '0';
-        lower.style.opacity = '0';
+        lower.style.height = "0";
+        lower.style.opacity = "0";
       }
-      logo.style.justifyContent = 'center';
-      logo.style.height = '3rem';
-      logo.style.marginTop = '0';
-      
-      if (middleDefault) middleDefault.style.opacity = '0';
-      if (middleScrolled) middleScrolled.style.opacity = '1';
+      logo.style.justifyContent = "center";
+      logo.style.height = "3rem";
+      logo.style.marginTop = "0";
+
+      if (middleDefault) middleDefault.style.opacity = "0";
+      if (middleScrolled) middleScrolled.style.opacity = "1";
     }
-    
+
     // Ajouter une entrée dans l'historique
-    window.history.pushState({ menuOpen: true }, '');
+    window.history.pushState({ menuOpen: true }, "");
   }
 
   function isMobile() {
@@ -183,7 +240,7 @@ const { alwaysScrolled = false } = Astro.props;
   }
 
   // Toggle menu mobile
-  mobileMenuButton.addEventListener('click', () => {
+  mobileMenuButton.addEventListener("click", () => {
     if (menuOpen) {
       closeMenu();
       if (window.history.state?.menuOpen) {
@@ -195,57 +252,57 @@ const { alwaysScrolled = false } = Astro.props;
   });
 
   // Gérer le bouton retour du navigateur
-  window.addEventListener('popstate', (event) => {
+  window.addEventListener("popstate", (event) => {
     if (menuOpen) {
       closeMenu();
     }
   });
 
   // Fermer le menu quand on clique sur un lien
-  const mobileLinks = mobileMenu.querySelectorAll('a');
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
+  const mobileLinks = mobileMenu.querySelectorAll("a");
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", () => {
       closeMenu();
     });
   });
 
   // Ne gérer le scroll que si pas en mode alwaysScrolled
   if (!alwaysScrolled) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 5) {
         wasScrolled = true;
-        navbar.classList.add('scrolled');
+        navbar.classList.add("scrolled");
         if (upper) {
-          upper.style.height = '0';
-          upper.style.opacity = '0';
+          upper.style.height = "0";
+          upper.style.opacity = "0";
         }
         if (lower) {
-          lower.style.height = '0';
-          lower.style.opacity = '0';
+          lower.style.height = "0";
+          lower.style.opacity = "0";
         }
-        logo.style.justifyContent = 'center';
-        logo.style.height = '3rem';
-        logo.style.marginTop = '0';
-        
-        if (middleDefault) middleDefault.style.opacity = '0';
-        if (middleScrolled) middleScrolled.style.opacity = '1';
+        logo.style.justifyContent = "center";
+        logo.style.height = "3rem";
+        logo.style.marginTop = "0";
+
+        if (middleDefault) middleDefault.style.opacity = "0";
+        if (middleScrolled) middleScrolled.style.opacity = "1";
       } else {
         wasScrolled = false;
         if (!menuOpen) {
-          navbar.classList.remove('scrolled');
+          navbar.classList.remove("scrolled");
           if (upper) {
-            upper.style.height = '33%';
-            upper.style.opacity = '1';
+            upper.style.height = "33%";
+            upper.style.opacity = "1";
           }
           if (lower) {
-            lower.style.height = '33%';
-            lower.style.opacity = '1';
+            lower.style.height = "33%";
+            lower.style.opacity = "1";
           }
-          logo.style.height = isMobile() ? "9.5rem" : '12rem';
-          logo.style.marginTop = isMobile() ? '5rem' : '2rem';
-          
-          if (middleDefault) middleDefault.style.opacity = '1';
-          if (middleScrolled) middleScrolled.style.opacity = '0';
+          logo.style.height = isMobile() ? "9.5rem" : "12rem";
+          logo.style.marginTop = isMobile() ? "5rem" : "2rem";
+
+          if (middleDefault) middleDefault.style.opacity = "1";
+          if (middleScrolled) middleScrolled.style.opacity = "0";
         }
       }
     });
@@ -261,7 +318,7 @@ const { alwaysScrolled = false } = Astro.props;
     padding-bottom: 0.25rem;
     margin: 1rem;
     border-radius: 0.5rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     width: calc(100% - 2rem);
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.9);
@@ -272,5 +329,4 @@ const { alwaysScrolled = false } = Astro.props;
   nav.scrolled img {
     transition: all 0.3s ease;
   }
-  
 </style>

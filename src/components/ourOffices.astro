@@ -23,7 +23,7 @@ const firstCabinetImage =
   typeof cabinets[0].image === "string" ? cabinets[0].image : cabinets[0].image?.src;
 ---
 
-<section class="w-full scroll-mt-25 pt-20 pb-10" id="our-offices">
+<section class="w-full scroll-mt-25 pt-10 pb-10" id="cabinets">
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-3xl md:text-4xl text-[#313181] font-bold text-center mb-4">Nos cabinets</h2>
     <p class="text-center text-gray-600 mb-12">
@@ -78,7 +78,7 @@ const firstCabinetImage =
           id="cabinet-link"
           href={cabinets[0].mapsUrl}
           target="_blank"
-          variant="button"
+          variant="external"
           className="inline-flex"
         >
           Voir sur Google Maps

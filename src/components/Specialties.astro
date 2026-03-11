@@ -1,23 +1,24 @@
 ---
 import team from "../data/team.js";
-const specialties = [
+import Link from "./Link.astro";
+import { Image } from "astro:assets";
+import emptyAvatar from "../assets/medecins/emptyPP.png";
+interface Specialty {
+  id: string;
+  title: string;
+  shortDesc: string;
+  description: string;
+  specialNote?: string;
+  doctors?: string[]; // Ajouté ici
+}
+
+const specialties: Specialty[] = [
   {
     id: "pneumologie-generale",
     title: "Pneumologie générale",
     shortDesc: "Prise en charge complète des maladies respiratoires de l'adulte",
     description:
       "Nous prenons en charge l'ensemble des maladies respiratoires de l'adulte : asthme, bronchite chronique, BPCO, pathologie interstitielle, infections pulmonaires, essoufflement inexpliqué, toux chronique.",
-    doctors: [
-      "Dr Bombaron",
-      "Dr Caillet",
-      "Dr Hanin",
-      "Dr Vial-Dupuy",
-      "Dr Wattiez",
-      "Dr Piegay",
-      "Dr Veaudor",
-      "Dr Bouledrak",
-      "Dr Jouan",
-    ],
   },
   {
     id: "pneumo-pediatrie",
@@ -25,11 +26,6 @@ const specialties = [
     shortDesc: "Troubles respiratoires de l'enfant et l'adolescent",
     description:
       "La pneumo-pédiatrie est dédiée aux troubles respiratoires de l'enfant et de l'adolescent. Nous accompagnons les jeunes patients à partir de l'âge de 6 ans, dans le diagnostic et le suivi de pathologies telles que l'asthme de l'enfant, les allergies respiratoires ou les infections à répétition.",
-    doctors: [
-      "Dr Vial-Dupuy (à partir de 6 ans)",
-      "Dr Wattiez (à partir de 10 ans)",
-      "Dr Hanin (à partir de 16 ans)",
-    ],
   },
   {
     id: "allergologie",
@@ -37,7 +33,6 @@ const specialties = [
     shortDesc: "Diagnostic et traitement des allergies",
     description:
       "Nous prenons en charge le diagnostic et le traitement des allergies, principalement respiratoires, telles que la rhinite allergique ou l'asthme allergique. Des évaluations spécialisées permettent d'identifier les allergènes responsables de vos symptômes et de vous proposer une immunothérapie allergénique (ou désensibilisation). Nous assurons également l'exploration des allergies alimentaires et médicamenteuses, en particulier avec l'hôpital de jour d'allergologie médicamenteuse de l'adulte à la Polyclinique de Rillieux.",
-    doctors: ["Dr Vial-Dupuy", "Dr Wattiez"],
     specialNote: "Pour un problème d'allergie alimentaire ou médicamenteuse : Dr Vial-Dupuy",
   },
   {
@@ -46,7 +41,6 @@ const specialties = [
     shortDesc: "Diagnostic et suivi des cancers du poumon",
     description:
       "L'oncologie thoracique concerne le diagnostic, le suivi et la prise en charge des cancers du poumon. Nous travaillons sur 3 sites (Hôpital privé Jean Mermoz, Clinique Charcot et Polyclinique de Rillieux) en collaboration avec des équipes de chirurgie thoracique et de radiothérapie pour que chaque patient bénéficie d'un accompagnement personnalisé tout au long de son parcours de soins.",
-    doctors: ["Dr Bombaron", "Dr Piegay", "Dr Veaudor", "Dr Bouledrak", "Dr Caillet", "Dr Jouan"],
   },
   {
     id: "fibroscopie",
@@ -54,15 +48,6 @@ const specialties = [
     shortDesc: "Exploration de l'intérieur des bronches",
     description:
       "La fibroscopie bronchique est un examen permettant d'explorer l'intérieur des bronches à l'aide d'un endoscope souple. Cet examen est indiqué pour le bilan de certaines pathologies pulmonaires, et notamment pour réaliser des prélèvements biopsiques ou des analyses microbiologiques. Il peut être proposé selon votre préférence sous anesthésie locale ou sous anesthésie générale. Les fibroscopies bronchiques sont réalisées sur 3 sites : Hôpital privé Jean Mermoz, Clinique Charcot et Polyclinique de Rillieux.",
-    doctors: [
-      "Dr Bombaron",
-      "Dr Piegay",
-      "Dr Veaudor",
-      "Dr Bouledrak",
-      "Dr Caillet",
-      "Dr Jouan",
-      "Dr Hanin",
-    ],
   },
   {
     id: "sommeil",
@@ -70,23 +55,27 @@ const specialties = [
     shortDesc: "Diagnostic du syndrome d'apnées du sommeil",
     description:
       "Les troubles respiratoires du sommeil, comme le syndrome d'apnées du sommeil, peuvent avoir un impact important sur la santé et la qualité de vie. Ils se manifestent souvent par des ronflements, une fatigue persistante ou une somnolence dans la journée. Un bilan spécialisé permet d'établir le diagnostic et de proposer des solutions efficaces pour retrouver un sommeil réparateur. Notre centre propose des examens diagnostics en ambulatoire (nuit à domicile) par polygraphie ventilatoire ou polysomnographie.",
-    doctors: [
-      "Dr Bombaron",
-      "Dr Caillet",
-      "Dr Hanin",
-      "Dr Vial-Dupuy",
-      "Dr Wattiez",
-      "Dr Piegay",
-      "Dr Veaudor",
-      "Dr Bouledrak",
-      "Dr Jouan",
-    ],
     specialNote: "Pour une Polysomnographie : Dr Wattiez, Dr Hanin, Dr Jouan, Dr Bouledrak",
   },
 ];
+
+// Générer dynamiquement la liste des docteurs pour chaque spécialité
+specialties.forEach((specialty) => {
+  specialty.doctors = team
+    .filter((doctor) => doctor.specialties.includes(specialty.id))
+    .map((doctor) => {
+      // Solution: cast en Record<string, string>
+      const notes = doctor.specialtyNotes as Record<string, string> | undefined;
+      const note = notes?.[specialty.id];
+      return note ? `${doctor.displayName} ${note}` : doctor.displayName;
+    });
+});
 ---
 
-<section class="w-full py-20 bg-gradient-to-b from-white to-[--brand-surface]" id="specialties">
+<section
+  class="w-full scroll-mt-25 pt-10 pb-10 bg-gradient-to-b from-white to-[--brand-surface]"
+  id="expertises"
+>
   <div class="max-w-7xl mx-auto px-6">
     <!-- Header -->
     <div class="text-center mb-16">
@@ -138,11 +127,11 @@ const specialties = [
 <!-- Panneau latéral (Side Panel) -->
 <div
   id="specialty-panel"
-  class="fixed inset-y-0 right-0 w-full md:w-[600px] bg-white shadow-2xl z-[200] transform translate-x-full transition-transform duration-300 overflow-y-auto"
+  class="fixed inset-y-0 right-0 w-full md:w-[600px] bg-white shadow-2xl z-[200] transform translate-x-full transition-transform duration-300 flex flex-col"
 >
-  <!-- Header du panneau -->
+  <!-- Header du panneau (NON SCROLLABLE) -->
   <div
-    class="sticky top-0 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white px-6 py-6 flex justify-between items-center z-10"
+    class="flex-shrink-0 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white px-6 py-6 flex justify-between items-center"
   >
     <h2 id="panel-title" class="text-2xl text-white font-bold"></h2>
     <button
@@ -159,8 +148,8 @@ const specialties = [
     </button>
   </div>
 
-  <!-- Contenu du panneau -->
-  <div class="p-6 space-y-6">
+  <!-- Contenu du panneau (SCROLLABLE) -->
+  <div class="flex-1 overflow-y-auto p-6 space-y-6">
     <!-- Description -->
     <div>
       <h3 class="text-lg font-bold text-[#313181] mb-3">Description</h3>
@@ -177,14 +166,56 @@ const specialties = [
     <!-- Praticiens -->
     <div>
       <h3 class="text-lg font-bold text-[#313181] mb-4">Praticiens disponibles</h3>
-      <div id="panel-doctors" class="space-y-3"></div>
+      <div id="panel-doctors" class="space-y-3 flex flex-col">
+        <!-- Template pré-rendu pour chaque médecin -->
+        {
+          team.map((doctor) => (
+            <div class="doctor-card hidden" data-doctor={doctor.displayName}>
+              <div class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-all group">
+                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-[#37A4B3]/20 group-hover:border-[#37A4B3] flex-shrink-0 flex items-center justify-center transition-colors">
+                  {doctor.photo ? (
+                    <img
+                      src={doctor.photo.src}
+                      alt={doctor.displayName}
+                      class="w-full h-full object-cover object-top"
+                    />
+                  ) : (
+                    <Image
+                      src={emptyAvatar}
+                      alt={doctor.name}
+                      width={300}
+                      height={300}
+                      class="w-full h-full object-cover object-center"
+                    />
+                  )}
+                </div>
+                <div class="flex-1 min-w-0">
+                  <span class="doctor-name font-medium text-[#313181] text-sm block">
+                    {doctor.displayName}
+                  </span>
+                </div>
+                {doctor.url && (
+                  <Link
+                    href={doctor.url}
+                    target="_blank"
+                    variant="external"
+                    className="flex-shrink-0"
+                  >
+                    Prendre RDV
+                  </Link>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </div>
 
     <!-- CTA -->
     <div class="pt-6 border-t border-gray-200">
       <a
         id="team"
-        href="/#our-teamcontact"
+        href="/#our-team"
         class="block w-full text-center px-6 py-4 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white font-semibold rounded-xl hover:shadow-lg transition-all"
       >
         Notre équipe
@@ -223,77 +254,6 @@ const specialties = [
     }, 300);
   });
 
-  // Créer un mapping nom → données
-  const doctorsMap = {};
-  team.forEach((doctor) => {
-    const parts = doctor.name.split(" ");
-    const lastName = parts[1]; // "BOMBARON"
-
-    // Créer plusieurs clés possibles
-    doctorsMap[`Dr ${lastName}`] = doctor;
-    doctorsMap[`Dr ${lastName.charAt(0) + lastName.slice(1).toLowerCase()}`] = doctor; // "Dr Bombaron"
-
-    // Pour "VIAL-DUPUY"
-    if (lastName.includes("-")) {
-      const formatted = lastName
-        .split("-")
-        .map((part) => part.charAt(0) + part.slice(1).toLowerCase())
-        .join("-");
-      doctorsMap[`Dr ${formatted}`] = doctor; // "Dr Vial-Dupuy"
-    }
-  });
-
-  function getDoctorCard(doctorName) {
-    // Extraire le nom propre (sans les infos entre parenthèses)
-    const cleanName = doctorName.split("(")[0].trim();
-
-    // Chercher le médecin dans nos données
-    const doctorData = doctorsMap[cleanName];
-
-    if (doctorData) {
-      // Utiliser la vraie photo ou l'initiale
-      const photoSrc = doctorData.photo?.src || null;
-      const initial = cleanName.split(" ")[1]?.[0] || cleanName[0];
-
-      return `
-        <div class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-all group">
-          <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-[#37A4B3]/20 group-hover:border-[#37A4B3] flex-shrink-0 ${photoSrc ? "" : "bg-gradient-to-br from-[#37A4B3] to-[#268090]"} flex items-center justify-center transition-colors">
-            ${photoSrc ? `<img src="${photoSrc}" alt="${cleanName}" class="w-full h-full object-cover object-top" />` : `<span class="text-white font-bold text-lg">${initial}</span>`}
-          </div>
-          <div class="flex-1 min-w-0">
-            <span class="font-medium text-[#313181] text-sm block">${doctorName}</span>
-          </div>
-          ${
-            doctorData.url
-              ? `
-            <a 
-              href="${doctorData.url}" 
-              target="_blank"
-              rel="noopener noreferrer"
-              onclick="event.stopPropagation()"
-              class="flex-shrink-0 px-4 py-2 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white text-sm font-semibold rounded-lg hover:shadow-md hover:scale-105 transition-all"
-            >
-              Prendre RDV
-            </a>
-          `
-              : ""
-          }
-        </div>
-      `;
-    }
-
-    // Fallback si le médecin n'est pas trouvé dans les données
-    const initial = cleanName.split(" ")[1]?.[0] || cleanName[0];
-    return `
-      <div class="flex items-center gap-3 p-3">
-        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#37A4B3] to-[#268090] flex items-center justify-center">
-          <span class="text-white font-bold text-lg">${initial}</span>
-        </div>
-        <span class="font-medium text-[#313181] text-sm">${doctorName}</span>
-      </div>
-    `;
-  }
-
   function openPanel(specialtyId) {
     const specialty = specialties.find((s) => s.id === specialtyId);
     if (!specialty) return;
@@ -301,20 +261,46 @@ const specialties = [
     panelTitle.textContent = specialty.title;
     panelDescription.textContent = specialty.description;
 
-    // Trier les médecins par ordre alphabétique puis remplir la liste
+    // Cacher toutes les cartes de médecins
+    const allDoctorCards = panelDoctors.querySelectorAll(".doctor-card");
+    allDoctorCards.forEach((card) => card.classList.add("hidden"));
+
+    // Trier les médecins par ordre alphabétique
     const sortedDoctors = [...specialty.doctors].sort((a, b) => {
       const nameA = a.split("(")[0].trim().split(" ")[1] || a;
       const nameB = b.split("(")[0].trim().split(" ")[1] || b;
       return nameA.localeCompare(nameB);
     });
 
-    panelDoctors.innerHTML = sortedDoctors.map((doctor) => getDoctorCard(doctor)).join("");
+    // Afficher et réorganiser les médecins dans l'ordre trié
+    sortedDoctors.forEach((doctorName, index) => {
+      const cleanName = doctorName.split("(")[0].trim();
+      const card = panelDoctors.querySelector(`[data-doctor="${cleanName}"]`);
+
+      if (card) {
+        // Mettre à jour le nom avec la note si elle existe
+        const nameEl = card.querySelector(".doctor-name");
+        if (nameEl) {
+          nameEl.textContent = doctorName;
+        }
+
+        // Définir l'ordre d'affichage avec CSS order
+        card.style.order = index;
+        card.classList.remove("hidden");
+      }
+    });
 
     if (specialty.specialNote) {
       panelNote.textContent = specialty.specialNote;
       panelNoteContainer.classList.remove("hidden");
     } else {
       panelNoteContainer.classList.add("hidden");
+    }
+
+    // Réinitialiser le scroll à 0
+    const scrollableContent = panel.querySelector(".overflow-y-auto");
+    if (scrollableContent) {
+      scrollableContent.scrollTop = 0;
     }
 
     panel.classList.remove("translate-x-full");
