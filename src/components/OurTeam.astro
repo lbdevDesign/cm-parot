@@ -1,7 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-import Link from './Link.astro';
-import team from '../data/team.js';
+import { Image } from "astro:assets";
+import Link from "./Link.astro";
+import team from "../data/team.js";
 import emptyAvatar from "../assets/medecins/emptyPP.png";
 
 const sortedTeam = [...team].sort((a, b) =>
@@ -11,49 +11,53 @@ const sortedTeam = [...team].sort((a, b) =>
 
 <section class="w-full scroll-mt-25 pt-10 pb-10" id="our-team">
   <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-4xl font-bold text-center mb-4">Notre équipe</h2>
-    <p class="text-center text-gray-600 mb-12">Des médecins pneumologues expérimentés à votre écoute</p>
+    <h2 class="text-3xl md:text-4xl text-[#313181] font-bold text-center mb-4">Notre équipe</h2>
+    <p class="text-center text-gray-600 mb-12">
+      Des médecins pneumologues expérimentés à votre écoute
+    </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {sortedTeam.map((member) => (
-        <div class="bg-white rounded-2xl border border-gray-200 hover:border-[#37A4B3] transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md">
-          <div class="p-6 flex items-center gap-6">
-            <div class="w-28 h-28 rounded-full overflow-hidden border-4 border-[#37A4B3]/20 hover:border-[#37A4B3] transition-colors flex-shrink-0">
-              {member.photo ? (
-                <Image 
-                  src={member.photo} 
-                  alt={member.name}
-                  class="w-full h-full object-cover object-top"
-                />
-              ) : (
-                <Image 
-                  src={emptyAvatar} 
-                  alt={member.name}
-                  width={300}
-                  height={300}
-                  class="w-full h-full object-cover object-center"
-                />
-              )}
-            </div>
-
-            <div class="flex-1 flex flex-col gap-3">
-              <div>
-                <h3 class="text-xl font-semibold text-[#313181] mb-1">{member.name}</h3>
-                <p class="text-gray-600 text-sm">Pneumologue</p>
+      {
+        sortedTeam.map((member) => (
+          <div class="bg-white rounded-2xl border border-gray-200 hover:border-[#37A4B3] transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md">
+            <div class="p-6 flex items-center gap-6">
+              <div class="w-28 h-28 rounded-full overflow-hidden border-4 border-[#37A4B3]/20 hover:border-[#37A4B3] transition-colors flex-shrink-0">
+                {member.photo ? (
+                  <Image
+                    src={member.photo}
+                    alt={member.name}
+                    class="w-full h-full object-cover object-top"
+                  />
+                ) : (
+                  <Image
+                    src={emptyAvatar}
+                    alt={member.name}
+                    width={300}
+                    height={300}
+                    class="w-full h-full object-cover object-center"
+                  />
+                )}
               </div>
 
-              <Link 
-                href={member.url} 
-                variant="button" 
-                target="_blank"
-                className="w-full justify-center"
-              >
-                Prendre RDV
-              </Link>
+              <div class="flex-1 flex flex-col gap-3">
+                <div>
+                  <h3 class="text-xl font-semibold text-[#313181] mb-1">{member.name}</h3>
+                  <p class="text-gray-600 text-sm">Pneumologue</p>
+                </div>
+
+                <Link
+                  href={member.url}
+                  variant="button"
+                  target="_blank"
+                  className="w-full justify-center"
+                >
+                  Prendre RDV
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>

@@ -1,0 +1,319 @@
+---
+// Composant bulle de contact avec modale
+---
+
+<!-- Bulle flottante -->
+<div class="fixed bottom-6 right-6 z-50">
+  <button
+    id="open-contact-modal"
+    class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+    aria-label="Ouvrir le formulaire de contact"
+  >
+    <svg
+      class="h-8 w-8 transition-transform group-hover:scale-110"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+      ></path>
+    </svg>
+  </button>
+</div>
+
+<!-- Modale -->
+<div
+  id="contact-modal"
+  class="fixed inset-0 z-[100] pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4"
+  style="background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); opacity: 0;"
+>
+  <div
+    id="modal-content"
+    class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] transform scale-95 transition-transform duration-300 flex flex-col overflow-hidden"
+  >
+    <!-- Header (fixe, ne scroll jamais) -->
+    <div
+      class="bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white px-6 py-4 rounded-t-2xl flex justify-between items-center flex-shrink-0"
+    >
+      <h2 class="text-2xl font-bold text-white">Contactez-nous</h2>
+      <button
+        id="close-contact-modal"
+        class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-all"
+        aria-label="Fermer"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Contenu scrollable (formulaire + message succès) -->
+    <div class="overflow-y-auto flex-1 custom-scrollbar">
+      <!-- Formulaire -->
+      <form id="contact-form" class="p-6 space-y-4">
+        <!-- Nom -->
+        <div>
+          <label for="name" class="block text-sm font-semibold text-[#313181] mb-2">
+            Nom et Prénom <span class="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#37A4B3] focus:border-transparent transition-all outline-none"
+            placeholder="Jean Dupont"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-semibold text-[#313181] mb-2">
+            Email <span class="text-red-500">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#37A4B3] focus:border-transparent transition-all outline-none"
+            placeholder="jean.dupont@exemple.fr"
+          />
+        </div>
+
+        <!-- Téléphone -->
+        <div>
+          <label for="phone" class="block text-sm font-semibold text-[#313181] mb-2">
+            Téléphone
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#37A4B3] focus:border-transparent transition-all outline-none"
+            placeholder="06 12 34 56 78"
+          />
+        </div>
+
+        <!-- Sujet -->
+        <div>
+          <label for="subject" class="block text-sm font-semibold text-[#313181] mb-2">
+            Sujet <span class="text-red-500">*</span>
+          </label>
+          <select
+            id="subject"
+            name="subject"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#37A4B3] focus:border-transparent transition-all outline-none"
+          >
+            <option value="">Sélectionnez un sujet</option>
+            <option value="rendez-vous">Demande de rendez-vous</option>
+            <option value="information">Demande d'information</option>
+            <option value="partenariat">Partenariat</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label for="message" class="block text-sm font-semibold text-[#313181] mb-2">
+            Message <span class="text-red-500">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="4"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#37A4B3] focus:border-transparent transition-all outline-none resize-none"
+            placeholder="Votre message..."></textarea>
+        </div>
+
+        <!-- RGPD -->
+        <div class="flex items-start gap-3">
+          <input
+            type="checkbox"
+            id="consent"
+            name="consent"
+            required
+            class="mt-1 w-4 h-4 text-[#37A4B3] border-gray-300 rounded focus:ring-[#37A4B3]"
+          />
+          <label for="consent" class="text-sm text-gray-600">
+            J'accepte que mes données soient utilisées pour répondre à ma demande.
+            <a href="/confidentialite" class="text-[#37A4B3] hover:underline">En savoir plus</a>
+          </label>
+        </div>
+
+        <!-- Boutons -->
+        <div class="flex gap-3 pt-4">
+          <button
+            type="button"
+            id="cancel-button"
+            class="flex-1 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-all"
+          >
+            Annuler
+          </button>
+          <button
+            type="submit"
+            class="flex-1 px-6 py-3 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white rounded-lg font-semibold hover:shadow-lg transition-all"
+          >
+            Envoyer
+          </button>
+        </div>
+      </form>
+
+      <!-- Message de succès (caché par défaut) -->
+      <div id="success-message" class="hidden p-6">
+        <div class="text-center space-y-4">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+            <svg
+              class="h-8 w-8 text-green-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-[#313181]">Message envoyé !</h3>
+          <p class="text-gray-600">Nous vous répondrons dans les plus brefs délais.</p>
+          <button
+            id="close-success"
+            class="px-6 py-3 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white rounded-lg font-semibold hover:shadow-lg transition-all"
+          >
+            Fermer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("contact-modal");
+  const modalContent = document.getElementById("modal-content");
+  const openBtn = document.getElementById("open-contact-modal");
+  const closeBtn = document.getElementById("close-contact-modal");
+  const cancelBtn = document.getElementById("cancel-button");
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const successMessage = document.getElementById("success-message");
+  const closeSuccess = document.getElementById("close-success");
+
+  function openModal() {
+    modal?.classList.remove("pointer-events-none");
+    modal?.classList.add("pointer-events-auto");
+    if (modal) modal.style.opacity = "1";
+    modalContent?.classList.remove("scale-95");
+    modalContent?.classList.add("scale-100");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal?.classList.add("pointer-events-none");
+    modal?.classList.remove("pointer-events-auto");
+    if (modal) modal.style.opacity = "0";
+    modalContent?.classList.add("scale-95");
+    modalContent?.classList.remove("scale-100");
+    document.body.style.overflow = "";
+
+    // Reset form après fermeture
+    setTimeout(() => {
+      form?.reset();
+      form?.classList.remove("hidden");
+      successMessage?.classList.add("hidden");
+    }, 300);
+  }
+
+  // Ouvrir la modale
+  openBtn?.addEventListener("click", openModal);
+
+  // Fermer la modale
+  closeBtn?.addEventListener("click", closeModal);
+  cancelBtn?.addEventListener("click", closeModal);
+  closeSuccess?.addEventListener("click", closeModal);
+
+  // Fermer en cliquant en dehors
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Fermer avec Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal && modal.style.opacity === "1") {
+      closeModal();
+    }
+  });
+
+  // Gestion du formulaire
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      // Simulation d'envoi (remplace par ton vrai endpoint)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Afficher le message de succès
+      form?.classList.add("hidden");
+      successMessage?.classList.remove("hidden");
+
+      console.log("Formulaire soumis:", Object.fromEntries(formData));
+    } catch (error) {
+      console.error("Erreur:", error);
+      alert("Une erreur est survenue. Veuillez réessayer.");
+    }
+  });
+</script>
+
+<style>
+  /* Animation de pulse sur la bulle */
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 rgba(55, 164, 179, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(55, 164, 179, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(55, 164, 179, 0);
+    }
+  }
+
+  #open-contact-modal {
+    animation: pulse-ring 2s infinite;
+  }
+
+  /* Smooth scroll UNIQUEMENT pour le contenu scrollable */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #37a4b3 #f1f1f1;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #37a4b3;
+    border-radius: 10px;
+  }
+</style>
