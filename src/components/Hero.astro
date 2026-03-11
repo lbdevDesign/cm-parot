@@ -5,29 +5,29 @@ import headerImage from "../assets/header.jpg";
 import lowerWaves from "../assets/logo/logoCMPlowerWavesColored.svg";
 ---
 
-<section 
-  class="relative w-full h-[90vh] min-h-[700px] max-h-[100vh] flex items-center bg-white"
->
+<section class="relative w-full h-[90vh] min-h-[700px] max-h-[100vh] flex items-center bg-white">
   <!-- Overlay -->
-  <div class="
-    absolute inset-0 z-10 
-    bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(0,0,0,0)]
-  ">
+  <div class="absolute inset-0 z-10
+    bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(0,0,0,0)]">
   </div>
 
   <!-- Content -->
-  <div class="w-full w-full mx-auto flex flex-col justify-center md:flex-row items-center md:items-start">
-    <div 
-      class="
-        relative z-20 px-6 
-        w-full lg:w-4/4 xl:w-2/3 
+  <div
+    class="w-full w-full mx-auto flex flex-col justify-center md:flex-row items-center md:items-start"
+  >
+    <div
+      class="relative z-20 px-3 md:px-6
+        w-full lg:w-4/4 xl:w-2/3
         mt-45
-        text-white 
-      "
+        text-white"
     >
-      <div class="w-full text-center space-y-6">
-        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-2.5 text-white">
-          <span class="font-small lg:font-medium">Pneumologie, Allergologie Respiratoire et Oncologie Thoracique à Lyon</span>
+      <div class="w-full text-center space-y-6 mb-20">
+        <div
+          class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-2 md:px-6 py-2.5 text-white"
+        >
+          <span class="text-s lg:text-base font-medium">
+            Pneumologie, Allergologie Respiratoire et Oncologie Thoracique à Lyon
+          </span>
         </div>
         <h1 class="text-4xl text-white font-header md:text-5xl lg:text-6xl font-bold leading-tight">
           La santé de vos
@@ -38,33 +38,30 @@ import lowerWaves from "../assets/logo/logoCMPlowerWavesColored.svg";
         </h1>
 
         <p class="text-base md:text-l opacity-90">
-          Parce que bien respirer est essentiel à votre qualité de vie, notre centre de pneumologie vous propose un accompagnement personnalisé et attentif. Nos médecins prennent le temps de comprendre vos besoins pour vous offrir un suivi médical clair, rassurant et adapté à votre situation.
+          Parce que bien respirer est essentiel à votre qualité de vie, notre centre de pneumologie
+          vous propose un accompagnement personnalisé et attentif. Nos médecins prennent le temps de
+          comprendre vos besoins pour vous offrir un suivi médical clair, rassurant et adapté à
+          votre situation.
         </p>
       </div>
     </div>
   </div>
 
   <!-- Logo ovale -->
-  <div 
-    class="
-      absolute  
+  <div
+    class="absolute
       bg-white p-4 rounded-full
       z-30 flex items-center justify-center
-      left-1/2 bottom-0 transform 
-      -translate-x-1/2 translate-y-1/2
-    "
+      left-1/2 bottom-0 transform
+      -translate-x-1/2 translate-y-1/2"
   >
-    <Image 
-      src={lowerWaves}
-      alt="Logo waves" 
-      class="h-6 md:h-8 w-auto"
-    />
+    <Image src={lowerWaves} alt="Logo waves" class="h-6 md:h-8 w-auto" />
   </div>
 
   <!-- Background image -->
-  <Image 
+  <Image
     src={headerImage}
-    alt="Hero Image" 
+    alt="Hero Image"
     class="absolute inset-0 w-full h-full object-cover object-center z-0"
   />
 </section>

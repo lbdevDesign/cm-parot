@@ -1,7 +1,5 @@
 ---
 import Link from "./Link.astro";
-
-// Récupérer les données des cabinets
 import cabinets from "../data/cabinets.js";
 
 // Préparer les données pour le JS (on extrait le src des images)
@@ -13,6 +11,7 @@ const cabinetsJSON = JSON.stringify(
     description: c.description,
     mapsUrl: c.mapsUrl,
     image: typeof c.image === "string" ? c.image : c.image?.src,
+    imageMob: typeof c.imageMob === "string" ? c.imageMob : c.imageMob?.src,
   }))
 );
 
@@ -21,6 +20,8 @@ let activeCabinetIndex = 0;
 // Pour l'affichage initial
 const firstCabinetImage =
   typeof cabinets[0].image === "string" ? cabinets[0].image : cabinets[0].image?.src;
+const firstCabinetImageMob =
+  typeof cabinets[0].imageMob === "string" ? cabinets[0].imageMob : cabinets[0].imageMob?.src;
 ---
 
 <section class="w-full scroll-mt-25 pt-10 pb-10" id="cabinets">
@@ -54,11 +55,19 @@ const firstCabinetImage =
     >
       <!-- Image en haut -->
       <div class="relative w-full md:h-100 overflow-hidden">
+        <!-- Image desktop (hidden on mobile) -->
         <img
-          id="cabinet-image"
+          id="cabinet-image-desktop"
           src={firstCabinetImage}
           alt={cabinets[0].name}
-          class="w-full h-full object-cover transition-transform duration-300"
+          class="hidden md:block w-full h-full object-cover transition-transform duration-300"
+        />
+        <!-- Image mobile (hidden on desktop) -->
+        <img
+          id="cabinet-image-mobile"
+          src={firstCabinetImageMob || firstCabinetImage}
+          alt={cabinets[0].name}
+          class="block md:hidden w-full h-full object-cover transition-transform duration-300"
         />
       </div>
 
@@ -66,11 +75,16 @@ const firstCabinetImage =
       <div class="p-8">
         <div class="flex items-start justify-between gap-4 mb-4">
           <div class="flex-1">
-            <h3 id="cabinet-name" class="text-2xl font-bold text-[#313181] mb-2">
+            <h3
+              id="cabinet-name"
+              class="text-center md:text-left text-2xl font-bold text-[#313181] mb-2"
+            >
               {cabinets[0].name}
             </h3>
-            <p id="cabinet-description" class="text-gray-600">{cabinets[0].description}</p>
-            <p class="text-gray-600 mt-2">{cabinets[0].hours}</p>
+            <p id="cabinet-description" class="text-center md:text-left text-gray-600">
+              {cabinets[0].description}
+            </p>
+            <p class="text-center md:text-left text-gray-600 mt-2">{cabinets[0].hours}</p>
           </div>
         </div>
 
@@ -79,7 +93,7 @@ const firstCabinetImage =
           href={cabinets[0].mapsUrl}
           target="_blank"
           variant="external"
-          className="inline-flex"
+          className="w-full justify-center md:inline-flex md:w-auto"
         >
           Voir sur Google Maps
         </Link>
@@ -89,30 +103,19 @@ const firstCabinetImage =
 </section>
 
 <script define:vars={{ cabinetsJSON }}>
-  console.log("Script chargé");
-
   const cabinetsData = JSON.parse(cabinetsJSON);
-  console.log("Données cabinets:", cabinetsData);
-
   const buttons = document.querySelectorAll(".cabinet-btn");
-  console.log("Nombre de boutons trouvés:", buttons.length);
 
   const nameEl = document.getElementById("cabinet-name");
   const descriptionEl = document.getElementById("cabinet-description");
   const linkEl = document.getElementById("cabinet-link");
-  const imageEl = document.getElementById("cabinet-image");
+  const imageDesktopEl = document.getElementById("cabinet-image-desktop");
+  const imageMobileEl = document.getElementById("cabinet-image-mobile");
 
-  buttons.forEach((btn, index) => {
-    console.log("Ajout listener sur bouton", index, "ID:", btn.getAttribute("data-cabinet-id"));
-
+  buttons.forEach((btn) => {
     btn.addEventListener("click", function () {
-      console.log("CLIC détecté sur bouton !");
-
       const cabinetId = this.getAttribute("data-cabinet-id");
-      console.log("Cabinet ID cliqué:", cabinetId);
-
       const selected = cabinetsData.find((c) => String(c.id) === String(cabinetId));
-      console.log("Cabinet trouvé:", selected);
 
       if (!selected) {
         console.error("Aucun cabinet trouvé pour ID:", cabinetId);
@@ -144,8 +147,13 @@ const firstCabinetImage =
       nameEl.textContent = selected.name;
       descriptionEl.textContent = selected.description;
       linkEl.href = selected.mapsUrl;
-      imageEl.src = selected.image;
-      imageEl.alt = selected.name;
+
+      // Mettre à jour les deux images
+      imageDesktopEl.src = selected.image;
+      imageDesktopEl.alt = selected.name;
+
+      imageMobileEl.src = selected.imageMob || selected.image; // Fallback sur image si imageMob n'existe pas
+      imageMobileEl.alt = selected.name;
     });
   });
 </script>

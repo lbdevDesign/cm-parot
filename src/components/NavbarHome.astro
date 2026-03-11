@@ -43,7 +43,7 @@ const { alwaysScrolled = false } = Astro.props;
       <a
         id="nav-logo"
         href="/"
-        class={`font-bold text-gray-800 transition-all duration-400 flex flex-col items-center justify-self-center ${alwaysScrolled ? "h-16" : "h-38 md:h-48 mt-[5rem] md:mt-[2rem]"}`}
+        class={`font-bold text-gray-800 transition-all duration-400 flex flex-col items-center justify-self-center ${alwaysScrolled ? "h-12" : "h-24 md:h-48 mt-8 md:mt-[2rem]"}`}
       >
         {
           !alwaysScrolled && (
@@ -59,7 +59,7 @@ const { alwaysScrolled = false } = Astro.props;
         <!-- Deux versions du texte superposées -->
         <div
           id="middleTextContainer"
-          class={`relative flex items-center justify-center transition-all duration-300 ${alwaysScrolled ? "h-16" : "h-[3.5rem] md:h-[4rem]"}`}
+          class={`relative flex items-center justify-center transition-all duration-300 ${alwaysScrolled ? "h-12" : "h-12 md:h-[4rem]"}`}
         >
           {
             !alwaysScrolled && (
@@ -75,7 +75,7 @@ const { alwaysScrolled = false } = Astro.props;
             id="middleTextScrolled"
             src={logoTextColored}
             alt="Nav Image Scrolled"
-            class={`w-auto transition-all duration-300 ${alwaysScrolled ? "relative opacity-100 h-16" : "absolute opacity-0 h-full"}`}
+            class={`w-auto transition-all duration-300 ${alwaysScrolled ? "relative opacity-100 h-12" : "absolute opacity-0 h-full"}`}
           />
         </div>
 
@@ -132,13 +132,13 @@ const { alwaysScrolled = false } = Astro.props;
       class="flex flex-col space-y-8 text-2xl font-medium text-[#313181] text-center transform translate-y-8 opacity-0 transition-all duration-300"
     >
       <li>
-        <a href="/#our-offices" class="block py-3 hover:text-[#37A4B3] transition">Nos cabinets</a>
+        <a href="/#expertises" class="block py-3 hover:text-[#37A4B3] transition">Nos expertises</a>
       </li>
       <li>
-        <a href="/#our-team" class="block py-3 hover:text-[#37A4B3] transition">Notre équipe</a>
+        <a href="/#cabinets" class="block py-3 hover:text-[#37A4B3] transition">Nos cabinets</a>
       </li>
       <li>
-        <a href="/#faq" class="block py-3 hover:text-[#37A4B3] transition">Vos questions</a>
+        <a href="/#equipe" class="block py-3 hover:text-[#37A4B3] transition">Notre équipe</a>
       </li>
       <li>
         <a href="/contact" class="block py-3 hover:text-[#37A4B3] transition">Contactez-nous</a>
@@ -188,8 +188,8 @@ const { alwaysScrolled = false } = Astro.props;
         lower.style.height = "33%";
         lower.style.opacity = "1";
       }
-      logo.style.height = isMobile() ? "9.5rem" : "12rem";
-      logo.style.marginTop = isMobile() ? "5rem" : "2rem";
+      logo.style.height = isMobile() ? "6rem" : "12rem"; // ← Changé de 9.5rem à 6rem
+      logo.style.marginTop = isMobile() ? "2rem" : "2rem"; // ← Changé de 5rem à 2rem
 
       if (middleDefault) middleDefault.style.opacity = "1";
       if (middleScrolled) middleScrolled.style.opacity = "0";
@@ -298,8 +298,8 @@ const { alwaysScrolled = false } = Astro.props;
             lower.style.height = "33%";
             lower.style.opacity = "1";
           }
-          logo.style.height = isMobile() ? "9.5rem" : "12rem";
-          logo.style.marginTop = isMobile() ? "5rem" : "2rem";
+          logo.style.height = isMobile() ? "6rem" : "12rem";
+          logo.style.marginTop = isMobile() ? "2rem" : "2rem";
 
           if (middleDefault) middleDefault.style.opacity = "1";
           if (middleScrolled) middleScrolled.style.opacity = "0";
