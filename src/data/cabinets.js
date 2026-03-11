@@ -2,6 +2,10 @@ import parotDuquesne from "../assets/cliniques/cliniqueDuquesne.jpg";
 import parotCharcot from "../assets/cliniques/cliniqueCharcot.jpg";
 import parotMermoz from "../assets/cliniques/cliniqueMermoz.jpg";
 import parotRilleux from "../assets/cliniques/cliniqueRilleux.jpg";
+import duquesnneMob from "../assets/cliniques/duquesnneMob.jpg";
+import charcotMob from "../assets/cliniques/charcotMob.jpg";
+import mermozMob from "../assets/cliniques/mermozMob.jpg";
+import rilleuxMob from "../assets/cliniques/rilleuxMob.jpg";
 
 const cabinets = [
   {
@@ -10,9 +14,10 @@ const cabinets = [
     district: "Duquesne",
     description: "54 Rue Duquesne, 69006 Lyon",
     image: parotDuquesne,
+    imageMob: duquesnneMob,
     logo: "imgSlot.png",
     hours: "Lun - Ven: 8h - 18h",
-    mapsUrl: "https://maps.app.goo.gl/b86pVfsgpgrCJSX97"
+    mapsUrl: "https://maps.app.goo.gl/b86pVfsgpgrCJSX97",
   },
   {
     id: 2,
@@ -20,9 +25,10 @@ const cabinets = [
     district: "Charcot",
     description: "51 Rue Commandant Charcot, 69110 Sainte-Foy-lès-Lyon",
     image: parotCharcot,
+    imageMob: charcotMob,
     logo: "imgSlot.png",
     hours: "Lun - Ven: 8h - 18h",
-    mapsUrl: "https://maps.app.goo.gl/dh84879fLTujPNVs6"
+    mapsUrl: "https://maps.app.goo.gl/dh84879fLTujPNVs6",
   },
   {
     id: 3,
@@ -30,9 +36,10 @@ const cabinets = [
     district: "Mermoz",
     description: "11 Rue Edouard Nieuport, 69008 Lyon",
     image: parotMermoz,
+    imageMob: mermozMob,
     logo: "imgSlot.png",
     hours: "Lun - Ven: 8h - 18h",
-    mapsUrl: "https://maps.app.goo.gl/aUro1PMNwxkdr7bdA"
+    mapsUrl: "https://maps.app.goo.gl/aUro1PMNwxkdr7bdA",
   },
   {
     id: 4,
@@ -40,10 +47,11 @@ const cabinets = [
     district: "Rillieux",
     description: "65 Rue des Contamines, 69140 Rillieux-la-Pape",
     image: parotRilleux,
+    imageMob: rilleuxMob,
     logo: "/imgSlot.png",
     hours: "Lun - Ven: 8h - 18h",
-    mapsUrl: "https://maps.app.goo.gl/mbuYFTrBJPFdojp3A"
-  }
+    mapsUrl: "https://maps.app.goo.gl/mbuYFTrBJPFdojp3A",
+  },
 ];
 
 export default cabinets;
