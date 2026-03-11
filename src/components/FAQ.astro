@@ -15,7 +15,7 @@ const faq = [
   {
     id: 2,
     question: "Quels sont les horaires d'ouverture ?",
-    answer:`<p>Centre Médical Parot est ouvert aux horaires suivants :</p>
+    answer: `<p>Centre Médical Parot est ouvert aux horaires suivants :</p>
 
     <ul>
       <li><strong>Lundi :</strong> 08h00 – 12h00, 14h00 – 17h30</li>
@@ -28,14 +28,14 @@ const faq = [
   {
     id: 3,
     question: "Acceptez-vous de nouveaux patients ?",
-    answer:`<p>
+    answer: `<p>
       Oui, <strong>Centre Médical Parot accepte actuellement de nouveaux patients</strong>.
     </p>`,
   },
   {
     id: 4,
     question: "Proposez-vous la téléconsultation ?",
-    answer:`<p>
+    answer: `<p>
       Oui, Centre Médical Parot propose la téléconsultation pour les motifs suivants :
     </p>
 
@@ -48,37 +48,44 @@ const faq = [
 ---
 
 <section id="faq" class="max-w-4xl mx-auto px-6 py-20 scroll-mt-25 pt-10 pb-10">
-  <h2 class="text-4xl font-bold text-center mb-4">Questions fréquentes</h2>
+  <h2 class="text-3xl md:text-4xl text-[#313181] font-bold text-center mb-4">
+    Questions fréquentes
+  </h2>
   <p class="text-center text-gray-600 mb-12">Tout ce que vous devez savoir sur nos services</p>
 
   <div class="space-y-4">
-    {faq.map((item, index) => (
-      <details
-        class="group bg-white rounded-2xl border border-gray-200 hover:border-[#37A4B3] transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md"
-      >
-        <summary class="cursor-pointer font-semibold text-[#313181] p-6 flex items-center justify-between list-none">
-          <span class="flex items-center gap-4">
-            <span class="flex-shrink-0 w-8 h-8 bg-[#37A4B3]/10 rounded-full flex items-center justify-center text-[#37A4B3] font-bold text-sm">
-              {index + 1}
+    {
+      faq.map((item, index) => (
+        <details class="group bg-white rounded-2xl border border-gray-200 hover:border-[#37A4B3] transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md">
+          <summary class="cursor-pointer font-semibold text-[#313181] p-6 flex items-center justify-between list-none">
+            <span class="flex items-center gap-4">
+              <span class="flex-shrink-0 w-8 h-8 bg-[#37A4B3]/10 rounded-full flex items-center justify-center text-[#37A4B3] font-bold text-sm">
+                {index + 1}
+              </span>
+              <span class="text-lg">{item.question}</span>
             </span>
-            <span class="text-lg">{item.question}</span>
-          </span>
-          
-          <svg 
-            class="w-6 h-6 text-[#37A4B3] transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ml-4" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </summary>
 
-        <div class="px-6 pb-6 pt-0">
-          <div class="pl-12 prose prose-sm max-w-none text-gray-600" set:html={item.answer} />
-        </div>
-      </details>
-    ))}
+            <svg
+              class="w-6 h-6 text-[#37A4B3] transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ml-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </summary>
+
+          <div class="px-6 pb-6 pt-0">
+            <div class="pl-12 prose prose-sm max-w-none text-gray-600" set:html={item.answer} />
+          </div>
+        </details>
+      ))
+    }
   </div>
 </section>
 
@@ -110,7 +117,7 @@ const faq = [
     content: "→";
     position: absolute;
     left: 0;
-    color: #37A4B3;
+    color: #37a4b3;
     font-weight: bold;
   }
 </style>

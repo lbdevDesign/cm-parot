@@ -1,0 +1,348 @@
+---
+import team from "../data/team.js";
+const specialties = [
+  {
+    id: "pneumologie-generale",
+    title: "Pneumologie générale",
+    shortDesc: "Prise en charge complète des maladies respiratoires de l'adulte",
+    description:
+      "Nous prenons en charge l'ensemble des maladies respiratoires de l'adulte : asthme, bronchite chronique, BPCO, pathologie interstitielle, infections pulmonaires, essoufflement inexpliqué, toux chronique.",
+    doctors: [
+      "Dr Bombaron",
+      "Dr Caillet",
+      "Dr Hanin",
+      "Dr Vial-Dupuy",
+      "Dr Wattiez",
+      "Dr Piegay",
+      "Dr Veaudor",
+      "Dr Bouledrak",
+      "Dr Jouan",
+    ],
+  },
+  {
+    id: "pneumo-pediatrie",
+    title: "Pneumo-pédiatrie",
+    shortDesc: "Troubles respiratoires de l'enfant et l'adolescent",
+    description:
+      "La pneumo-pédiatrie est dédiée aux troubles respiratoires de l'enfant et de l'adolescent. Nous accompagnons les jeunes patients à partir de l'âge de 6 ans, dans le diagnostic et le suivi de pathologies telles que l'asthme de l'enfant, les allergies respiratoires ou les infections à répétition.",
+    doctors: [
+      "Dr Vial-Dupuy (à partir de 6 ans)",
+      "Dr Wattiez (à partir de 10 ans)",
+      "Dr Hanin (à partir de 16 ans)",
+    ],
+  },
+  {
+    id: "allergologie",
+    title: "Allergologie",
+    shortDesc: "Diagnostic et traitement des allergies",
+    description:
+      "Nous prenons en charge le diagnostic et le traitement des allergies, principalement respiratoires, telles que la rhinite allergique ou l'asthme allergique. Des évaluations spécialisées permettent d'identifier les allergènes responsables de vos symptômes et de vous proposer une immunothérapie allergénique (ou désensibilisation). Nous assurons également l'exploration des allergies alimentaires et médicamenteuses, en particulier avec l'hôpital de jour d'allergologie médicamenteuse de l'adulte à la Polyclinique de Rillieux.",
+    doctors: ["Dr Vial-Dupuy", "Dr Wattiez"],
+    specialNote: "Pour un problème d'allergie alimentaire ou médicamenteuse : Dr Vial-Dupuy",
+  },
+  {
+    id: "oncologie",
+    title: "Oncologie thoracique",
+    shortDesc: "Diagnostic et suivi des cancers du poumon",
+    description:
+      "L'oncologie thoracique concerne le diagnostic, le suivi et la prise en charge des cancers du poumon. Nous travaillons sur 3 sites (Hôpital privé Jean Mermoz, Clinique Charcot et Polyclinique de Rillieux) en collaboration avec des équipes de chirurgie thoracique et de radiothérapie pour que chaque patient bénéficie d'un accompagnement personnalisé tout au long de son parcours de soins.",
+    doctors: ["Dr Bombaron", "Dr Piegay", "Dr Veaudor", "Dr Bouledrak", "Dr Caillet", "Dr Jouan"],
+  },
+  {
+    id: "fibroscopie",
+    title: "Fibroscopie bronchique",
+    shortDesc: "Exploration de l'intérieur des bronches",
+    description:
+      "La fibroscopie bronchique est un examen permettant d'explorer l'intérieur des bronches à l'aide d'un endoscope souple. Cet examen est indiqué pour le bilan de certaines pathologies pulmonaires, et notamment pour réaliser des prélèvements biopsiques ou des analyses microbiologiques. Il peut être proposé selon votre préférence sous anesthésie locale ou sous anesthésie générale. Les fibroscopies bronchiques sont réalisées sur 3 sites : Hôpital privé Jean Mermoz, Clinique Charcot et Polyclinique de Rillieux.",
+    doctors: [
+      "Dr Bombaron",
+      "Dr Piegay",
+      "Dr Veaudor",
+      "Dr Bouledrak",
+      "Dr Caillet",
+      "Dr Jouan",
+      "Dr Hanin",
+    ],
+  },
+  {
+    id: "sommeil",
+    title: "Troubles respiratoires du sommeil",
+    shortDesc: "Diagnostic du syndrome d'apnées du sommeil",
+    description:
+      "Les troubles respiratoires du sommeil, comme le syndrome d'apnées du sommeil, peuvent avoir un impact important sur la santé et la qualité de vie. Ils se manifestent souvent par des ronflements, une fatigue persistante ou une somnolence dans la journée. Un bilan spécialisé permet d'établir le diagnostic et de proposer des solutions efficaces pour retrouver un sommeil réparateur. Notre centre propose des examens diagnostics en ambulatoire (nuit à domicile) par polygraphie ventilatoire ou polysomnographie.",
+    doctors: [
+      "Dr Bombaron",
+      "Dr Caillet",
+      "Dr Hanin",
+      "Dr Vial-Dupuy",
+      "Dr Wattiez",
+      "Dr Piegay",
+      "Dr Veaudor",
+      "Dr Bouledrak",
+      "Dr Jouan",
+    ],
+    specialNote: "Pour une Polysomnographie : Dr Wattiez, Dr Hanin, Dr Jouan, Dr Bouledrak",
+  },
+];
+---
+
+<section class="w-full py-20 bg-gradient-to-b from-white to-[--brand-surface]" id="specialties">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#313181] mb-4">Nos domaines d'expertise</h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        Une équipe pluridisciplinaire pour une prise en charge complète de vos besoins respiratoires
+      </p>
+    </div>
+
+    <!-- Grille des blocs cliquables -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        specialties.map((specialty) => (
+          <button
+            data-specialty={specialty.id}
+            class="specialty-card p-4 bg-white rounded-2xl border-2 border-gray-200 hover:border-[#37A4B3] hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer text-left h-full flex flex-col"
+          >
+            <div class="w-full rounded-lg bg-gradient-to-br from-[#37A4B3] to-[#268090] p-6 group-hover:from-[#268090] group-hover:to-[#1F6B78] transition-all duration-300 min-h-[100px] flex items-center">
+              <h3 class="text-xl font-bold text-white">{specialty.title}</h3>
+            </div>
+
+            <div class="p-6 flex-1 flex flex-col">
+              <p class="text-gray-600 text-sm mb-4 flex-1">{specialty.shortDesc}</p>
+
+              <div class="flex items-center gap-2 text-[#37A4B3] font-semibold text-sm">
+                En savoir plus
+                <svg
+                  class="h-4 w-4 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </div>
+            </div>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Panneau latéral (Side Panel) -->
+<div
+  id="specialty-panel"
+  class="fixed inset-y-0 right-0 w-full md:w-[600px] bg-white shadow-2xl z-[200] transform translate-x-full transition-transform duration-300 overflow-y-auto"
+>
+  <!-- Header du panneau -->
+  <div
+    class="sticky top-0 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white px-6 py-6 flex justify-between items-center z-10"
+  >
+    <h2 id="panel-title" class="text-2xl text-white font-bold"></h2>
+    <button
+      id="close-panel"
+      class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-all"
+    >
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Contenu du panneau -->
+  <div class="p-6 space-y-6">
+    <!-- Description -->
+    <div>
+      <h3 class="text-lg font-bold text-[#313181] mb-3">Description</h3>
+      <p id="panel-description" class="text-gray-600 leading-relaxed"></p>
+    </div>
+
+    <!-- Note spéciale si existe -->
+    <div id="panel-note-container" class="hidden">
+      <div class="bg-[#37A4B3] bg-opacity-10 border-l-4 border-[#37A4B3] p-4 rounded">
+        <p id="panel-note" class="text-sm text-white"></p>
+      </div>
+    </div>
+
+    <!-- Praticiens -->
+    <div>
+      <h3 class="text-lg font-bold text-[#313181] mb-4">Praticiens disponibles</h3>
+      <div id="panel-doctors" class="space-y-3"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="pt-6 border-t border-gray-200">
+      <a
+        id="team"
+        href="/#our-teamcontact"
+        class="block w-full text-center px-6 py-4 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white font-semibold rounded-xl hover:shadow-lg transition-all"
+      >
+        Notre équipe
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay (fond sombre) -->
+<div
+  id="panel-overlay"
+  class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[199] opacity-0 pointer-events-none transition-opacity duration-300"
+>
+</div>
+
+<script define:vars={{ specialties, team }}>
+  const panel = document.getElementById("specialty-panel");
+  const overlay = document.getElementById("panel-overlay");
+  const closeBtn = document.getElementById("close-panel");
+  const cards = document.querySelectorAll(".specialty-card");
+  const teamBtn = document.getElementById("team");
+
+  const panelTitle = document.getElementById("panel-title");
+  const panelDescription = document.getElementById("panel-description");
+  const panelDoctors = document.getElementById("panel-doctors");
+  const panelNote = document.getElementById("panel-note");
+  const panelNoteContainer = document.getElementById("panel-note-container");
+
+  teamBtn.addEventListener("click", () => {
+    closePanel();
+    setTimeout(() => {
+      const teamSection = document.getElementById("our-team");
+      if (teamSection) {
+        teamSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 300);
+  });
+
+  // Créer un mapping nom → données
+  const doctorsMap = {};
+  team.forEach((doctor) => {
+    const parts = doctor.name.split(" ");
+    const lastName = parts[1]; // "BOMBARON"
+
+    // Créer plusieurs clés possibles
+    doctorsMap[`Dr ${lastName}`] = doctor;
+    doctorsMap[`Dr ${lastName.charAt(0) + lastName.slice(1).toLowerCase()}`] = doctor; // "Dr Bombaron"
+
+    // Pour "VIAL-DUPUY"
+    if (lastName.includes("-")) {
+      const formatted = lastName
+        .split("-")
+        .map((part) => part.charAt(0) + part.slice(1).toLowerCase())
+        .join("-");
+      doctorsMap[`Dr ${formatted}`] = doctor; // "Dr Vial-Dupuy"
+    }
+  });
+
+  function getDoctorCard(doctorName) {
+    // Extraire le nom propre (sans les infos entre parenthèses)
+    const cleanName = doctorName.split("(")[0].trim();
+
+    // Chercher le médecin dans nos données
+    const doctorData = doctorsMap[cleanName];
+
+    if (doctorData) {
+      // Utiliser la vraie photo ou l'initiale
+      const photoSrc = doctorData.photo?.src || null;
+      const initial = cleanName.split(" ")[1]?.[0] || cleanName[0];
+
+      return `
+        <div class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-all group">
+          <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-[#37A4B3]/20 group-hover:border-[#37A4B3] flex-shrink-0 ${photoSrc ? "" : "bg-gradient-to-br from-[#37A4B3] to-[#268090]"} flex items-center justify-center transition-colors">
+            ${photoSrc ? `<img src="${photoSrc}" alt="${cleanName}" class="w-full h-full object-cover object-top" />` : `<span class="text-white font-bold text-lg">${initial}</span>`}
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-medium text-[#313181] text-sm block">${doctorName}</span>
+          </div>
+          ${
+            doctorData.url
+              ? `
+            <a 
+              href="${doctorData.url}" 
+              target="_blank"
+              rel="noopener noreferrer"
+              onclick="event.stopPropagation()"
+              class="flex-shrink-0 px-4 py-2 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white text-sm font-semibold rounded-lg hover:shadow-md hover:scale-105 transition-all"
+            >
+              Prendre RDV
+            </a>
+          `
+              : ""
+          }
+        </div>
+      `;
+    }
+
+    // Fallback si le médecin n'est pas trouvé dans les données
+    const initial = cleanName.split(" ")[1]?.[0] || cleanName[0];
+    return `
+      <div class="flex items-center gap-3 p-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#37A4B3] to-[#268090] flex items-center justify-center">
+          <span class="text-white font-bold text-lg">${initial}</span>
+        </div>
+        <span class="font-medium text-[#313181] text-sm">${doctorName}</span>
+      </div>
+    `;
+  }
+
+  function openPanel(specialtyId) {
+    const specialty = specialties.find((s) => s.id === specialtyId);
+    if (!specialty) return;
+
+    panelTitle.textContent = specialty.title;
+    panelDescription.textContent = specialty.description;
+
+    // Trier les médecins par ordre alphabétique puis remplir la liste
+    const sortedDoctors = [...specialty.doctors].sort((a, b) => {
+      const nameA = a.split("(")[0].trim().split(" ")[1] || a;
+      const nameB = b.split("(")[0].trim().split(" ")[1] || b;
+      return nameA.localeCompare(nameB);
+    });
+
+    panelDoctors.innerHTML = sortedDoctors.map((doctor) => getDoctorCard(doctor)).join("");
+
+    if (specialty.specialNote) {
+      panelNote.textContent = specialty.specialNote;
+      panelNoteContainer.classList.remove("hidden");
+    } else {
+      panelNoteContainer.classList.add("hidden");
+    }
+
+    panel.classList.remove("translate-x-full");
+    overlay.classList.remove("opacity-0", "pointer-events-none");
+    overlay.classList.add("opacity-75", "pointer-events-auto");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closePanel() {
+    panel.classList.add("translate-x-full");
+    overlay.classList.add("opacity-0", "pointer-events-none");
+    overlay.classList.remove("opacity-75", "pointer-events-auto");
+    document.body.style.overflow = "";
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const specialtyId = card.getAttribute("data-specialty");
+      openPanel(specialtyId);
+    });
+  });
+
+  closeBtn?.addEventListener("click", closePanel);
+  overlay?.addEventListener("click", closePanel);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !panel.classList.contains("translate-x-full")) {
+      closePanel();
+    }
+  });
+</script>

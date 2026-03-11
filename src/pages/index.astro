@@ -1,20 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from "@/components/Hero.astro"
-import OurOffices from "@/components/ourOffices.astro"
-import OurTeam from "@/components/OurTeam.astro"
-import FAQ from "@/components/FAQ.astro"
-import cabinets from "@/data/cabinets.js"
-import Partners from '@/components/Partners.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import OurOffices from "@/components/ourOffices.astro";
+import OurTeam from "@/components/OurTeam.astro";
+import FAQ from "@/components/FAQ.astro";
+import cabinets from "@/data/cabinets.js";
+import ContactBubble from "@/components/ContactBubble.astro";
+import Specialties from "@/components/Specialties.astro";
 ---
 
 <Layout
-	title="Centre médical Parot - Votre santé, notre priorité"
-	description="Découvrez le Centre médical Parot, votre cabinet de confiance pour des soins de santé de qualité. Notre équipe de professionnels dévoués est là pour vous offrir des services médicaux complets et personnalisés. Prenez rendez-vous dès aujourd'hui."
-	image="/cmParrot_accueil.jpg"
+  title="Centre médical Parot - Votre santé, notre priorité"
+  description="Découvrez le Centre médical Parot, votre cabinet de confiance pour des soins de santé de qualité. Notre équipe de professionnels dévoués est là pour vous offrir des services médicaux complets et personnalisés. Prenez rendez-vous dès aujourd'hui."
+  image="/cmParrot_accueil.jpg"
 >
-	<Hero />
-	<OurOffices client:load cabinets={cabinets} />
-	<OurTeam />
-	<FAQ />
+  <Hero />
+  <Specialties />
+  <OurOffices client:load cabinets={cabinets} />
+  <OurTeam />
+  <FAQ />
+  <ContactBubble />
 </Layout>
