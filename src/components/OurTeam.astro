@@ -7,9 +7,27 @@ import emptyAvatar from "../assets/medecins/emptyPP.png";
 const sortedTeam = [...team].sort((a, b) =>
   a.name.localeCompare(b.name, "fr", { sensitivity: "base" })
 );
+
+// Mapping des IDs de spécialités vers leurs noms
+const specialtyNames: Record<string, string> = {
+  "pneumologie-generale": "Pneumologie générale",
+  "pneumo-pediatrie": "Pneumo-pédiatrie",
+  allergologie: "Allergologie",
+  oncologie: "Oncologie thoracique",
+  fibroscopie: "Fibroscopie bronchique",
+  sommeil: "Troubles du sommeil",
+};
+
+// Fonction pour obtenir les noms de spécialités d'un médecin
+function getSpecialtyLabels(specialtyIds: string[]): string {
+  return specialtyIds
+    .map((id) => specialtyNames[id])
+    .filter(Boolean)
+    .join(" • ");
+}
 ---
 
-<section class="w-full scroll-mt-25 pt-10 pb-10" id="our-team">
+<section class="w-full scroll-mt-25 pt-10 pb-10" id="equipe">
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-3xl md:text-4xl text-[#313181] font-bold text-center mb-4">Notre équipe</h2>
     <p class="text-center text-gray-600 mb-12">
@@ -42,12 +60,12 @@ const sortedTeam = [...team].sort((a, b) =>
               <div class="flex-1 flex flex-col gap-3">
                 <div>
                   <h3 class="text-xl font-semibold text-[#313181] mb-1">{member.name}</h3>
-                  <p class="text-gray-600 text-sm">Pneumologue</p>
+                  <p class="text-gray-600 text-sm">{getSpecialtyLabels(member.specialties)}</p>
                 </div>
 
                 <Link
                   href={member.url}
-                  variant="button"
+                  variant="external"
                   target="_blank"
                   className="w-full justify-center"
                 >

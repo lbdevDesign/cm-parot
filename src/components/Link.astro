@@ -1,5 +1,5 @@
 ---
-type Variant = "default" | "button" | "outline" | "underline";
+type Variant = "default" | "button" | "external" | "outline" | "underline";
 
 interface Props {
   id?: string;
@@ -9,31 +9,28 @@ interface Props {
   target?: string;
 }
 
-const {
-  id,
-  href = "#",
-  variant = "default",
-  className = "",
-  target,
-} = Astro.props;
+const { id, href = "#", variant = "default", className = "", target } = Astro.props;
 
-const base = "relative pr-6 group inline-flex items-center font-semibold transition rounded cursor-pointer";
+const base =
+  "relative group inline-flex items-center font-semibold transition rounded cursor-pointer";
 
 const variants: Record<Variant, string> = {
   default: "text-blue-600 hover:text-blue-700",
-  button: "btn-gradient", // Retire les classes en double, tout est dans le CSS
+  button: "btn-gradient",
+  external:
+    "bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all font-semibold",
   outline: "border border-blue-600 text-blue-600 px-5 py-2 hover:bg-blue-600 hover:text-white",
   underline: "text-blue-600 underline hover:text-blue-700",
 };
 ---
 
 <a id={id} href={href} target={target} class={`${base} ${variants[variant]} ${className}`}>
-  <span class="mr-0 group-hover:mr-2 transition-all duration-300">
+  <span class="relative z-10 group-hover:mr-2 transition-all duration-300">
     <slot />
   </span>
 
   <img
-    class="absolute right-2 w-0 h-4 opacity-0 -translate-x-1 group-hover:w-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+    class="relative z-10 w-0 h-4 ml-0 opacity-0 group-hover:w-4 group-hover:ml-2 group-hover:opacity-100 transition-all duration-300 flex-shrink-0"
     src="/Arrow_Right_SM.svg"
     alt="arrow right"
   />
@@ -47,51 +44,47 @@ const variants: Record<Variant, string> = {
     border: 2px solid transparent;
     color: white;
     font-weight: 600;
-    border-radius: 0.5rem; /* Ajoute le border-radius ici */
-    transition: color 0.3s ease, border-color 0.3s ease;
+    border-radius: 0.5rem;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease;
   }
-  
+
   .btn-gradient::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #2A8A98 0%, #268090 100%);
+    background: linear-gradient(135deg, #2a8a98 0%, #268090 100%);
     transition: opacity 0.3s ease;
-    z-index: 0; /* Change de -1 à 0 */
+    z-index: 0;
   }
-  
+
   .btn-gradient::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     background: white;
     opacity: 0;
     transition: opacity 0.3s ease;
-    z-index: 0; /* Change de -1 à 0 */
+    z-index: 0;
   }
-  
-  /* Le texte doit être au-dessus des pseudo-éléments */
+
   .btn-gradient > span,
   .btn-gradient > img {
     position: relative;
     z-index: 1;
   }
-  
+
   .btn-gradient:hover::before {
     opacity: 0;
   }
-  
+
   .btn-gradient:hover::after {
     opacity: 1;
   }
-  
+
   .btn-gradient:hover {
     color: #313181;
     border: 2px solid #313181;
-  }
-  
-  /* Fix pour la flèche au hover */
-  .btn-gradient:hover img {
-    margin-left: 1rem;
   }
 </style>
