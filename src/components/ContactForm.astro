@@ -1,10 +1,24 @@
 ---
 import Link from "../components/Link.astro";
+import cabinets from "../data/cabinets.js";
+
+// Préparer les données pour le JS
+const cabinetsJSON = JSON.stringify(
+  cabinets.map((c) => ({
+    id: String(c.id),
+    name: c.name,
+    district: c.district,
+    phone: c.phone || "04 78 77 51 43",
+    email: c.email || "secretaria@centremedicalparot.fr",
+  }))
+);
+
+const firstCabinet = cabinets[0];
 ---
 
 <section class="relative min-h-screen flex items-center py-20 bg-[#313181]" id="contact">
   <div class="relative z-10 w-full max-w-7xl mx-auto pt-10 mt-10 px-6">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div class="grid md:grid-cols-2 gap-12 items-start">
       <!-- Partie gauche : Informations -->
       <div class="space-y-8">
         <div>
@@ -13,6 +27,27 @@ import Link from "../components/Link.astro";
             <span class="text-[#37A4B3]">Contactez-nous</span>
           </h1>
           <p class="text-xl text-white/90">Notre équipe vous répond dans les plus brefs délais</p>
+        </div>
+
+        <!-- Sélecteur de cabinet -->
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">Sélectionnez votre cabinet</h3>
+          <div class="flex gap-3 flex-wrap">
+            {
+              cabinets.map((cabinet, index) => (
+                <button
+                  data-cabinet-id={String(cabinet.id)}
+                  class={`cabinet-selector px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                    index === 0
+                      ? "bg-white text-[#313181] shadow-md"
+                      : "bg-white/10 text-white border border-white/20 hover:bg-white/20"
+                  }`}
+                >
+                  {cabinet.district}
+                </button>
+              ))
+            }
+          </div>
         </div>
 
         <!-- Infos de contact -->
@@ -37,7 +72,14 @@ import Link from "../components/Link.astro";
             </div>
             <div>
               <h3 class="font-semibold text-lg mb-1 text-white">Téléphone</h3>
-              <p class="text-white/80">04 78 77 51 43</p>
+
+              <a
+                id="contact-phone"
+                href={`tel:${(firstCabinet.phone || "04 78 77 51 43").replace(/\s/g, "")}`}
+                class="text-white/80 hover:text-[#37A4B3] transition"
+              >
+                {firstCabinet.phone || "04 78 77 51 43"}
+              </a>
             </div>
           </div>
 
@@ -61,21 +103,16 @@ import Link from "../components/Link.astro";
             </div>
             <div>
               <h3 class="font-semibold text-lg mb-1 text-white">Email</h3>
-              <p class="text-white/80">secretaria@centremedicalparot.fr</p>
+
+              <a
+                id="contact-email"
+                href={`mailto:${firstCabinet.email || "secretaria@centremedicalparot.fr"}`}
+                class="text-white/80 hover:text-[#37A4B3] transition"
+              >
+                {firstCabinet.email || "secretaria@centremedicalparot.fr"}
+              </a>
             </div>
           </div>
-
-          <!-- <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center">
-              <svg class="w-6 h-6 text-[#37A4B3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-lg mb-1 text-white">Horaires</h3>
-              <p class="text-white/80">Lun-Ven : 8h-17h30</p>
-            </div>
-          </div> -->
         </div>
       </div>
 
@@ -99,10 +136,12 @@ import Link from "../components/Link.astro";
           </div>
 
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-2"> Email </label>
+            <label for="email-input" class="block text-sm font-medium text-gray-700 mb-2">
+              Email
+            </label>
             <input
               type="email"
-              id="email"
+              id="email-input"
               name="email"
               required
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#37A4B3] focus:border-transparent transition"
@@ -123,11 +162,46 @@ import Link from "../components/Link.astro";
               placeholder="Décrivez votre demande..."></textarea>
           </div>
 
-          <Link variant="button" className="w-full justify-center text-center block">
+          <button
+            type="submit"
+            class="w-full px-6 py-3 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white font-semibold rounded-lg hover:shadow-lg transition-all"
+          >
             Envoyer le message
-          </Link>
+          </button>
         </form>
       </div>
     </div>
+
+    <script define:vars={{ cabinetsJSON }}>
+      const cabinetsData = JSON.parse(cabinetsJSON);
+      const buttons = document.querySelectorAll(".cabinet-selector");
+      const phoneEl = document.getElementById("contact-phone");
+      const emailEl = document.getElementById("contact-email");
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const cabinetId = this.getAttribute("data-cabinet-id");
+          const selected = cabinetsData.find((c) => String(c.id) === String(cabinetId));
+
+          if (!selected) return;
+
+          // Mettre à jour les boutons
+          buttons.forEach((b) => {
+            b.classList.remove("bg-white", "text-[#313181]", "shadow-md");
+            b.classList.add("bg-white/10", "text-white", "border", "border-white/20");
+          });
+
+          this.classList.add("bg-white", "text-[#313181]", "shadow-md");
+          this.classList.remove("bg-white/10", "text-white", "border", "border-white/20");
+
+          // Mettre à jour les infos de contact
+          phoneEl.textContent = selected.phone;
+          phoneEl.href = `tel:${selected.phone.replace(/\s/g, "")}`;
+
+          emailEl.textContent = selected.email;
+          emailEl.href = `mailto:${selected.email}`;
+        });
+      });
+    </script>
   </div>
 </section>

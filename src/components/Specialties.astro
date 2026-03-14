@@ -91,10 +91,12 @@ specialties.forEach((specialty) => {
         specialties.map((specialty) => (
           <button
             data-specialty={specialty.id}
-            class="specialty-card p-4 bg-white rounded-2xl border-2 border-gray-200 hover:border-[#37A4B3] hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer text-left h-full flex flex-col"
+            class="relative overflow-hidden specialty-card p-4 bg-white rounded-2xl border-2 border-gray-200 hover:border-[#37A4B3] hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer text-left h-full flex flex-col"
           >
             <div class="w-full rounded-lg bg-gradient-to-br from-[#37A4B3] to-[#268090] p-6 group-hover:from-[#268090] group-hover:to-[#1F6B78] transition-all duration-300 min-h-[100px] flex items-center">
-              <h3 class="text-xl font-bold text-white">{specialty.title}</h3>
+              <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-white/10 group-hover:scale-110 transition-transform duration-300" />
+              <div class="absolute -right-2 top-12 w-16 h-16 rounded-full bg-white/5 group-hover:scale-110 transition-transform duration-300" />
+              <h3 class="text-xl font-bold text-white relative z-10">{specialty.title}</h3>
             </div>
 
             <div class="p-6 flex-1 flex flex-col">
@@ -195,31 +197,17 @@ specialties.forEach((specialty) => {
                   </span>
                 </div>
                 {doctor.url && (
-                  <Link
-                    href={doctor.url}
-                    target="_blank"
-                    variant="external"
-                    className="flex-shrink-0"
-                  >
-                    Prendre RDV
-                  </Link>
+                  <div class="flex-shrink-0">
+                    <Link href={doctor.url} target="_blank" variant="external" className="">
+                      Prendre RDV
+                    </Link>
+                  </div>
                 )}
               </div>
             </div>
           ))
         }
       </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="pt-6 border-t border-gray-200">
-      <a
-        id="team"
-        href="/#our-team"
-        class="block w-full text-center px-6 py-4 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white font-semibold rounded-xl hover:shadow-lg transition-all"
-      >
-        Notre équipe
-      </a>
     </div>
   </div>
 </div>
@@ -236,7 +224,6 @@ specialties.forEach((specialty) => {
   const overlay = document.getElementById("panel-overlay");
   const closeBtn = document.getElementById("close-panel");
   const cards = document.querySelectorAll(".specialty-card");
-  const teamBtn = document.getElementById("team");
 
   const panelTitle = document.getElementById("panel-title");
   const panelDescription = document.getElementById("panel-description");
@@ -244,15 +231,7 @@ specialties.forEach((specialty) => {
   const panelNote = document.getElementById("panel-note");
   const panelNoteContainer = document.getElementById("panel-note-container");
 
-  teamBtn.addEventListener("click", () => {
-    closePanel();
-    setTimeout(() => {
-      const teamSection = document.getElementById("our-team");
-      if (teamSection) {
-        teamSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 300);
-  });
+  let panelOpen = false; // ← AJOUT
 
   function openPanel(specialtyId) {
     const specialty = specialties.find((s) => s.id === specialtyId);
@@ -261,30 +240,25 @@ specialties.forEach((specialty) => {
     panelTitle.textContent = specialty.title;
     panelDescription.textContent = specialty.description;
 
-    // Cacher toutes les cartes de médecins
     const allDoctorCards = panelDoctors.querySelectorAll(".doctor-card");
     allDoctorCards.forEach((card) => card.classList.add("hidden"));
 
-    // Trier les médecins par ordre alphabétique
     const sortedDoctors = [...specialty.doctors].sort((a, b) => {
       const nameA = a.split("(")[0].trim().split(" ")[1] || a;
       const nameB = b.split("(")[0].trim().split(" ")[1] || b;
       return nameA.localeCompare(nameB);
     });
 
-    // Afficher et réorganiser les médecins dans l'ordre trié
     sortedDoctors.forEach((doctorName, index) => {
       const cleanName = doctorName.split("(")[0].trim();
       const card = panelDoctors.querySelector(`[data-doctor="${cleanName}"]`);
 
       if (card) {
-        // Mettre à jour le nom avec la note si elle existe
         const nameEl = card.querySelector(".doctor-name");
         if (nameEl) {
           nameEl.textContent = doctorName;
         }
 
-        // Définir l'ordre d'affichage avec CSS order
         card.style.order = index;
         card.classList.remove("hidden");
       }
@@ -297,7 +271,6 @@ specialties.forEach((specialty) => {
       panelNoteContainer.classList.add("hidden");
     }
 
-    // Réinitialiser le scroll à 0
     const scrollableContent = panel.querySelector(".overflow-y-auto");
     if (scrollableContent) {
       scrollableContent.scrollTop = 0;
@@ -307,6 +280,9 @@ specialties.forEach((specialty) => {
     overlay.classList.remove("opacity-0", "pointer-events-none");
     overlay.classList.add("opacity-75", "pointer-events-auto");
     document.body.style.overflow = "hidden";
+
+    panelOpen = true; // ← AJOUT
+    window.history.pushState({ panelOpen: true }, ""); // ← AJOUT
   }
 
   function closePanel() {
@@ -314,6 +290,8 @@ specialties.forEach((specialty) => {
     overlay.classList.add("opacity-0", "pointer-events-none");
     overlay.classList.remove("opacity-75", "pointer-events-auto");
     document.body.style.overflow = "";
+
+    panelOpen = false; // ← AJOUT
   }
 
   cards.forEach((card) => {
@@ -323,12 +301,36 @@ specialties.forEach((specialty) => {
     });
   });
 
-  closeBtn?.addEventListener("click", closePanel);
-  overlay?.addEventListener("click", closePanel);
+  closeBtn?.addEventListener("click", () => {
+    closePanel();
+    if (window.history.state?.panelOpen) {
+      // ← AJOUT
+      window.history.back(); // ← AJOUT
+    }
+  });
+
+  overlay?.addEventListener("click", () => {
+    closePanel();
+    if (window.history.state?.panelOpen) {
+      // ← AJOUT
+      window.history.back(); // ← AJOUT
+    }
+  });
+
+  // ← AJOUT : Gérer le bouton retour
+  window.addEventListener("popstate", (event) => {
+    if (panelOpen) {
+      closePanel();
+    }
+  });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !panel.classList.contains("translate-x-full")) {
       closePanel();
+      if (window.history.state?.panelOpen) {
+        // ← AJOUT
+        window.history.back(); // ← AJOUT
+      }
     }
   });
 </script>

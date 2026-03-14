@@ -18,6 +18,8 @@ const cabinets = [
     logo: "imgSlot.png",
     hours: "Lun - Ven: 8h - 18h",
     mapsUrl: "https://maps.app.goo.gl/b86pVfsgpgrCJSX97",
+    phone: "04 78 77 51 43",
+    email: "lyon6@centremedicalparot.fr",
   },
   {
     id: 2,
@@ -29,6 +31,8 @@ const cabinets = [
     logo: "imgSlot.png",
     hours: "Lun - Ven: 8h - 18h",
     mapsUrl: "https://maps.app.goo.gl/dh84879fLTujPNVs6",
+    phone: "04 78 77 51 43",
+    email: "charcot@centremedicalparot.fr",
   },
   {
     id: 3,
@@ -40,6 +44,8 @@ const cabinets = [
     logo: "imgSlot.png",
     hours: "Lun - Ven: 8h - 18h",
     mapsUrl: "https://maps.app.goo.gl/aUro1PMNwxkdr7bdA",
+    phone: "04 78 77 51 43",
+    email: "mermoz@centremedicalparot.fr",
   },
   {
     id: 4,
@@ -51,6 +57,8 @@ const cabinets = [
     logo: "/imgSlot.png",
     hours: "Lun - Ven: 8h - 18h",
     mapsUrl: "https://maps.app.goo.gl/mbuYFTrBJPFdojp3A",
+    phone: "04 78 77 51 43",
+    email: "rilleux@centremedicalparot.fr",
   },
 ];
 
