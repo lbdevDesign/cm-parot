@@ -36,6 +36,7 @@ let activeCabinetIndex = 0;
         cabinets.map((cabinet, index) => (
           <button
             data-cabinet-id={String(cabinet.id)}
+            aria-label={`Sélectionner le cabinet ${cabinet.district}`}
             class={`cabinet-btn cursor-pointer px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
               index === activeCabinetIndex
                 ? "bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white shadow-md"

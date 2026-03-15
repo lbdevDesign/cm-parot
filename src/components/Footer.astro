@@ -1,6 +1,6 @@
 ---
-import Image from 'astro/components/Image.astro';
-import logoFooter from '../assets/logo/logoCMPwhite.svg';
+import Image from "astro/components/Image.astro";
+import logoFooter from "../assets/logo/logoCMPwhite.svg";
 
 const navLinks = [
   { label: "Accueil", href: "/" },
@@ -14,17 +14,10 @@ const legalLinks = [
   { label: "Politique de confidentialité", href: "/confidentialite" },
   // { label: "Conditions d’utilisation", href: "/cgu" },
 ];
-
-const socialLinks = [
-  { label: "Twitter", href: "https://twitter.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Instagram", href: "https://instagram.com" },
-];
 ---
 
 <footer class="bg-gray-950 text-gray-300 pt-16 pb-10">
   <div class="max-w-7xl mx-auto px-6 flex gap-8 md:gap-24 md:flex-row flex-col justify-between">
-
     <!-- Logo + Description -->
     <div class="space-y-4 w-full md:w-100">
       <Image src={logoFooter} alt="Logo" class="w-32 m-auto-0" />
@@ -36,29 +29,33 @@ const socialLinks = [
 
     <!-- Navigation -->
     <div>
-      <h4 class="text-white font-semibold mb-4">Navigation</h4>
+      <p class="text-white font-semibold mb-4">Navigation</p>
       <ul class="space-y-2">
-        {navLinks.map((link) => (
-          <li>
-            <a href={link.href} class="hover:underline">
-              {link.label}
-            </a>
-          </li>
-        ))}
+        {
+          navLinks.map((link) => (
+            <li>
+              <a href={link.href} class="hover:underline">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
 
     <!-- Légal -->
     <div>
-      <h4 class="text-white font-semibold mb-4">Légal</h4>
+      <p class="text-white font-semibold mb-4">Légal</p>
       <ul class="space-y-2">
-        {legalLinks.map((link) => (
-          <li>
-            <a href={link.href} class="hover:underline">
-              {link.label}
-            </a>
-          </li>
-        ))}
+        {
+          legalLinks.map((link) => (
+            <li>
+              <a href={link.href} class="hover:underline">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>

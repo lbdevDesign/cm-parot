@@ -91,6 +91,7 @@ specialties.forEach((specialty) => {
         specialties.map((specialty) => (
           <button
             data-specialty={specialty.id}
+            aria-label={`Voir les détails sur ${specialty.title}`}
             class="relative overflow-hidden specialty-card p-4 bg-white rounded-2xl border-2 border-gray-200 hover:border-[#37A4B3] hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer text-left h-full flex flex-col"
           >
             <div class="w-full rounded-lg bg-gradient-to-br from-[#37A4B3] to-[#268090] p-6 group-hover:from-[#268090] group-hover:to-[#1F6B78] transition-all duration-300 min-h-[100px] flex items-center">
@@ -138,6 +139,7 @@ specialties.forEach((specialty) => {
     <h2 id="panel-title" class="text-2xl text-white font-bold"></h2>
     <button
       id="close-panel"
+      aria-label="Fermer le panneau"
       class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-all"
     >
       <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
