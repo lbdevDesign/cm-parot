@@ -1,8 +1,14 @@
 ---
+import { Image } from "astro:assets"; // ← Bon import
 import Link from "./Link.astro";
 import cabinets from "../data/cabinets.js";
 
-// Préparer les données pour le JS (on extrait le src des images)
+// Importer les images statiquement pour l'optimisation
+import cliniqueDuquesne from "../assets/cabinets/cliniqueDuquesne.jpg";
+import cliniqueDuquesneMob from "../assets/cabinets/cliniqueDuquesneMob.jpg";
+// ... importe toutes tes images
+
+// Préparer les données pour le JS
 const cabinetsJSON = JSON.stringify(
   cabinets.map((c) => ({
     id: String(c.id),
@@ -10,18 +16,11 @@ const cabinetsJSON = JSON.stringify(
     district: c.district,
     description: c.description,
     mapsUrl: c.mapsUrl,
-    image: typeof c.image === "string" ? c.image : c.image?.src,
-    imageMob: typeof c.imageMob === "string" ? c.imageMob : c.imageMob?.src,
+    // Garder seulement les données non-image pour le JSON
   }))
 );
 
 let activeCabinetIndex = 0;
-
-// Pour l'affichage initial
-const firstCabinetImage =
-  typeof cabinets[0].image === "string" ? cabinets[0].image : cabinets[0].image?.src;
-const firstCabinetImageMob =
-  typeof cabinets[0].imageMob === "string" ? cabinets[0].imageMob : cabinets[0].imageMob?.src;
 ---
 
 <section class="w-full scroll-mt-25 pt-10 pb-10" id="cabinets">
@@ -55,20 +54,36 @@ const firstCabinetImageMob =
     >
       <!-- Image en haut -->
       <div class="relative w-full md:h-100 overflow-hidden">
-        <!-- Image desktop (hidden on mobile) -->
-        <img
-          id="cabinet-image-desktop"
-          src={firstCabinetImage}
-          alt={cabinets[0].name}
-          class="hidden md:block w-full h-full object-cover transition-transform duration-300"
-        />
-        <!-- Image mobile (hidden on desktop) -->
-        <img
-          id="cabinet-image-mobile"
-          src={firstCabinetImageMob || firstCabinetImage}
-          alt={cabinets[0].name}
-          class="block md:hidden w-full h-full object-cover transition-transform duration-300"
-        />
+        {
+          cabinets.map((cabinet, index) => (
+            <>
+              {/* Image desktop */}
+              <Image
+                src={cabinet.image}
+                alt={cabinet.name}
+                width={1920}
+                height={800}
+                quality={80}
+                format="webp"
+                loading={index === 0 ? "eager" : "lazy"}
+                class={`hidden md:block w-full h-full object-cover transition-opacity duration-300 cabinet-image-desktop ${index === 0 ? "opacity-100" : "opacity-0 absolute inset-0"}`}
+                data-cabinet-id={String(cabinet.id)}
+              />
+              {/* Image mobile */}
+              <Image
+                src={cabinet.imageMob || cabinet.image}
+                alt={cabinet.name}
+                width={768}
+                height={500}
+                quality={80}
+                format="webp"
+                loading={index === 0 ? "eager" : "lazy"}
+                class={`block md:hidden w-full h-full object-cover transition-opacity duration-300 cabinet-image-mobile ${index === 0 ? "opacity-100" : "opacity-0 absolute inset-0"}`}
+                data-cabinet-id={String(cabinet.id)}
+              />
+            </>
+          ))
+        }
       </div>
 
       <!-- Contenu -->
@@ -105,22 +120,16 @@ const firstCabinetImageMob =
 <script define:vars={{ cabinetsJSON }}>
   const cabinetsData = JSON.parse(cabinetsJSON);
   const buttons = document.querySelectorAll(".cabinet-btn");
-
   const nameEl = document.getElementById("cabinet-name");
   const descriptionEl = document.getElementById("cabinet-description");
   const linkEl = document.getElementById("cabinet-link");
-  const imageDesktopEl = document.getElementById("cabinet-image-desktop");
-  const imageMobileEl = document.getElementById("cabinet-image-mobile");
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", function () {
       const cabinetId = this.getAttribute("data-cabinet-id");
       const selected = cabinetsData.find((c) => String(c.id) === String(cabinetId));
 
-      if (!selected) {
-        console.error("Aucun cabinet trouvé pour ID:", cabinetId);
-        return;
-      }
+      if (!selected) return;
 
       // Mettre à jour les boutons
       buttons.forEach((b) => {
@@ -143,17 +152,24 @@ const firstCabinetImageMob =
       );
       this.classList.remove("bg-white", "text-[#313181]", "border", "border-gray-200");
 
+      // Cacher toutes les images
+      document.querySelectorAll(".cabinet-image-desktop, .cabinet-image-mobile").forEach((img) => {
+        img.classList.add("opacity-0", "absolute", "inset-0");
+        img.classList.remove("opacity-100");
+      });
+
+      // Afficher les images du cabinet sélectionné
+      document.querySelectorAll(`[data-cabinet-id="${cabinetId}"]`).forEach((img) => {
+        if (img.tagName === "IMG") {
+          img.classList.remove("opacity-0", "absolute", "inset-0");
+          img.classList.add("opacity-100");
+        }
+      });
+
       // Mettre à jour le contenu
       nameEl.textContent = selected.name;
       descriptionEl.textContent = selected.description;
       linkEl.href = selected.mapsUrl;
-
-      // Mettre à jour les deux images
-      imageDesktopEl.src = selected.image;
-      imageDesktopEl.alt = selected.name;
-
-      imageMobileEl.src = selected.imageMob || selected.image; // Fallback sur image si imageMob n'existe pas
-      imageMobileEl.alt = selected.name;
     });
   });
 </script>
