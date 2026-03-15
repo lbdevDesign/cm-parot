@@ -1,0 +1,159 @@
+---
+import Link from "./Link.astro";
+import cabinets from "../data/cabinets.js";
+
+// Préparer les données pour le JS (on extrait le src des images)
+const cabinetsJSON = JSON.stringify(
+  cabinets.map((c) => ({
+    id: String(c.id),
+    name: c.name,
+    district: c.district,
+    description: c.description,
+    mapsUrl: c.mapsUrl,
+    image: typeof c.image === "string" ? c.image : c.image?.src,
+    imageMob: typeof c.imageMob === "string" ? c.imageMob : c.imageMob?.src,
+  }))
+);
+
+let activeCabinetIndex = 0;
+
+// Pour l'affichage initial
+const firstCabinetImage =
+  typeof cabinets[0].image === "string" ? cabinets[0].image : cabinets[0].image?.src;
+const firstCabinetImageMob =
+  typeof cabinets[0].imageMob === "string" ? cabinets[0].imageMob : cabinets[0].imageMob?.src;
+---
+
+<section class="w-full scroll-mt-25 pt-10 pb-10" id="cabinets">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl text-[#313181] font-bold text-center mb-4">Nos cabinets</h2>
+    <p class="text-center text-gray-600 mb-12">
+      Retrouvez nos différents cabinets médicaux répartis dans la ville
+    </p>
+
+    <!-- Boutons de sélection -->
+    <div class="flex gap-3 justify-center flex-wrap mb-8">
+      {
+        cabinets.map((cabinet, index) => (
+          <button
+            data-cabinet-id={String(cabinet.id)}
+            class={`cabinet-btn cursor-pointer px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+              index === activeCabinetIndex
+                ? "bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white shadow-md"
+                : "bg-white text-[#313181] border border-gray-200 hover:border-[#37A4B3] hover:shadow-sm"
+            }`}
+          >
+            {cabinet.district}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Carte d'affichage -->
+    <div
+      class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+    >
+      <!-- Image en haut -->
+      <div class="relative w-full md:h-100 overflow-hidden">
+        <!-- Image desktop (hidden on mobile) -->
+        <img
+          id="cabinet-image-desktop"
+          src={firstCabinetImage}
+          alt={cabinets[0].name}
+          class="hidden md:block w-full h-full object-cover transition-transform duration-300"
+        />
+        <!-- Image mobile (hidden on desktop) -->
+        <img
+          id="cabinet-image-mobile"
+          src={firstCabinetImageMob || firstCabinetImage}
+          alt={cabinets[0].name}
+          class="block md:hidden w-full h-full object-cover transition-transform duration-300"
+        />
+      </div>
+
+      <!-- Contenu -->
+      <div class="p-8">
+        <div class="flex items-start justify-between gap-4 mb-4">
+          <div class="flex-1">
+            <h3
+              id="cabinet-name"
+              class="text-center md:text-left text-2xl font-bold text-[#313181] mb-2"
+            >
+              {cabinets[0].name}
+            </h3>
+            <p id="cabinet-description" class="text-center md:text-left text-gray-600">
+              {cabinets[0].description}
+            </p>
+            <p class="text-center md:text-left text-gray-600 mt-2">{cabinets[0].hours}</p>
+          </div>
+        </div>
+
+        <Link
+          id="cabinet-link"
+          href={cabinets[0].mapsUrl}
+          target="_blank"
+          variant="external"
+          className="w-full justify-center md:inline-flex md:w-auto"
+        >
+          Voir sur Google Maps
+        </Link>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ cabinetsJSON }}>
+  const cabinetsData = JSON.parse(cabinetsJSON);
+  const buttons = document.querySelectorAll(".cabinet-btn");
+
+  const nameEl = document.getElementById("cabinet-name");
+  const descriptionEl = document.getElementById("cabinet-description");
+  const linkEl = document.getElementById("cabinet-link");
+  const imageDesktopEl = document.getElementById("cabinet-image-desktop");
+  const imageMobileEl = document.getElementById("cabinet-image-mobile");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const cabinetId = this.getAttribute("data-cabinet-id");
+      const selected = cabinetsData.find((c) => String(c.id) === String(cabinetId));
+
+      if (!selected) {
+        console.error("Aucun cabinet trouvé pour ID:", cabinetId);
+        return;
+      }
+
+      // Mettre à jour les boutons
+      buttons.forEach((b) => {
+        b.classList.remove(
+          "bg-gradient-to-br",
+          "from-[#37A4B3]",
+          "to-[#268090]",
+          "text-white",
+          "shadow-md"
+        );
+        b.classList.add("bg-white", "text-[#313181]", "border", "border-gray-200");
+      });
+
+      this.classList.add(
+        "bg-gradient-to-br",
+        "from-[#37A4B3]",
+        "to-[#268090]",
+        "text-white",
+        "shadow-md"
+      );
+      this.classList.remove("bg-white", "text-[#313181]", "border", "border-gray-200");
+
+      // Mettre à jour le contenu
+      nameEl.textContent = selected.name;
+      descriptionEl.textContent = selected.description;
+      linkEl.href = selected.mapsUrl;
+
+      // Mettre à jour les deux images
+      imageDesktopEl.src = selected.image;
+      imageDesktopEl.alt = selected.name;
+
+      imageMobileEl.src = selected.imageMob || selected.image; // Fallback sur image si imageMob n'existe pas
+      imageMobileEl.alt = selected.name;
+    });
+  });
+</script>
