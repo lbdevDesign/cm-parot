@@ -44,6 +44,7 @@ function getSpecialtyLabels(specialtyIds: string[]): string {
                   <Image
                     src={member.photo}
                     alt={member.name}
+                    loading="lazy"
                     class="w-full h-full object-cover object-top"
                   />
                 ) : (
@@ -52,6 +53,7 @@ function getSpecialtyLabels(specialtyIds: string[]): string {
                     alt={member.name}
                     width={300}
                     height={300}
+                    loading="lazy"
                     class="w-full h-full object-cover object-center"
                   />
                 )}

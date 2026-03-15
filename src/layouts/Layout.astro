@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import NavbarHome from "@/components/NavbarHome.astro";
 import Footer from "@/components/Footer.astro";
+import "../styles/fonts.css";
 import { SEO } from "astro-seo";
 
 // Récupérer l'URL actuelle
@@ -49,14 +50,6 @@ const fullTitle = title.includes("Centre Médical Parot")
 
     <meta name="generator" content={Astro.generator} />
     <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Preconnect fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&family=Onest:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
 
     <SEO
       title={fullTitle}
