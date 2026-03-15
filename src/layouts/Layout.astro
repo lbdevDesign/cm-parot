@@ -1,12 +1,12 @@
 ---
-import "../styles/global.css"
-import NavbarHome from "@/components/NavbarHome.astro"
-import Footer from "@/components/Footer.astro"
-import { SEO } from 'astro-seo';
+import "../styles/global.css";
+import NavbarHome from "@/components/NavbarHome.astro";
+import Footer from "@/components/Footer.astro";
+import { SEO } from "astro-seo";
 
 // Récupérer l'URL actuelle
 const { pathname } = Astro.url;
-const isHome = pathname === '/' || pathname === '';
+const isHome = pathname === "/" || pathname === "";
 
 interface Props {
   title?: string;
@@ -15,72 +15,149 @@ interface Props {
   noindex?: boolean;
 }
 
-const siteName = "Cabinet Médical Partenaire";
+const siteName = "Centre Médical Parot";
+const siteUrl = "https://centremedicalparot.fr";
 
-const { 
-  title = "Titre par défaut de ton site",
-  description = "Description par défaut de ton site",
+const {
+  title = "Centre Médical Parot - Pneumologie Lyon, Rillieux & Sainte-Foy-lès-Lyon",
+  description = "Cabinet de pneumologie à Lyon 6, Mermoz, Rillieux-la-Pape et Sainte-Foy-lès-Lyon. Spécialistes en maladies respiratoires, allergologie, troubles du sommeil, oncologie thoracique.",
   image = "/images/og-image.jpg",
-  noindex = false
+  noindex = false,
 } = Astro.props;
+
+// Construire l'URL canonique
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+
+// Titre complet avec le nom du site
+const fullTitle = title.includes("Centre Médical Parot")
+  ? title
+  : `${title} | Centre Médical Parot`;
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&family=Onest:wght@100..900&display=swap" rel="stylesheet">
-		<title>Centre médical Parot</title>
-		<SEO
-			title={title}
-			description={description}
-			noindex={noindex}
-			nofollow={noindex}
-			openGraph={{
-				basic: {
-					title: title,
-					type: "website",
-					image: image,
-				},
-					optional: {
-					siteName: siteName,
-					description: description,
-					locale: "fr_FR",
-				},
-			}}
-			twitter={{
-				card: "summary_large_image",
-				title: title,
-				description: description,
-				image: image,
-			}}
-			extend={{
-				link: [{ rel: "icon", href: "/favicon.svg" }],
-				meta: [
-					{ name: "theme-color", content: "#313181" },
-				],
-			}}
-		/>
-	</head>
-	<body class="bg-[--brand-surface]">
-		<NavbarHome alwaysScrolled={!isHome} />
-			<main>
-				<slot />
-			</main>
-		<Footer />
-	</body>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <meta name="generator" content={Astro.generator} />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Preconnect fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&family=Onest:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <SEO
+      title={fullTitle}
+      description={description}
+      canonical={canonicalURL}
+      noindex={noindex}
+      nofollow={noindex}
+      openGraph={{
+        basic: {
+          title: fullTitle,
+          type: "website",
+          image: new URL(image, siteUrl).href,
+          url: canonicalURL,
+        },
+        optional: {
+          siteName: siteName,
+          description: description,
+          locale: "fr_FR",
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: fullTitle,
+        description: description,
+        image: new URL(image, siteUrl).href,
+      }}
+      extend={{
+        link: [{ rel: "sitemap", type: "application/xml", href: "/sitemap.xml" }],
+        meta: [
+          { name: "theme-color", content: "#313181" },
+          { name: "robots", content: noindex ? "noindex, nofollow" : "index, follow" },
+          {
+            name: "keywords",
+            content:
+              "pneumologue lyon, pneumologie lyon 6, cabinet pneumologie rillieux, allergologue lyon, troubles sommeil lyon, apnée du sommeil, fibroscopie bronchique, oncologie thoracique",
+          },
+          { name: "geo.region", content: "FR-69" },
+          { name: "geo.placename", content: "Lyon" },
+          { name: "geo.position", content: "45.7640;4.8357" },
+          { name: "ICBM", content: "45.7640, 4.8357" },
+        ],
+      }}
+    />
+
+    {
+      isHome && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MedicalBusiness",
+            "@id": siteUrl,
+            name: "Centre Médical Parot",
+            url: siteUrl,
+            logo: new URL("/logo.png", siteUrl).href,
+            image: new URL(image, siteUrl).href,
+            description: description,
+            telephone: "+33478775143",
+            email: "secretaria@centremedicalparot.fr",
+            medicalSpecialty: [
+              "Pulmonology",
+              "Allergy and Immunology",
+              "Sleep Medicine",
+              "Thoracic Oncology",
+            ],
+            address: [
+              {
+                "@type": "PostalAddress",
+                streetAddress: "54 rue Duquesne",
+                addressLocality: "Lyon",
+                postalCode: "69006",
+                addressCountry: "FR",
+              },
+              {
+                "@type": "PostalAddress",
+                streetAddress: "11 rue Edouard Nieuport",
+                addressLocality: "Lyon",
+                postalCode: "69008",
+                addressCountry: "FR",
+              },
+            ],
+            sameAs: ["https://www.doctolib.fr/cabinet-medical/lyon/centre-medical-parot"],
+          })}
+        />
+      )
+    }
+  </head>
+  <body class="bg-[--brand-surface]">
+    <NavbarHome alwaysScrolled={!isHome} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>
