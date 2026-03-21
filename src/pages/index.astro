@@ -6,6 +6,7 @@ import OurTeam from "@/components/OurTeam.astro";
 import FAQ from "@/components/FAQ.astro";
 import cabinets from "@/data/cabinets.js";
 import ContactBubble from "@/components/ContactBubble.astro";
+import Partners from "@/components/Partners.astro";
 import Specialties from "@/components/Specialties.astro";
 
 const title = "Centre médical Parot - Votre santé, notre priorité";
@@ -19,6 +20,7 @@ const image = "/cmParrot_accueil.jpg";
   <Specialties />
   <OurOffices client:load cabinets={cabinets} />
   <OurTeam />
+  <Partners />
   <FAQ />
   <ContactBubble />
 </Layout>

@@ -14,7 +14,8 @@ const team = [
     url: "https://www.doctolib.fr/pneumologue/lyon/pierre-bombaron",
     photo: pierreBombaron,
     specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
-    description: null, // À compléter
+    description:
+      "Le Dr Bombaron prend en charge les pathologies respiratoires de l'adulte et de l'adolescent à partir de 12 ans. Il assure en consultation le diagnostic et le suivi des maladies respiratoires chroniques, de l'oncologie thoracique et des syndromes d'apnées du sommeil. Il exerce au cabinet de la rue Duquesne, à la clinique Lyon-Nord Rillieux et à l'Hôpital Privé Jean Mermoz où il participe à la prise en charge des pathologies respiratoires et oncologiques, dans le cadre de bilans spécialisés ou de situations aiguës.",
   },
   {
     name: "Dr VIAL-DUPUY Amandine",
@@ -52,7 +53,8 @@ const team = [
     url: "https://www.doctolib.fr/pneumologue/lyon/bruno-caillet",
     photo: brunoCaillet,
     specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
-    description: null, // À compléter
+    description:
+      "Le Dr Caillet prend en charge les pathologies respiratoires de l'adolescent à partir de 12 ans et de l'adulte. Il assure en consultation (Hôpital Privé Jean Mermoz et cabinet rue Duquesne) le diagnostic et le suivi des maladies respiratoires chroniques et des syndromes d'apnées du sommeil. Il exerce à l'Hôpital Privé Jean Mermoz, où il participe à la prise en charge des pathologies respiratoires et oncologiques, dans le cadre de bilans spécialisés ou de situations aiguës.",
   },
   {
     name: "Dr BOULEDRAK Karima",
@@ -63,7 +65,8 @@ const team = [
     specialtyNotes: {
       sommeil: "(Polysomnographie)",
     },
-    description: null, // À compléter
+    description:
+      "Le Dr Bouledrak prend en charge les pathologies respiratoires de l'adolescent à partir de 12 ans et de l'adulte. Elle assure le diagnostic et le suivi des maladies respiratoires, ainsi que la prise en charge de l'oncologie thoracique et des troubles respiratoires du sommeil, notamment l'apnée du sommeil. Elle exerce également à l'Hôpital Privé Jean Mermoz, où elle participe à la prise en charge des pathologies respiratoires et oncologiques, dans le cadre de bilans spécialisés ou de situations aiguës.",
   },
   {
     name: "Dr PIEGAY Fabrice",
@@ -71,7 +74,8 @@ const team = [
     url: "https://www.doctolib.fr/pneumologue/lyon/fabrice-piegay",
     photo: fabricePiegay,
     specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
-    description: null, // À compléter
+    description:
+      "Le Dr Piégay exerce la pneumologie générale de l'adulte (à partir de 16 ans). Il assure le diagnostic et le suivi des maladies respiratoires notamment chroniques, en particulier asthme, pathologies interstitielles et oncologie thoracique.",
   },
   {
     name: "Dr VEAUDOR Martin",
@@ -82,7 +86,8 @@ const team = [
     specialtyNotes: {
       fibroscopie: "(EBUS - Échoendoscopie)",
     },
-    description: null, // À compléter
+    description:
+      "Le Dr Veaudor prend en charge les pathologies respiratoires de l'adulte. Il assure en consultation le diagnostic et le suivi des maladies respiratoires chroniques et des syndromes d'apnées du sommeil. Il exerce à l'Hôpital Privé Jean Mermoz, où il participe à la prise en charge des pathologies respiratoires et oncologiques, dans le cadre de bilans spécialisés ou de situations aiguës. Il assure également une prise en charge complète des cancers pulmonaires à la Clinique Charcot.",
   },
   {
     name: "Dr HANIN Nelson",
@@ -106,7 +111,8 @@ const team = [
     specialtyNotes: {
       sommeil: "(Polysomnographie)",
     },
-    description: null, // À compléter
+    description:
+      "Le Dr Jouan prend en charge les pathologies respiratoires de l'adolescent à partir de 12 ans et de l'adulte. Elle assure en consultation le diagnostic et le suivi des maladies respiratoires chroniques et des syndromes d'apnées du sommeil. Elle exerce à l'Hôpital Privé Jean Mermoz, où elle participe à la prise en charge des pathologies respiratoires et oncologiques, dans le cadre de bilans spécialisés ou de situations aiguës.",
   },
 ];
 
