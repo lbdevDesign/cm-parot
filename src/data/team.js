@@ -14,6 +14,7 @@ const team = [
     url: "https://www.doctolib.fr/pneumologue/lyon/pierre-bombaron",
     photo: pierreBombaron,
     specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
+    description: null, // À compléter
   },
   {
     name: "Dr VIAL-DUPUY Amandine",
@@ -24,16 +25,26 @@ const team = [
     specialtyNotes: {
       "pneumo-pediatrie": "(à partir de 6 ans)",
     },
+    description:
+      "Le Dr Vial-Dupuy pratique la pneumologie et l'allergologie générale chez l'enfant à partir de 6 ans et chez l'adulte. Elle prend en charge les pathologies respiratoires, en particulier l'asthme et l'apnée du sommeil, mais aussi les pathologies allergologiques telles que les allergies respiratoires, alimentaires, ou médicamenteuses.",
   },
   {
     name: "Dr WATTIEZ Annick",
     displayName: "Dr Wattiez",
     url: "https://www.doctolib.fr/pneumologue/lyon/annick-wattiez",
     photo: annickWattiez,
-    specialties: ["pneumologie-generale", "pneumo-pediatrie", "allergologie", "sommeil"],
+    specialties: [
+      "pneumologie-generale",
+      "pneumo-pediatrie",
+      "allergologie",
+      "fibroscopie",
+      "sommeil",
+    ],
     specialtyNotes: {
       "pneumo-pediatrie": "(à partir de 10 ans)",
     },
+    description:
+      "Le Dr Wattiez pratique la pneumologie et l'allergologie respiratoire chez l'adulte et chez l'enfant à partir de 10 ans. Elle prend en charge les pathologies respiratoires en général avec une spécificité dans l'apnée du sommeil.",
   },
   {
     name: "Dr CAILLET Bruno",
@@ -41,6 +52,7 @@ const team = [
     url: "https://www.doctolib.fr/pneumologue/lyon/bruno-caillet",
     photo: brunoCaillet,
     specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
+    description: null, // À compléter
   },
   {
     name: "Dr BOULEDRAK Karima",
@@ -48,6 +60,10 @@ const team = [
     url: "https://www.doctolib.fr/pneumologue/lyon/karima-bouledrak",
     photo: karimaBouledrak,
     specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
+    specialtyNotes: {
+      sommeil: "(Polysomnographie)",
+    },
+    description: null, // À compléter
   },
   {
     name: "Dr PIEGAY Fabrice",
@@ -55,6 +71,7 @@ const team = [
     url: "https://www.doctolib.fr/pneumologue/lyon/fabrice-piegay",
     photo: fabricePiegay,
     specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
+    description: null, // À compléter
   },
   {
     name: "Dr VEAUDOR Martin",
@@ -62,6 +79,10 @@ const team = [
     url: "https://www.doctolib.fr/pneumologue/lyon/martin-veaudor",
     photo: martinVeaudor,
     specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
+    specialtyNotes: {
+      fibroscopie: "(EBUS - Échoendoscopie)",
+    },
+    description: null, // À compléter
   },
   {
     name: "Dr HANIN Nelson",
@@ -71,7 +92,10 @@ const team = [
     specialties: ["pneumologie-generale", "pneumo-pediatrie", "fibroscopie", "sommeil"],
     specialtyNotes: {
       "pneumo-pediatrie": "(à partir de 16 ans)",
+      sommeil: "(Polysomnographie)",
     },
+    description:
+      "Le Dr Hanin pratique la pneumologie générale chez l'enfant à partir de 12 ans et chez l'adulte. Il prend en charge les pathologies respiratoires en général avec une spécificité dans l'apnée du sommeil et les appareillages nocturnes avancés.",
   },
   {
     name: "Dr JOUAN Mathilde",
@@ -79,6 +103,10 @@ const team = [
     url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/mathilde-jouan",
     photo: null,
     specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
+    specialtyNotes: {
+      sommeil: "(Polysomnographie)",
+    },
+    description: null, // À compléter
   },
 ];
 

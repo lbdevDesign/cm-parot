@@ -3,13 +3,14 @@ import team from "../data/team.js";
 import Link from "./Link.astro";
 import { Image } from "astro:assets";
 import emptyAvatar from "../assets/medecins/emptyPP.png";
+
 interface Specialty {
   id: string;
   title: string;
   shortDesc: string;
   description: string;
   specialNote?: string;
-  doctors?: string[]; // Ajouté ici
+  doctors?: string[];
 }
 
 const specialties: Specialty[] = [
@@ -40,21 +41,25 @@ const specialties: Specialty[] = [
     title: "Oncologie thoracique",
     shortDesc: "Diagnostic et suivi des cancers du poumon",
     description:
-      "L'oncologie thoracique concerne le diagnostic, le suivi et la prise en charge des cancers du poumon. Nous travaillons sur 3 sites (Hôpital privé Jean Mermoz, Clinique Charcot et Polyclinique de Rillieux) en collaboration avec des équipes de chirurgie thoracique et de radiothérapie pour que chaque patient bénéficie d'un accompagnement personnalisé tout au long de son parcours de soins.",
+      "L'expertise du centre médical Parot permet d'assurer le diagnostic et la prise en charge thérapeutique des cancers du poumon. Nous travaillons sur 3 sites hospitaliers répartis sur la métropole de Lyon (Hôpital privé Jean Mermoz, Clinique Charcot et Polyclinique de Rillieux) en collaboration avec des équipes de chirurgie thoracique et de radiothérapie pour que chaque patient bénéficie d'un accompagnement personnalisé de qualité tout au long de son parcours de soins.",
+    specialNote:
+      "En cas de suspicion de cancer pulmonaire, vous pouvez réaliser une demande de consultation urgente afin d'obtenir un rendez-vous dans un délai de quelques jours.",
   },
   {
     id: "fibroscopie",
     title: "Fibroscopie bronchique",
-    shortDesc: "Exploration de l'intérieur des bronches",
+    shortDesc: "Exploration de l'intérieur des voies respiratoires",
     description:
-      "La fibroscopie bronchique est un examen permettant d'explorer l'intérieur des bronches à l'aide d'un endoscope souple. Cet examen est indiqué pour le bilan de certaines pathologies pulmonaires, et notamment pour réaliser des prélèvements biopsiques ou des analyses microbiologiques. Il peut être proposé selon votre préférence sous anesthésie locale ou sous anesthésie générale. Les fibroscopies bronchiques sont réalisées sur 3 sites : Hôpital privé Jean Mermoz, Clinique Charcot et Polyclinique de Rillieux.",
+      "La fibroscopie bronchique est un examen permettant d'explorer l'intérieur des voies respiratoires (trachée et bronches) à l'aide d'un endoscope souple. Cet examen est indiqué pour le bilan diagnostique de certaines pathologies pulmonaires, notamment d'origine tumorale ou infectieuse. L'examen permet de réaliser des prélèvements pour des recherches à visée microbiologique et des biopsies pour analyse anatomopathologique. Il peut être réalisé selon votre préférence sous anesthésie locale ou sous anesthésie générale avec un délai de moins d'une semaine pour les indications urgentes. Les fibroscopies bronchiques sont réalisées sur 3 sites : Hôpital privé Jean Mermoz, Clinique Charcot et Polyclinique de Rillieux.",
+    specialNote:
+      "L'hôpital Privé Jean Mermoz est équipé pour la réalisation des échoendoscopies bronchiques (EBUS). Le Dr Veaudor pratique également l'échoendoscopie.",
   },
   {
     id: "sommeil",
     title: "Troubles respiratoires du sommeil",
     shortDesc: "Diagnostic du syndrome d'apnées du sommeil",
     description:
-      "Les troubles respiratoires du sommeil, comme le syndrome d'apnées du sommeil, peuvent avoir un impact important sur la santé et la qualité de vie. Ils se manifestent souvent par des ronflements, une fatigue persistante ou une somnolence dans la journée. Un bilan spécialisé permet d'établir le diagnostic et de proposer des solutions efficaces pour retrouver un sommeil réparateur. Notre centre propose des examens diagnostics en ambulatoire (nuit à domicile) par polygraphie ventilatoire ou polysomnographie.",
+      "Les troubles respiratoires du sommeil, comme le syndrome d'apnées du sommeil, peuvent avoir un impact important sur la santé et la qualité de vie. Ils se manifestent souvent par des ronflements, une fatigue persistante ou une somnolence dans la journée. Un bilan spécialisé permet d'établir le diagnostic et de proposer des solutions efficaces pour retrouver un sommeil réparateur. Notre centre propose des examens diagnostics en ambulatoire (nuit à domicile) et également en hospitalisation (Hôpital Privé Jean Mermoz) par polygraphie ventilatoire ou polysomnographie (polygraphie ventilatoire + électro-encéphalogramme).",
     specialNote: "Pour une Polysomnographie : Dr Wattiez, Dr Hanin, Dr Jouan, Dr Bouledrak",
   },
 ];
@@ -64,7 +69,6 @@ specialties.forEach((specialty) => {
   specialty.doctors = team
     .filter((doctor) => doctor.specialties.includes(specialty.id))
     .map((doctor) => {
-      // Solution: cast en Record<string, string>
       const notes = doctor.specialtyNotes as Record<string, string> | undefined;
       const note = notes?.[specialty.id];
       return note ? `${doctor.displayName} ${note}` : doctor.displayName;
@@ -92,9 +96,9 @@ specialties.forEach((specialty) => {
           <button
             data-specialty={specialty.id}
             aria-label={`Voir les détails sur ${specialty.title}`}
-            class="relative overflow-hidden specialty-card p-4 bg-white rounded-2xl border-2 border-gray-200 hover:border-[#37A4B3] hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer text-left h-full flex flex-col"
+            class="relative overflow-hidden specialty-card p-4 bg-white rounded-2xl border-2 border-gray-200 hover:border-[#37A4B3] hover:shadow-xl transition-all duration-300 group cursor-pointer text-left h-full flex flex-col"
           >
-            <div class="w-full rounded-lg bg-gradient-to-br from-[#37A4B3] to-[#268090] p-6 group-hover:from-[#268090] group-hover:to-[#1F6B78] transition-all duration-300 min-h-[100px] flex items-center">
+            <div class="w-full rounded-lg bg-gradient-to-br from-[#37A4B3] to-[#268090] p-6 group-hover:from-[#268090] group-hover:to-[#1F6B78] transition-all duration-300 min-h-[100px] flex items-center relative overflow-hidden">
               <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-white/10 group-hover:scale-110 transition-transform duration-300" />
               <div class="absolute -right-2 top-12 w-16 h-16 rounded-full bg-white/5 group-hover:scale-110 transition-transform duration-300" />
               <h3 class="text-xl font-bold text-white relative z-10">{specialty.title}</h3>
@@ -131,8 +135,11 @@ specialties.forEach((specialty) => {
 <div
   id="specialty-panel"
   class="fixed inset-y-0 right-0 w-full md:w-[600px] bg-white shadow-2xl z-[200] transform translate-x-full transition-transform duration-300 flex flex-col"
+  role="dialog"
+  aria-labelledby="panel-title"
+  aria-modal="true"
 >
-  <!-- Header du panneau (NON SCROLLABLE) -->
+  <!-- Header du panneau -->
   <div
     class="flex-shrink-0 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white px-6 py-6 flex justify-between items-center"
   >
@@ -163,7 +170,7 @@ specialties.forEach((specialty) => {
     <!-- Note spéciale si existe -->
     <div id="panel-note-container" class="hidden">
       <div class="bg-[#37A4B3] bg-opacity-10 border-l-4 border-[#37A4B3] p-4 rounded">
-        <p id="panel-note" class="text-sm text-white"></p>
+        <p id="panel-note" class="text-gray-700 text-sm"></p>
       </div>
     </div>
 
@@ -171,24 +178,28 @@ specialties.forEach((specialty) => {
     <div>
       <h3 class="text-lg font-bold text-[#313181] mb-4">Praticiens disponibles</h3>
       <div id="panel-doctors" class="space-y-3 flex flex-col">
-        <!-- Template pré-rendu pour chaque médecin -->
         {
           team.map((doctor) => (
             <div class="doctor-card hidden" data-doctor={doctor.displayName}>
               <div class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-all group">
                 <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-[#37A4B3]/20 group-hover:border-[#37A4B3] flex-shrink-0 flex items-center justify-center transition-colors">
                   {doctor.photo ? (
-                    <img
-                      src={doctor.photo.src}
+                    <Image
+                      src={doctor.photo}
                       alt={doctor.displayName}
+                      width={48}
+                      height={48}
+                      quality={80}
+                      loading="lazy"
                       class="w-full h-full object-cover object-top"
                     />
                   ) : (
                     <Image
                       src={emptyAvatar}
                       alt={doctor.name}
-                      width={300}
-                      height={300}
+                      width={48}
+                      height={48}
+                      loading="lazy"
                       class="w-full h-full object-cover object-center"
                     />
                   )}
@@ -200,7 +211,7 @@ specialties.forEach((specialty) => {
                 </div>
                 {doctor.url && (
                   <div class="flex-shrink-0">
-                    <Link href={doctor.url} target="_blank" variant="external" className="">
+                    <Link href={doctor.url} target="_blank" variant="external">
                       Prendre RDV
                     </Link>
                   </div>
@@ -218,6 +229,7 @@ specialties.forEach((specialty) => {
 <div
   id="panel-overlay"
   class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[199] opacity-0 pointer-events-none transition-opacity duration-300"
+  aria-hidden="true"
 >
 </div>
 
@@ -233,7 +245,7 @@ specialties.forEach((specialty) => {
   const panelNote = document.getElementById("panel-note");
   const panelNoteContainer = document.getElementById("panel-note-container");
 
-  let panelOpen = false; // ← AJOUT
+  let panelOpen = false;
 
   function openPanel(specialtyId) {
     const specialty = specialties.find((s) => s.id === specialtyId);
@@ -283,8 +295,8 @@ specialties.forEach((specialty) => {
     overlay.classList.add("opacity-75", "pointer-events-auto");
     document.body.style.overflow = "hidden";
 
-    panelOpen = true; // ← AJOUT
-    window.history.pushState({ panelOpen: true }, ""); // ← AJOUT
+    panelOpen = true;
+    window.history.pushState({ panelOpen: true }, "");
   }
 
   function closePanel() {
@@ -293,7 +305,7 @@ specialties.forEach((specialty) => {
     overlay.classList.remove("opacity-75", "pointer-events-auto");
     document.body.style.overflow = "";
 
-    panelOpen = false; // ← AJOUT
+    panelOpen = false;
   }
 
   cards.forEach((card) => {
@@ -306,20 +318,17 @@ specialties.forEach((specialty) => {
   closeBtn?.addEventListener("click", () => {
     closePanel();
     if (window.history.state?.panelOpen) {
-      // ← AJOUT
-      window.history.back(); // ← AJOUT
+      window.history.back();
     }
   });
 
   overlay?.addEventListener("click", () => {
     closePanel();
     if (window.history.state?.panelOpen) {
-      // ← AJOUT
-      window.history.back(); // ← AJOUT
+      window.history.back();
     }
   });
 
-  // ← AJOUT : Gérer le bouton retour
   window.addEventListener("popstate", (event) => {
     if (panelOpen) {
       closePanel();
@@ -330,8 +339,7 @@ specialties.forEach((specialty) => {
     if (e.key === "Escape" && !panel.classList.contains("translate-x-full")) {
       closePanel();
       if (window.history.state?.panelOpen) {
-        // ← AJOUT
-        window.history.back(); // ← AJOUT
+        window.history.back();
       }
     }
   });
