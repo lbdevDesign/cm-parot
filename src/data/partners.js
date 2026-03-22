@@ -1,21 +1,21 @@
-import logoDoctolib from "../assets/partners/doctolib.jpg";
-import logoHCL from "../assets/partners/hcl.jpg";
-import logoARS from "../assets/partners/ars.jpg";
+import logoMermoz from "../assets/partners/hopitalMermozLogo.jpg";
+import logoRillieux from "../assets/partners/cliniqueRillieuxLogo.jpg";
+import logoCharcot from "../assets/partners/cliniqueCharcotLogo.jpg";
 
 export default [
   {
-    name: "Doctolib",
-    logo: logoDoctolib,
-    url: "https://www.doctolib.fr",
+    name: "Hôpital privé Jean Mermoz",
+    logo: logoMermoz,
+    url: "https://polycliniquelyonnord.vivalto-sante.com",
   },
   {
-    name: "Hôpital Croix-Rousse",
-    logo: logoHCL,
-    url: "https://www.chu-lyon.fr",
+    name: "Polyclinique Lyon Nord",
+    logo: logoRillieux,
+    url: "https://polycliniquelyonnord.vivalto-sante.com",
   },
   {
-    name: "ARS Auvergne-Rhône-Alpes",
-    logo: logoARS,
-    url: "https://www.auvergne-rhone-alpes.ars.sante.fr",
+    name: "Clinique Charcot",
+    logo: logoCharcot,
+    url: "https://www.clinique-charcot.fr",
   },
 ];
