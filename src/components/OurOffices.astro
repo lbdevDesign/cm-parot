@@ -40,7 +40,7 @@ let activeCabinetIndex = 0;
             class={`cabinet-btn cursor-pointer px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
               index === activeCabinetIndex
                 ? "bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white shadow-md"
-                : "bg-white text-[#313181] border border-gray-200 hover:border-[#37A4B3] hover:shadow-sm"
+                : "bg-white text-[#313181] border border-[#37A4B3] hover:shadow-sm hover:bg-gray-100 hover:from-[#37A4B3] hover:to-[#268090]"
             }`}
           >
             {cabinet.district}
@@ -134,24 +134,31 @@ let activeCabinetIndex = 0;
 
       // Mettre à jour les boutons
       buttons.forEach((b) => {
+        // reset état inactif
         b.classList.remove(
           "bg-gradient-to-br",
           "from-[#37A4B3]",
           "to-[#268090]",
           "text-white",
-          "shadow-md"
+          "shadow-md",
+          "border-transparent"
         );
-        b.classList.add("bg-white", "text-[#313181]", "border", "border-gray-200");
+
+        b.classList.add("bg-white", "text-[#313181]", "border", "border-[#37A4B3]");
       });
 
+      // état actif
       this.classList.add(
         "bg-gradient-to-br",
         "from-[#37A4B3]",
         "to-[#268090]",
         "text-white",
-        "shadow-md"
+        "shadow-md",
+        "border",
+        "border-transparent"
       );
-      this.classList.remove("bg-white", "text-[#313181]", "border", "border-gray-200");
+
+      this.classList.remove("bg-white", "text-[#313181]", "border-[#37A4B3]");
 
       // Cacher toutes les images
       document.querySelectorAll(".cabinet-image-desktop, .cabinet-image-mobile").forEach((img) => {
