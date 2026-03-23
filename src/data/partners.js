@@ -6,7 +6,7 @@ export default [
   {
     name: "Hôpital privé Jean Mermoz",
     logo: logoMermoz,
-    url: "https://polycliniquelyonnord.vivalto-sante.com",
+    url: "https://hopital-prive-jean-mermoz-lyon.ramsaysante.fr",
   },
   {
     name: "Polyclinique Lyon Nord",
