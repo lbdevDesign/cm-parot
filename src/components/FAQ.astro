@@ -3,7 +3,7 @@ const faq = [
   {
     id: 1,
     question: "Quelle est l'adresse de Centre Médical Parot ?",
-    answer: `<p>Centre Médical Parot reçoit des patients aux adresses suivantes :</p>
+    answer: `<p><strong>Centre Médical Parot reçoit des patients aux adresses suivantes :</strong></p>
 
     <ul>
       <li>54 Rue Duquesne, 69006 Lyon</li>
@@ -101,23 +101,27 @@ const faq = [
   }
 
   /* Style des listes dans les réponses */
-  details ul {
+  details :global(ul) {
     list-style: none;
     padding-left: 0;
     margin-top: 0.75rem;
   }
 
-  details ul li {
+  details :global(ul li) {
     padding: 0.5rem 0;
     padding-left: 1.5rem;
     position: relative;
   }
 
-  details ul li::before {
-    content: "→";
+  details :global(ul li::before) {
+    content: "";
     position: absolute;
     left: 0;
-    color: #37a4b3;
-    font-weight: bold;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: #37a4b3;
+    border-radius: 50%;
   }
 </style>

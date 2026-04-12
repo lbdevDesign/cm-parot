@@ -17,10 +17,5 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  <url>
-    <loc>https://centremedicalparot.fr/confidentialite</loc>
-    <lastmod>2025-03-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+
 </urlset>

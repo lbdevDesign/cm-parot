@@ -18,9 +18,14 @@ const firstCabinet = cabinets[0];
 
 <section class="relative min-h-screen flex items-center py-20 bg-[#313181]" id="contact">
   <div class="relative z-10 w-full max-w-7xl mx-auto pt-10 mt-10 px-6">
-    <div class="grid md:grid-cols-2 gap-12 items-start">
-      <!-- Partie gauche : Informations -->
-      <div class="space-y-8">
+    <div class="grid min-[1080px]:grid-cols-2 gap-16 items-stretch w-full">
+      <!-- Image -->
+      <div class="order-2 min-[1080px]:order-1 self-stretch min-[1080px]:h-auto h-64">
+        <img src="/acceuil-parot.jpg" alt="Centre Médical Parot" class="w-full h-full rounded-2xl object-cover" />
+      </div>
+
+      <!-- Informations de contact -->
+      <div class="space-y-8 order-1 min-[1080px]:order-2">
         <div>
           <h1 class="text-3xl md:text-5xl text-white md:text-6xl font-bold mb-4">
             Une question ?<br />
@@ -37,7 +42,7 @@ const firstCabinet = cabinets[0];
               cabinets.map((cabinet, index) => (
                 <button
                   data-cabinet-id={String(cabinet.id)}
-                  class={`cabinet-selector px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                  class={`cabinet-selector cursor-pointer px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                     index === 0
                       ? "bg-white text-[#313181] shadow-md"
                       : "bg-white/10 text-white border border-white/20 hover:bg-white/20"
@@ -114,61 +119,6 @@ const firstCabinet = cabinets[0];
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Partie droite : Formulaire -->
-      <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-10">
-        <h2 class="text-2xl font-bold text-[#313181] mb-6">Envoyez-nous un message</h2>
-
-        <form class="space-y-5">
-          <div>
-            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-              Nom complet
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#37A4B3] focus:border-transparent transition"
-              placeholder="Jean Dupont"
-            />
-          </div>
-
-          <div>
-            <label for="email-input" class="block text-sm font-medium text-gray-700 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email-input"
-              name="email"
-              required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#37A4B3] focus:border-transparent transition"
-              placeholder="jean.dupont@email.com"
-            />
-          </div>
-
-          <div>
-            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows="4"
-              required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#37A4B3] focus:border-transparent transition resize-none"
-              placeholder="Décrivez votre demande..."></textarea>
-          </div>
-
-          <button
-            type="submit"
-            class="w-full px-6 py-3 bg-gradient-to-br from-[#37A4B3] to-[#268090] text-white font-semibold rounded-lg hover:shadow-lg transition-all"
-          >
-            Envoyer le message
-          </button>
-        </form>
       </div>
     </div>
 

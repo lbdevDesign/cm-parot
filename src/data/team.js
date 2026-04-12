@@ -6,6 +6,7 @@ import karimaBouledrak from "../assets/medecins/karimaBouledrak.jpg";
 import fabricePiegay from "../assets/medecins/fabricePiegay.jpg";
 import martinVeaudor from "../assets/medecins/martinVeaudor.jpg";
 import nelsonHanin from "../assets/medecins/nelsonHanin.jpg";
+import mathildeJouan from "../assets/medecins/mathildeJouan.jpg";
 
 const team = [
   {
@@ -106,7 +107,7 @@ const team = [
     name: "Dr JOUAN Mathilde",
     displayName: "Dr Jouan",
     url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/mathilde-jouan",
-    photo: null,
+    photo: mathildeJouan,
     specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
     specialtyNotes: {
       sommeil: "(Polysomnographie)",
