@@ -74,7 +74,7 @@ const team = [
     displayName: "Dr Piegay",
     url: "https://www.doctolib.fr/pneumologue/lyon/fabrice-piegay",
     photo: fabricePiegay,
-    specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil"],
+    specialties: ["pneumologie-generale", "oncologie", "fibroscopie", "sommeil", "allergologie"],
     description:
       "Le Dr Piégay exerce la pneumologie générale de l'adulte (à partir de 16 ans). Il assure le diagnostic et le suivi des maladies respiratoires notamment chroniques, en particulier asthme, pathologies interstitielles et oncologie thoracique.",
   },
@@ -95,9 +95,9 @@ const team = [
     displayName: "Dr Hanin",
     url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/nelson-hanin",
     photo: nelsonHanin,
-    specialties: ["pneumologie-generale", "pneumo-pediatrie", "fibroscopie", "sommeil"],
+    specialties: ["pneumologie-generale", "pneumo-pediatrie", "fibroscopie", "sommeil", "allergologie"],
     specialtyNotes: {
-      "pneumo-pediatrie": "(à partir de 16 ans)",
+      "pneumo-pediatrie": "(à partir de 12 ans)",
       sommeil: "(Polysomnographie)",
     },
     description:
