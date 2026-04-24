@@ -44,6 +44,7 @@ const team = [
     ],
     specialtyNotes: {
       "pneumo-pediatrie": "(à partir de 10 ans)",
+      sommeil: "(Polysomnographie)",
     },
     description:
       "Le Dr Wattiez pratique la pneumologie et l'allergologie respiratoire chez l'adulte et chez l'enfant à partir de 10 ans. Elle prend en charge les pathologies respiratoires en général avec une spécificité dans l'apnée du sommeil.",
@@ -95,7 +96,13 @@ const team = [
     displayName: "Dr Hanin",
     url: "https://www.doctolib.fr/pneumologue/rillieux-la-pape/nelson-hanin",
     photo: nelsonHanin,
-    specialties: ["pneumologie-generale", "pneumo-pediatrie", "fibroscopie", "sommeil", "allergologie"],
+    specialties: [
+      "pneumologie-generale",
+      "pneumo-pediatrie",
+      "fibroscopie",
+      "sommeil",
+      "allergologie",
+    ],
     specialtyNotes: {
       "pneumo-pediatrie": "(à partir de 12 ans)",
       sommeil: "(Polysomnographie)",
