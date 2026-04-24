@@ -44,7 +44,7 @@ const cabinets = [
     logo: "imgSlot.png",
     hours: "Lun - Ven: 8h - 18h",
     mapsUrl: "https://maps.app.goo.gl/aUro1PMNwxkdr7bdA",
-    phone: "04 78 94 24 74",
+    phone: "04 78 77 51 43",
     email: "secretariat.mermoz@centremedicalparot.fr",
   },
   {
