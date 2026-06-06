@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "/Users/lb8/.nvm/versions/node/v22.17.1/bin/node",
+      "runtimeArgs": ["/Users/lb8/Documents/Code/cm-parot/node_modules/.bin/astro", "dev", "--port", "4321"],
+      "port": 4321
+    }
+  ]
+}
