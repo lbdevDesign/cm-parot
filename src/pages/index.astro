@@ -8,6 +8,7 @@ import cabinets from "@/data/cabinets.js";
 import ContactBubble from "@/components/ContactBubble.astro";
 import Partners from "@/components/Partners.astro";
 import Specialties from "@/components/Specialties.astro";
+import DepistagePopup from "@/components/DepistagePopup.astro";
 
 const title = "Centre Médical Parot | Cabinet de Pneumologie Lyon";
 const descritpion =
@@ -17,6 +18,7 @@ const image = "/image/og-image.jpg";
 
 <Layout title={title} description={descritpion} image={image}>
   <Hero />
+  <DepistagePopup />
   <Specialties />
   <OurOffices client:load cabinets={cabinets} />
   <OurTeam />
