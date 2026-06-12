@@ -204,7 +204,19 @@
   const copyConfirm = document.getElementById("copy-confirm");
 
   copyBtn?.addEventListener("click", async () => {
-    await navigator.clipboard.writeText("depistage.mermoz@ramsaysante.fr");
+    try {
+      await navigator.clipboard.writeText("depistage.mermoz@ramsaysante.fr");
+    } catch {
+      // Fallback si l'API clipboard n'est pas disponible
+      const ta = document.createElement("textarea");
+      ta.value = "depistage.mermoz@ramsaysante.fr";
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
     if (copyIcon) copyIcon.style.display = "none";
     if (copyConfirm) copyConfirm.style.display = "flex";
     setTimeout(() => {
