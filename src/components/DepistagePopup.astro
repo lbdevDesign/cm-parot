@@ -111,17 +111,37 @@
           </svg>
           04 37 53 78 88
         </a>
-        <a
-          href="mailto:depistage.mermoz@ramsaysante.fr"
-          class="flex items-center gap-3 w-full px-5 py-3.5 rounded-xl font-medium text-sm transition-all hover:bg-blue-50 border text-gray-700"
+        <div
+          class="flex items-center rounded-xl border overflow-hidden text-sm"
           style="border-color: #313181;"
         >
-          <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: #313181;">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-          depistage.mermoz@ramsaysante.fr
-        </a>
+          <a
+            href="mailto:depistage.mermoz@ramsaysante.fr"
+            class="flex items-center gap-3 flex-1 px-5 py-3.5 font-medium text-gray-700 hover:bg-blue-50 transition-all"
+          >
+            <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: #313181;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            depistage.mermoz@ramsaysante.fr
+          </a>
+          <button
+            id="copy-email-btn"
+            aria-label="Copier l'adresse email"
+            class="shrink-0 px-4 py-3.5 border-l transition-all hover:bg-blue-50"
+            style="border-color: #313181;"
+          >
+            <!-- Icône copier (état par défaut) -->
+            <svg id="copy-icon" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: #313181;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <!-- Icône check (état copié) -->
+            <svg id="check-icon" class="h-4 w-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: #22c55e;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -173,6 +193,21 @@
       e.preventDefault();
       openModal();
     }
+  });
+
+  // Copier l'email
+  const copyBtn = document.getElementById("copy-email-btn");
+  const copyIcon = document.getElementById("copy-icon");
+  const checkIcon = document.getElementById("check-icon");
+
+  copyBtn?.addEventListener("click", async () => {
+    await navigator.clipboard.writeText("depistage.mermoz@ramsaysante.fr");
+    copyIcon?.classList.add("hidden");
+    checkIcon?.classList.remove("hidden");
+    setTimeout(() => {
+      copyIcon?.classList.remove("hidden");
+      checkIcon?.classList.add("hidden");
+    }, 2000);
   });
 
   // Fermeture
