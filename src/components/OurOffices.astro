@@ -1,12 +1,7 @@
 ---
-import { Image } from "astro:assets"; // ← Bon import
+import { Image } from "astro:assets";
 import Link from "./Link.astro";
 import cabinets from "../data/cabinets.js";
-
-// Importer les images statiquement pour l'optimisation
-import cliniqueDuquesne from "../assets/cabinets/cliniqueDuquesne.jpg";
-import cliniqueDuquesneMob from "../assets/cabinets/cliniqueDuquesneMob.jpg";
-// ... importe toutes tes images
 
 // Préparer les données pour le JS
 const cabinetsJSON = JSON.stringify(

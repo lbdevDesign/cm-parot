@@ -1,9 +1,24 @@
 ---
-import "../styles/global.css";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import headerImage from "../assets/header.jpg";
 import headerImageMobile from "../assets/headerMobile.jpg"; // Créer une version mobile plus légère
 import lowerWaves from "../assets/logo/logoCMPlowerWavesColored.svg";
+
+// Une seule image téléchargée selon la largeur d'écran (md = 768px)
+const desktopImage = await getImage({
+  src: headerImage,
+  width: 1920,
+  height: 1080,
+  quality: 85,
+  format: "webp",
+});
+const mobileImage = await getImage({
+  src: headerImageMobile,
+  width: 768,
+  height: 1024,
+  quality: 80,
+  format: "webp",
+});
 ---
 
 <section
@@ -13,32 +28,20 @@ import lowerWaves from "../assets/logo/logoCMPlowerWavesColored.svg";
   <div class="absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(0,0,0,0)]">
   </div>
 
-  <!-- Background images responsive -->
-  <!-- Desktop -->
-  <Image
-    src={headerImage}
-    alt="Centre Médical Parot - Pneumologie Lyon"
-    width={1920}
-    height={1080}
-    quality={85}
-    format="webp"
-    loading="eager"
-    fetchpriority="high"
-    class="hidden md:block absolute inset-0 w-full h-full object-cover object-center z-0"
-  />
-
-  <!-- Mobile -->
-  <Image
-    src={headerImageMobile}
-    alt="Centre Médical Parot - Pneumologie Lyon"
-    width={768}
-    height={1024}
-    quality={80}
-    format="webp"
-    loading="eager"
-    fetchpriority="high"
-    class="block md:hidden absolute inset-0 w-full h-full object-cover object-center z-0"
-  />
+  <!-- Background image responsive -->
+  <picture>
+    <source media="(min-width: 768px)" srcset={desktopImage.src} width="1920" height="1080" />
+    <img
+      src={mobileImage.src}
+      alt="Centre Médical Parot - Pneumologie Lyon"
+      width="768"
+      height="1024"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      class="absolute inset-0 w-full h-full object-cover object-center z-0"
+    />
+  </picture>
 
   <!-- Content -->
   <div class="w-full mx-auto flex flex-col justify-center md:flex-row items-center md:items-start">

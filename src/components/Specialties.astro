@@ -77,7 +77,7 @@ specialties.forEach((specialty) => {
 ---
 
 <section
-  class="w-full scroll-mt-25 pt-20 pb-10 bg-gradient-to-b from-white to-[--brand-surface]"
+  class="w-full scroll-mt-25 pt-20 pb-10"
   id="expertises"
 >
   <div class="max-w-7xl mx-auto px-6">
@@ -147,7 +147,7 @@ specialties.forEach((specialty) => {
     <button
       id="close-panel"
       aria-label="Fermer le panneau"
-      class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-all"
+      class="text-white hover:bg-white/20 rounded-full p-2 transition-all"
     >
       <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path
@@ -233,7 +233,7 @@ specialties.forEach((specialty) => {
 >
 </div>
 
-<script define:vars={{ specialties, team }}>
+<script define:vars={{ specialties }}>
   const panel = document.getElementById("specialty-panel");
   const overlay = document.getElementById("panel-overlay");
   const closeBtn = document.getElementById("close-panel");
