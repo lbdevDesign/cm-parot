@@ -2,7 +2,7 @@
 
 Generated: 2026-09-26 on branch `fix/favicon-ico` (HEAD `6fcf682`). First run.
 
-**Status (branch `chore/tech-debt-audit`):** RESOLVED: F001, F002, F003, F004, F007, F008, F009, F011, F012, F018, F019, F020, F021, F023 (via F018), F029, F030, F031, F034, F035, F037, F038. Still open: everything else, including F010 (Vercel Web Analytics not disclosed in the legal notice).
+**Status (branch `chore/tech-debt-audit`):** RESOLVED: F001, F002, F003, F004, F007, F008, F009, F011, F012, F018, F019, F020, F021, F023 (via F018), F029, F030, F031, F034, F035, F037, F038. F001/F002 were resolved by removing the broken classes (white background kept by choice, cream tried and rejected). Still open: everything else, including F010 (Vercel Web Analytics not disclosed in the legal notice).
 
 Scope: whole repo, about 3.3k lines of hand-written source (Astro, JS data files, CSS). The repo is small, so no subagents were used. Every source file was read in full. A production build (`astro build`) was run and the generated HTML/CSS in `.vercel/output/static/` was inspected to confirm which Tailwind classes actually produce CSS.
 
