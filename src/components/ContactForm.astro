@@ -1,6 +1,7 @@
 ---
-import Link from "../components/Link.astro";
+import { Image } from "astro:assets";
 import cabinets from "../data/cabinets.js";
+import accueilImage from "../assets/accueil-parot.jpg";
 
 // Préparer les données pour le JS
 const cabinetsJSON = JSON.stringify(
@@ -21,7 +22,15 @@ const firstCabinet = cabinets[0];
     <div class="grid min-[1080px]:grid-cols-2 gap-16 items-stretch w-full">
       <!-- Image -->
       <div class="order-2 min-[1080px]:order-1 self-stretch min-[1080px]:h-auto h-64">
-        <img src="/acceuil-parot.jpg" alt="Centre Médical Parot" class="w-full h-full rounded-2xl object-cover" />
+        <Image
+          src={accueilImage}
+          alt="Centre Médical Parot"
+          widths={[640, 960, 1280]}
+          sizes="(min-width: 1080px) 50vw, 100vw"
+          quality={80}
+          format="webp"
+          class="w-full h-full rounded-2xl object-cover"
+        />
       </div>
 
       <!-- Informations de contact -->

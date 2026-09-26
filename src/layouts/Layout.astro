@@ -80,7 +80,6 @@ const fullTitle = title.includes("Centre Médical Parot")
         link: [{ rel: "sitemap", type: "application/xml", href: "/sitemap.xml" }],
         meta: [
           { name: "theme-color", content: "#313181" },
-          { name: "robots", content: noindex ? "noindex, nofollow" : "index, follow" },
           {
             name: "keywords",
             content:
@@ -104,11 +103,11 @@ const fullTitle = title.includes("Centre Médical Parot")
             "@id": siteUrl,
             name: "Centre Médical Parot",
             url: siteUrl,
-            logo: new URL("/logo.png", siteUrl).href,
+            logo: new URL("/apple-touch-icon.png", siteUrl).href,
             image: new URL(image, siteUrl).href,
             description: description,
             telephone: "+33478775143",
-            email: "secretaria@centremedicalparot.fr",
+            email: "secretariat@centremedicalparot.fr",
             medicalSpecialty: [
               "Pulmonology",
               "Allergy and Immunology",
@@ -137,7 +136,7 @@ const fullTitle = title.includes("Centre Médical Parot")
       )
     }
   </head>
-  <body class="bg-[--brand-surface]">
+  <body>
     <NavbarHome alwaysScrolled={!isHome} />
     <main>
       <slot />
